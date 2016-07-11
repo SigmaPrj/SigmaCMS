@@ -1,0 +1,16 @@
+{
+    "name": "blackcater/sigma-cms",
+    "description": "数魔app后台服务程序",
+    "require": {
+        "rogeriopradoj/codeigniter": "^3.0",
+        "phpunit/phpunit": "^5.4"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "夜猫子丶x",
+            "email": "164710166@qq.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
