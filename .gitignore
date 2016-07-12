@@ -9,7 +9,6 @@
 
 # composer
 vendor/bin
-vendor/composer
 vendor/doctrine
 vendor/myclabs
 vendor/phpdocumentor
