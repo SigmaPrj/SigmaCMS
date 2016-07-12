@@ -127,3 +127,4 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('first_model' => 'first');
 */
 $autoload['model'] = array();
+// 设置在整个项目任何地方, 都会自动加载的模型model
