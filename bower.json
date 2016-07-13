@@ -1,0 +1,20 @@
+{
+  "name": "sigma-cms",
+  "homepage": "https://github.com/SigmaPrj/SigmaCMS",
+  "authors": [
+    "blackcater <164710166@qq.com>"
+  ],
+  "description": "数魔 后台管理程序 基于PHP开发",
+  "main": "",
+  "keywords": [
+    "sigma"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -16,3 +16,6 @@ vendor
 .vscode
 .eclipse
 
+# bower
+bower_components
+

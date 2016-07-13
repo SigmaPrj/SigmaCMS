@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+$routing['directory'] = 'admin';//即默认访问前台控制器
 /*
 | -------------------------------------------------------------------------
 | URI ROUTING
@@ -58,10 +59,7 @@ $route['translate_uri_dashes'] = FALSE;
 | Application Admin Routes
 | -------------------------------------------------------------------------
 */
-$route['news/create'] = 'news/create';
-$route['news/(:any)'] = 'news/view/$1';
-$route['news'] = 'news/index';
-$route['default_controller'] = 'pages/view';
+$route['default_controller'] = 'Index';
 
 
 /*

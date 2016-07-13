@@ -37,6 +37,9 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+// 定义控制器常亮路径
+define('CONTROLPATH', APPPATH.'/controllers');
+
 /**
  * Application Controller Class
  *
