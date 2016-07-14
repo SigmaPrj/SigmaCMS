@@ -336,6 +336,7 @@ CREATE TABLE IF NOT EXISTS `si_activity` (
   `e_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 活动结束时间
   `allow_personal` TINYINT UNSIGNED NOT NULL DEFAULT 1 , -- 是否允许个人参加
   `allow_team` TINYINT UNSIGNED NOT NULL DEFAULT 1 , -- 是否允许主队参加
+  `allow_teacher` TINYINT UNSIGNED NOT NULL DEFAULT 0 , -- 是否需要导师
   `team_min_number` TINYINT UNSIGNED NOT NULL DEFAULT 0 , -- 主队允许最少人数
   `team_max_number` TINYINT UNSIGNED NOT NULL DEFAULT 0 , -- 主队允许最多人数
   `save` INT UNSIGNED NOT NULL , -- 多少个人收藏
@@ -474,6 +475,7 @@ CREATE TABLE IF NOT EXISTS `si_news` (
   `e_date` int(10) unsigned DEFAULT 0 NOT NULL , -- 资讯比赛结束时间
   `allow_personal` TINYINT UNSIGNED NOT NULL DEFAULT 1 , -- 是否允许个人参加
   `allow_team` TINYINT UNSIGNED NOT NULL DEFAULT 1 , -- 是否允许主队参加
+  `allow_teacher` TINYINT UNSIGNED NOT NULL DEFAULT 0 , -- 是否需要导师
   `team_min_number` TINYINT UNSIGNED NOT NULL DEFAULT 0 , -- 主队允许最少人数
   `team_max_number` TINYINT UNSIGNED NOT NULL DEFAULT 0 , -- 主队允许最多人数
   `save` INT UNSIGNED NOT NULL , -- 多少个人收藏
@@ -521,3 +523,43 @@ CREATE TABLE IF NOT EXISTS `si_follow` (
 -- ###########################################
 
 -- TODO : 收藏功能表单
+
+
+-- ###########################################
+--                    朋友
+-- ###########################################
+
+DROP TABLE IF EXISTS `si_friend`;
+CREATE TABLE IF NOT EXISTS `si_friend` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `user_id` INT UNSIGNED NOT NULL ,
+  `frend_user_id` INT UNSIGNED NOT NULL ,
+  PRIMARY KEY `pk_friend` (`id`) ,
+  FOREIGN KEY `fk_friend_user` (`user_id`) REFERENCES `si_user` (`id`) ,
+  FOREIGN KEY `fk_friend_fuser` (`frend_user_id`) REFERENCES `si_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- ###########################################
+--                    队伍
+-- ###########################################
+
+DROP TABLE IF EXISTS `si_team`;
+CREATE TABLE IF NOT EXISTS `si_team`(
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(30) NOT NULL , -- 队名
+  `member_num` TINYINT UNSIGNED NOT NULL , -- 队伍人数
+  PRIMARY KEY `pk_team` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `si_team_member`;
+CREATE TABLE IF NOT EXISTS `si_team_member`(
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `team_id` INT UNSIGNED NOT NULL ,
+  `user_id` INT UNSIGNED NOT NULL ,
+  `is_leader` TINYINT UNSIGNED NOT NULL DEFAULT 0,
+  `is_teacher` TINYINT UNSIGNED NOT NULL DEFAULT 0,
+  PRIMARY KEY `pk_teamMember` (`id`) ,
+  FOREIGN KEY `fk_teamMember_team` (`team_id`) REFERENCES `si_team` (`id`) ,
+  FOREIGN KEY `fk_teamMember_user` (`user_id`) REFERENCES `si_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
