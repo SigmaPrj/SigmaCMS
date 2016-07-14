@@ -250,6 +250,7 @@ CREATE TABLE IF NOT EXISTS `si_video` (
   `title` VARCHAR(60) NOT NULL , -- 课程名称
   `description` TEXT , -- 课程详细描述
   `image` TEXT , -- 课程图片地址
+  `url` TEXT , -- 课程视频连接地址
   `category` SMALLINT UNSIGNED NOT NULL , -- 课程所属分类
   `learn` INT UNSIGNED NOT NULL DEFAULT 0 , -- 多少人正在学习
   `save` INT UNSIGNED NOT NULL DEFAULT 0 , -- 多少人收藏
@@ -257,19 +258,6 @@ CREATE TABLE IF NOT EXISTS `si_video` (
   `last_look_date` int(10) unsigned DEFAULT 0 NOT NULL , -- 最近一次浏览时间
   PRIMARY KEY `pk_video` (`id`) ,
   FOREIGN KEY `fk_video_category` (`category`) REFERENCES `si_category` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
--- 课程 章节内容
-DROP TABLE IF EXISTS `si_video_item`;
-CREATE TABLE IF NOT EXISTS `si_video_item` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(60) NOT NULL ,
-  `url` TEXT ,
-  `video_id` INT UNSIGNED NOT NULL , -- 所属视频标题
-  `parent_id` INT UNSIGNED NOT NULL , -- 父标题, 为0表示没有父标题
-  PRIMARY KEY `pk_videoItem` (`id`) ,
-  FOREIGN KEY `fk_videoItem_video` (`video_id`) REFERENCES `si_video` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -282,6 +270,7 @@ CREATE TABLE IF NOT EXISTS `si_video_comment` (
   `user_id` INT UNSIGNED NOT NULL ,
   `comment` TEXT ,
   `publish_date` int(10) unsigned DEFAULT 0 NOT NULL , -- 评论发布时间
+  `praise` INT UNSIGNED NOT NULL DEFAULT 0 , -- 评论被赞数目
   `sub_id` INT UNSIGNED NOT NULL , -- 被回复的评论id
   PRIMARY KEY `pk_videoComment` (`id`) ,
   FOREIGN KEY `fk_videoComment_video` (`video_id`) REFERENCES `si_video` (`id`) ,
@@ -301,22 +290,234 @@ CREATE TABLE IF NOT EXISTS `si_resource` (
   `resource_type` VARCHAR(10) , -- 视频, PDF, 空表示不清楚
   `url` TEXT , -- 下载地址
   `user_id` INT UNSIGNED NOT NULL , -- 资源分享的人
+  `category_id` INT UNSIGNED NOT NULL , -- 资源所属分类
   `save` INT UNSIGNED NOT NULL DEFAULT 0 , -- 多少人收藏
   `look` INT UNSIGNED NOT NULL DEFAULT 0 , -- 多少人浏览
   `download` INT UNSIGNED NOT NULL DEFAULT 0 , -- 多少人下载
-  `publish_date` int(10) unsigned DEFAULT 0 NOT NULL , -- 发布时间
+  `publish_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 发布时间
+  `last_look_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 最近一次浏览时间
   PRIMARY KEY `pk_resource` (`id`) ,
-  FOREIGN KEY `fk_resource_user` (`user_id`) REFERENCES `si_user` (`id`)
+  FOREIGN KEY `fk_resource_user` (`user_id`) REFERENCES `si_user` (`id`) ,
+  FOREIGN KEY `fk_resource_category` (`category_id`) REFERENCES `si_category` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- 资源评论
 DROP TABLE IF EXISTS `si_resource_comment`;
 CREATE TABLE IF NOT EXISTS `si_resource_comment` (
-
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `resource_id` INT UNSIGNED NOT NULL ,
+  `user_id` INT UNSIGNED NOT NULL ,
+  `comment` TEXT ,
+  `publish_date` int(10) unsigned DEFAULT 0 NOT NULL , -- 评论发布时间
+  `praise` INT UNSIGNED NOT NULL DEFAULT 0 , -- 评论被赞数目
+  `sub_id` INT UNSIGNED NOT NULL , -- 被回复的评论id
+  PRIMARY KEY `pk_resourceComment` (`id`) ,
+  FOREIGN KEY `fk_resourceComment_resource` (`resource_id`) REFERENCES `si_resource` (`id`) ,
+  FOREIGN KEY `fk_resourceComment_user` (`user_id`) REFERENCES `si_user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
 -- ###########################################
+--                  活动功能
+-- ###########################################
+
+-- 活动
+
+DROP TABLE IF EXISTS `si_activity`;
+CREATE TABLE IF NOT EXISTS `si_activity` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `title` VARCHAR(60) NOT NULL , -- 活动标题
+  `address` VARCHAR(255) NOT NULL , -- 活动地点
+  `image` TEXT , -- 活动宣传图
+  `publish_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 活动发布时间
+  `last_look_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 最近一次浏览时间
+  `s_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 活动开始时间
+  `e_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 活动结束时间
+  `allow_personal` TINYINT UNSIGNED NOT NULL DEFAULT 1 , -- 是否允许个人参加
+  `allow_team` TINYINT UNSIGNED NOT NULL DEFAULT 1 , -- 是否允许主队参加
+  `team_min_number` TINYINT UNSIGNED NOT NULL DEFAULT 0 , -- 主队允许最少人数
+  `team_max_number` TINYINT UNSIGNED NOT NULL DEFAULT 0 , -- 主队允许最多人数
+  `save` INT UNSIGNED NOT NULL , -- 多少个人收藏
+  `look` INT UNSIGNED NOT NULL , -- 多少个人查阅
+  `join` INT UNSIGNED NOT NULL , -- 多少个人参加
+  PRIMARY KEY `pk_activity` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- 活动评论
+DROP TABLE IF EXISTS `si_activity_comment`;
+CREATE TABLE IF NOT EXISTS `si_activity_comment` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `activity_id` INT UNSIGNED NOT NULL , -- 评论的哪条资讯
+  `user_id` INT UNSIGNED NOT NULL , -- 发布评论人
+  `comment` TEXT , -- 评论内容
+  `publish_date` int(10) unsigned DEFAULT 0 NOT NULL , -- 评论发布时间
+  `praise` INT UNSIGNED NOT NULL DEFAULT 0 , -- 评论被赞数目
+  `sub_id` INT UNSIGNED NOT NULL , -- 被回复的评论id
+  PRIMARY KEY `pk_activityComment` (`id`) ,
+  FOREIGN KEY `fk_activityComment_activity` (`activity_id`) REFERENCES `si_activity` (`id`) ,
+  FOREIGN KEY `fk_activityComment_user` (`user_id`) REFERENCES `si_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- ###########################################
+--                 社区功能
+-- ###########################################
+
+-- ------------------------------------------
+-- 话题
+-- ------------------------------------------
+DROP TABLE IF EXISTS `si_topic`;
+CREATE TABLE IF NOT EXISTS `si_topic` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(50) NOT NULL , -- 话题内容
+  `dynamic_num` INT UNSIGNED NOT NULL DEFAULT 0 , -- 该话题当前动态数目
+  PRIMARY KEY `pk_topic` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ------------------------------------------
+-- 经验分享
+-- ------------------------------------------
+DROP TABLE IF EXISTS `si_experience`;
+CREATE TABLE IF NOT EXISTS `si_experience` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `user_id` INT UNSIGNED NOT NULL , -- 发布分享的用户
+  `title` VARCHAR(25) NOT NULL , -- 分享文章标题
+  `content` TEXT , -- 分享文章内容
+  `publish_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 活动发布时间
+  `last_look_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 最近一次浏览时间
+  `save` INT UNSIGNED NOT NULL , -- 多少个人收藏
+  `look` INT UNSIGNED NOT NULL , -- 多少个人查阅
+  `praise` INT UNSIGNED NOT NULL , -- 多少个人称赞
+  PRIMARY KEY `pk_experience` (`id`) ,
+  FOREIGN KEY `fk_experience_user` (`user_id`) REFERENCES `si_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 经验分享评论
+
+DROP TABLE IF EXISTS `si_experience_comment`;
+CREATE TABLE IF NOT EXISTS `si_experience_comment` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `experience_id` INT UNSIGNED NOT NULL , -- 评论的哪条资讯
+  `user_id` INT UNSIGNED NOT NULL , -- 发布评论人
+  `comment` TEXT , -- 评论内容
+  `publish_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 活动发布时间
+  `last_look_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 最近一次浏览时间
+  `praise` INT UNSIGNED NOT NULL DEFAULT 0 , -- 评论被赞数目
+  `sub_id` INT UNSIGNED NOT NULL , -- 被回复的评论id
+  PRIMARY KEY `pk_experienceComment` (`id`) ,
+  FOREIGN KEY `fk_experienceComment_experience` (`experience_id`) REFERENCES `si_experience` (`id`) ,
+  FOREIGN KEY `fk_experienceComment_user` (`user_id`) REFERENCES `si_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ------------------------------------------
+-- 动态
+-- ------------------------------------------
+DROP TABLE IF EXISTS `si_dynamic`;
+CREATE TABLE IF NOT EXISTS `si_dynamic` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `user_id` INT UNSIGNED NOT NULL , -- 发布用户
+  `has_topic` TINYINT UNSIGNED NOT NULL DEFAULT 0 , -- 是否有话题
+  `topic_id` INT UNSIGNED , -- 话题id
+  `content` TEXT , -- 评论内容
+  `publish_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 活动发布时间
+  `last_look_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 最近一次浏览时间
+  `share` INT UNSIGNED NOT NULL , -- 分享人数
+  `look` INT UNSIGNED NOT NULL , -- 浏览人数
+  `praise` INT UNSIGNED NOT NULL , -- 称赞人数
+  PRIMARY KEY `pk_dynamic` (`id`) ,
+  FOREIGN KEY `fk_dynamic_user` (`user_id`) REFERENCES `si_user` (`id`) ,
+  FOREIGN KEY `fk_dynamic_topic` (`topic_id`) REFERENCES `si_topic` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 动态评论
+DROP TABLE IF EXISTS `si_dynamic_comment`;
+CREATE TABLE IF NOT EXISTS `si_dynamic_comment`(
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `dynamic_id` INT UNSIGNED NOT NULL , -- 评论的哪条资讯
+  `user_id` INT UNSIGNED NOT NULL , -- 发布评论人
+  `comment` TEXT , -- 评论内容
+  `publish_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 活动发布时间
+  `last_look_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 最近一次浏览时间
+  `praise` INT UNSIGNED NOT NULL DEFAULT 0 , -- 评论被赞数目
+  `sub_id` INT UNSIGNED NOT NULL , -- 被回复的评论id
+  PRIMARY KEY `pk_dynamicComment` (`id`) ,
+  FOREIGN KEY `fk_dynamicComment_dynamic` (`dynamic_id`) REFERENCES `si_dynamic` (`id`) ,
+  FOREIGN KEY `fk_dynamicComment_user` (`user_id`) REFERENCES `si_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- ###########################################
+--                 资讯功能
+-- ###########################################
+
+-- 资讯分类
+DROP TABLE IF EXISTS `si_news_type`;
+CREATE TABLE IF NOT EXISTS `si_news_type` (
+  `id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(4) NOT NULL , -- 资讯分类名称
+  PRIMARY KEY `pk_newsType` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 资讯
+DROP TABLE IF EXISTS `si_news`;
+CREATE TABLE IF NOT EXISTS `si_news` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `title` VARCHAR(60) NOT NULL , -- 资讯标题
+  `description` TEXT , -- 资讯详细描述
+  `image` TEXT , -- 图片地址
+  `news_type` SMALLINT UNSIGNED  NOT NULL ,
+  `publish_date` int(10) unsigned DEFAULT 0 NOT NULL , -- 资讯发布时间
+  `last_look_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 最近一次浏览时间
+  `s_date` int(10) unsigned DEFAULT 0 NOT NULL , -- 资讯比赛开始时间
+  `e_date` int(10) unsigned DEFAULT 0 NOT NULL , -- 资讯比赛结束时间
+  `allow_personal` TINYINT UNSIGNED NOT NULL DEFAULT 1 , -- 是否允许个人参加
+  `allow_team` TINYINT UNSIGNED NOT NULL DEFAULT 1 , -- 是否允许主队参加
+  `team_min_number` TINYINT UNSIGNED NOT NULL DEFAULT 0 , -- 主队允许最少人数
+  `team_max_number` TINYINT UNSIGNED NOT NULL DEFAULT 0 , -- 主队允许最多人数
+  `save` INT UNSIGNED NOT NULL , -- 多少个人收藏
+  `look` INT UNSIGNED NOT NULL , -- 多少个人查阅
+  `join` INT UNSIGNED NOT NULL , -- 多少个人参加
+  PRIMARY KEY `pk_news` (`id`) ,
+  FOREIGN KEY `fk_news_newsType` (`news_type`) REFERENCES `si_news_type` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- 资讯评论
+DROP TABLE IF EXISTS `si_news_comment`;
+CREATE TABLE IF NOT EXISTS `si_news_comment` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `news_id` INT UNSIGNED NOT NULL , -- 评论的哪条资讯
+  `user_id` INT UNSIGNED NOT NULL , -- 发布评论人
+  `comment` TEXT , -- 评论内容
+  `publish_date` int(10) unsigned DEFAULT 0 NOT NULL , -- 评论发布时间
+  `praise` INT UNSIGNED NOT NULL DEFAULT 0 , -- 评论被赞数目
+  `sub_id` INT UNSIGNED NOT NULL , -- 被回复的评论id
+  PRIMARY KEY `pk_newsComment` (`id`) ,
+  FOREIGN KEY `fk_newsComment_news` (`news_id`) REFERENCES `si_news` (`id`) ,
+  FOREIGN KEY `fk_newsComment_user` (`user_id`) REFERENCES `si_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+-- ###########################################
+--                  关注/粉丝 follow
+-- ###########################################
+
+DROP TABLE IF EXISTS `si_follow`;
+CREATE TABLE IF NOT EXISTS `si_follow` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `user_id` INT UNSIGNED NOT NULL ,
+  `follow_user_id` INT UNSIGNED NOT NULL ,
+  PRIMARY KEY `pk_follow` (`id`) ,
+  FOREIGN KEY `fk_follow_user` (`user_id`) REFERENCES `si_user` (`id`) ,
+  FOREIGN KEY `fk_follow_fuser` (`follow_user_id`) REFERENCES `si_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- ###########################################
 --                    收藏功能
 -- ###########################################
+
+-- TODO : 收藏功能表单
