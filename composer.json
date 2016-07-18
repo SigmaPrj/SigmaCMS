@@ -1,0 +1,14 @@
+{
+    "name": "blackcater/sigma-cms",
+    "require-dev": {
+        "fzaninotto/faker": "^1.6"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "blackcater",
+            "email": "164710166@qq.com"
+        }
+    ],
+    "require": {}
+}

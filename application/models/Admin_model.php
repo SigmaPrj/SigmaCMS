@@ -6,7 +6,7 @@
  * Date: 16/7/13
  * Time: 下午5:12
  */
-class Admin extends CI_Model
+class Admin_model extends CI_Model
 {
 
     public function __construct()

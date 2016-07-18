@@ -228,6 +228,9 @@ switch (ENVIRONMENT)
 	// Path to the system folder
 	define('BASEPATH', str_replace('\\', '/', $system_path));
 
+    // Path for root folder
+    define('ROOTPATH', __DIR__.'/');
+
 	// Path to the front controller (this file)
 	define('FCPATH', dirname(__FILE__).'/');
 
