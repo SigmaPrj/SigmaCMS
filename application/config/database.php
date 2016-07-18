@@ -75,7 +75,8 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'sdwwzjdxifjg.rds.sae.sina.com.cn:10557',
+	'hostname' => 'sdwwzjdxifjg.rds.sae.sina.com.cn',
+    'port'     => '10557',
 	'username' => 'sigmainc',
 	'password' => 'sigmainc2016',
 	'database' => 'sigma',
