@@ -75,11 +75,11 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'sdwwzjdxifjg.rds.sae.sina.com.cn',
-    'port'     => '10557',
-	'username' => 'sigmainc',
-	'password' => 'sigmainc2016',
-	'database' => 'sigma',
+	'hostname' => SAE_MYSQL_HOST_M,
+    'port'     => SAE_MYSQL_PORT,
+	'username' => SAE_MYSQL_USER,
+	'password' => SAE_MYSQL_PASS,
+	'database' => SAE_MYSQL_DB,
 	'dbdriver' => 'mysqli',
 	'dbprefix' => 'si_',
 	'pconnect' => FALSE,
