@@ -7,9 +7,6 @@
 !*/cache/index.html
 !*/cache/.htaccess
 
-# composer
-vendor
-
 # Editor
 .idea
 .atom
