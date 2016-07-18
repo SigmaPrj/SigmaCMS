@@ -82,7 +82,7 @@ $db['default'] = array(
 	'database' => SAE_MYSQL_DB,
 	'dbdriver' => 'mysqli',
 	'dbprefix' => 'si_',
-	'pconnect' => TRUE,
+	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
 	'cache_on' => FALSE,
 	'cachedir' => '',
