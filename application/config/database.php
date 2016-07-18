@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => SAE_MYSQL_HOST_M.':'.SAE_MYSQL_PORT,
-	'username' => SAE_MYSQL_USER,
-	'password' => SAE_MYSQL_PASS,
+	'hostname' => 'sdwwzjdxifjg.rds.sae.sina.com.cn:10557',
+	'username' => 'sigmainc',
+	'password' => 'sigmainc2016',
 	'database' => 'sigma',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => 'si_',
