@@ -4,55 +4,47 @@
  * Created by PhpStorm.
  * User: blackcater
  * Date: 16/7/18
- * Time: 上午9:30
+ * Time: 下午3:19
  */
-
 require APPPATH . '/libraries/REST_Controller.php';
-class City extends REST_Controller
+class UserType extends REST_Controller
 {
-    /**
-     * City constructor.
-     */
     public function __construct()
     {
-        // Construct the parent class
         parent::__construct();
-        $this->load->model('city_model', 'cityModel');
+        $this->load->model('UserType_model', 'userTypeModel');
     }
 
-    /**
-     *  获取所有城市
-     *  根据code获取城市
-     */
-    public function cities_get() {
+    public function userTypes_get() {
         $id = $this->get('id');
+
         if ($id === null) {
             // 获取所有数据
-            $data = $this->cityModel->getAllCities();
+            $data = $this->userTypeModel->getAllUserTypes();
             if ($data) {
                 $this->response($data, REST_Controller::HTTP_OK);
             } else {
                 $this->response([
                     'status' => FALSE,
-                    'message' => 'No cities were found'
+                    'message' => 'No user types were found'
                 ], REST_Controller::HTTP_NOT_FOUND);
             }
         }
 
-        // 获取特定的city
+        // 获取特定的user type
         $code = (int)$id;
 
         if ($id <= 0) {
             $this->response(null, REST_Controller::HTTP_BAD_REQUEST);
         }
 
-        $city = $this->cityModel->getCityByCode($code);
+        $city = $this->userTypeModel->getUserTypeByCode($code);
         if ($city) {
             $this->response($city, REST_Controller::HTTP_OK);
         } else {
             $this->response([
                 'status' => FALSE,
-                'message' => 'City not found'
+                'message' => 'User type not found'
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
     }

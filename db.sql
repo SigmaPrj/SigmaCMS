@@ -87,6 +87,7 @@ DROP TABLE IF EXISTS `si_city`;
 CREATE TABLE IF NOT EXISTS `si_city` (
   `code` SMALLINT UNSIGNED NOT NULL , -- 城市代码
   `name` VARCHAR(45) NOT NULL DEFAULT '' , -- 城市名称
+  `key` VARCHAR(3) NOT NULL DEFAULT '' , -- 城市索引值
   PRIMARY KEY `pk_city` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -138,6 +139,7 @@ CREATE TABLE IF NOT EXISTS `si_user` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(60) NOT NULL , -- 用户名
   `password` VARCHAR(32) NOT NULL , -- 密码
+  `nickname` VARCHAR(15) NOT NULL ,
   -- 1 表示邮箱注册   2 表示电话注册   3 表示自定义类型账号
   `username_type` ENUM('email', 'phone', 'customer'), -- 账号类型
   `email` VARCHAR(60) , -- 用户邮箱
