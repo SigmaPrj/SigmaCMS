@@ -75,10 +75,11 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => 'admin',
-	'database' => 'sigma',
+	'hostname' => 'w.rdc.sae.sina.com.cn',
+    'port'     => '3307',
+	'username' => 'kml3ool15w',
+	'password' => '0i3wmk25kk4z2k2xj545klh4zy02z551lxjl2w02',
+	'database' => 'app_sigmainc',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => 'si_',
 	'pconnect' => FALSE,
