@@ -83,12 +83,8 @@ if (!function_exists('upload_file_to_qiniu')) {
 
         list($ret, $err) = $uploadMgr->put($uploadToken, null, $output);
 
-        echo 'ret : '.print_r($ret);
+        echo 'err : '.print_r($err);
 
-        if ($err !== null) {
-            return 0;
-        } else {
-            return $ret;
-        }
+        return $ret;
     }
 }
