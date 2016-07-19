@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+    <category>
+        <name>前端开发</name>
+        <items>
+            <item>HTML/CSS</item>
+            <item>JavaScript</item>
+            <item>HTML5</item>
+            <item>CSS3</item>
+            <item>jQuery</item>
+            <item>WebApp</item>
+            <item>Node.js</item>
+            <item>Angular.js</item>
+            <item>Bootstrap</item>
+            <item>前端工具</item>
+        </items>
+    </category>
+    <category>
+        <name>后端开发</name>
+        <items>
+            <item>PHP</item>
+            <item>Java</item>
+            <item>Linux</item>
+            <item>Python</item>
+            <item>C</item>
+            <item>C++</item>
+            <item>Go</item>
+            <item>C#</item>
+            <item>数据结构</item>
+        </items>
+    </category>
+    <category>
+        <name>移动开发</name>
+        <items>
+            <item>Android</item>
+            <item>iOS</item>
+            <item>Unity 3D</item>
+            <item>Cocos2d-X</item>
+        </items>
+    </category>
+    <category>
+        <name>数据处理</name>
+        <items>
+            <item>MySQL</item>
+            <item>Oracle</item>
+            <item>MongoDB</item>
+            <item>SQL Server</item>
+            <item>云计算</item>
+            <item>大数据</item>
+        </items>
+    </category>
+    <category>
+        <name>图像处理</name>
+        <items>
+            <item>Photoshop</item>
+            <item>Maya</item>
+            <item>Premiere</item>
+            <item>ZBrush</item>
+        </items>
+    </category>
+</root>
