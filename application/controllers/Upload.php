@@ -17,6 +17,8 @@ class Upload extends  CI_Controller
     public function upload_file() {
         $fname = ROOTPATH.'tmp/'.$this->input->get('fname');
 
+        print_r($fname);
+
         $access_key = $this->config->item('qiniu_access');
         $secret_key = $this->config->item('qiniu_secret');
         $bucket_name = $this->config->item('qiniu_bucket');
