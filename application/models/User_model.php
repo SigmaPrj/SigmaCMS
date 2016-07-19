@@ -14,7 +14,7 @@ class User_model extends CI_Model
         $this->load->database();
     }
 
-    public function update($new) {
-        return $this->db->replace($new);
+    public function upd($new) {
+        return $this->db->replace('user', $new);
     }
 }
