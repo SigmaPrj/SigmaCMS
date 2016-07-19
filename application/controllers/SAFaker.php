@@ -1116,7 +1116,7 @@ class SAFaker extends CI_Controller
             // 拉取图片
             $res = upload_file_to_qiniu(download_file_by_curl($image), 'user', 'image', $id);
 
-            header('Access-Control-Allow-Origin:*');
+            echo $image.'<hr/>';
 
             if (!$res) {
                 echo 'User 数据上传失败!';
