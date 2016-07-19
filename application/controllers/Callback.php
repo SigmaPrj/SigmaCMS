@@ -31,9 +31,8 @@ class Callback extends CI_Controller
         if ($dbname === 'user') {
             $this->load->model('User_model', 'userModel');
             $this->userModel->upd([
-                'id' => $id,
                 $field => $this->config->item('qiniu_domain').$hash
-            ]);
+            ], $id);
         }
     }
 }
