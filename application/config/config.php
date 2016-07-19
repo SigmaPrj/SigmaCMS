@@ -519,3 +519,12 @@ $config['proxy_ips'] = '';
 |--------------------------------------------------------------------------
 */
 $config['si_md5'] = 'sigma2016_';
+
+/*
+|--------------------------------------------------------------------------
+| 七牛云存储配置
+|--------------------------------------------------------------------------
+*/
+$config['qiniu_access'] = 'wz81hSAWUxrGWPQ99vDsBG_mfmEMo8nV4xo2UiML';
+$config['qiniu_secret'] = 'UCFqd2m8r5wh_EjdRCm61hr7eQB6WYGXNSiuo3w2';
+$config['qiniu_bucket'] = 'sigma';

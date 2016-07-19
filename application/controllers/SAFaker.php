@@ -1035,6 +1035,4 @@ class SAFaker extends CI_Controller
             echo 'Friend 数据添加失败!';
         }
     }
-
-
 }

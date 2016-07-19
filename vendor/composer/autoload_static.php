@@ -6,7 +6,15 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit8ebe01b1badf14f04424cff26baff5c8
 {
+    public static $files = array (
+        '841780ea2e1d6545ea3a253239d59c05' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/functions.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
+        'Q' => 
+        array (
+            'Qiniu\\' => 6,
+        ),
         'F' => 
         array (
             'Faker\\' => 6,
@@ -14,6 +22,10 @@ class ComposerStaticInit8ebe01b1badf14f04424cff26baff5c8
     );
 
     public static $prefixDirsPsr4 = array (
+        'Qiniu\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu',
+        ),
         'Faker\\' => 
         array (
             0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
