@@ -15,8 +15,8 @@ class SAFaker extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('safaker_model', 'fakerModel');
-        $this->load->model('school_model', 'schoolModel');
+        $this->load->model('SAFaker_model', 'fakerModel');
+        $this->load->model('School_model', 'schoolModel');
         $this->config->load('config');
         $this->faker = Faker\Factory::create('zh_CN');
     }
