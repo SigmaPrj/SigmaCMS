@@ -49,18 +49,12 @@ if (!function_exists('download_file_by_curl')) {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HEADER, 0);
 
-        $output = curl_exec($ch);
-
-        $filename = 'tmp_'.time().'.png';
-        file_put_contents(ROOTPATH.'tmp/'.$filename, $output);
-
-        return $filename;
+        return curl_exec($ch);
     }
 }
 
 if (!function_exists('upload_file_to_qiniu')) {
-    function upload_file_to_qiniu($file, $dbname, $field, $id) {
-        $fname = ROOTPATH.'tmp/'.$file;
+    function upload_file_to_qiniu($output, $dbname, $field, $id) {
 
         $ci = &get_instance();
         $ci->config->load('config');
@@ -80,7 +74,7 @@ if (!function_exists('upload_file_to_qiniu')) {
 
         $uploadMgr = new Qiniu\Storage\UploadManager();
 
-        list($ret, $err) = $uploadMgr->putFile($uploadToken, null, $fname);
+        list($ret, $err) = $uploadMgr->put($uploadToken, null, $output);
 
         if ($err !== null) {
             return 0;
