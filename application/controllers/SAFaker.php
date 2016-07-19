@@ -9,6 +9,9 @@
 class SAFaker extends CI_Controller
 {
     protected $faker;
+
+    static protected $userId = 1;
+
     public function __construct()
     {
         parent::__construct();
@@ -1034,5 +1037,94 @@ class SAFaker extends CI_Controller
         } else {
             echo 'Friend 数据添加失败!';
         }
+    }
+
+    /**
+     * faker one user
+     */
+    public function faker_oneUser() {
+        $id = SAFaker::$userId;
+        $username_type = $this->faker->randomElement(['email', 'phone', 'customer']);
+        switch ($username_type) {
+            case 'email': {
+                $username = $this->faker->safeEmail;
+                $email = $username;
+                $phone = '';
+            }
+                break;
+            case 'phone' : {
+                $username = $this->faker->phoneNumber;
+                $phone = $username;
+                $email = '';
+            }
+                break;
+            case 'customer' : {
+                $username = $this->faker->regexify('[a-zA-Z0-9]{6,10}');
+                $email = '';
+                $phone = '';
+            }
+                break;
+        }
+        $password = md5($this->config->item('si_md5').$username);
+        $nickname = $this->faker->text(15);
+        $image = $this->faker->imageUrl(120, 120);
+        $signature = $this->faker->text(60);
+        $point = $this->faker->randomNumber(4);
+        $coin = $this->faker->randomNumber(4);
+        $user_level = $this->faker->randomNumber(2);
+        $school_code = $this->faker->numberBetween(1, 2553);
+        while (!$this->schoolModel->getSchoolWithCode($school_code)) {
+            // 判断是否为有效的school_code
+            $school_code = $this->faker->numberBetween(1, 2553);
+        }
+        $city_code = $this->faker->numberBetween(1, 216);
+        $user_type = $this->faker->numberBetween(1, 2);
+        $user_social = 1;
+        $last_login_city = $this->faker->numberBetween(1, 216);
+        $last_login_date = $this->faker->unixTime('now');
+        $last_register_date = $this->faker->unixTime($last_login_date);
+        $is_active = 1;
+        $active_date = $this->faker->unixTime($last_register_date);
+        $apply_date = 1800;
+        $apply_code = $this->faker->regexify('[0-9A-Z]{6}');
+        $data[] = [
+            'id' => $id,
+            'username' => $username,
+            'password' => $password,
+            'nickname' => $nickname,
+            'username_type' => $username_type,
+            'email' => $email,
+            'phone' => $phone,
+            'signature' => $signature,
+            'point' => $point,
+            'coin' => $coin,
+            'user_level' => $user_level,
+            'school_code' => $school_code,
+            'city_code' => $city_code,
+            'user_type' => $user_type,
+            'user_social' => $user_social,
+            'last_login_city' => $last_login_city,
+            'last_login_date' => $last_login_date,
+            'last_register_date' => $last_register_date,
+            'is_active' => $is_active,
+            'active_date' => $active_date,
+            'apply_date' => $apply_date,
+            'apply_code' => $apply_code
+        ];
+
+        if ($this->fakerModel->addFakerUser($data)) {
+            // 拉取图片
+            $filename = download_file_by_curl($image);
+            $res = upload_file_to_qiniu($filename, 'user', 'image', $id);
+            if (!$res) {
+                echo 'User 数据上传失败!';
+            } else {
+                echo 'User 数据上传成功!';
+            }
+        } else {
+            echo 'User 数据添加失败!';
+        }
+
+        SAFaker::$userId++;
     }
 }

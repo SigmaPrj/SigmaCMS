@@ -41,3 +41,51 @@ if (!function_exists('IS_AJAX')) {
         return ($_SERVER["HTTP_X_REQUESTED_WITH"] === "XMLHttpRequest");
     }
 }
+
+if (!function_exists('download_file_by_curl')) {
+    function download_file_by_curl($url) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+
+        $output = curl_exec($ch);
+
+        $filename = 'tmp_'.time().'.png';
+        file_put_contents(ROOTPATH.'tmp/'.$filename, $output);
+
+        return $filename;
+    }
+}
+
+if (!function_exists('upload_file_to_qiniu')) {
+    function upload_file_to_qiniu($file, $dbname, $field, $id) {
+        $fname = ROOTPATH.'tmp/'.$file;
+
+        $ci = &get_instance();
+        $ci->config->load('config');
+
+        $access_key = $ci->config->item('qiniu_access');
+        $secret_key = $ci->config->item('qiniu_secret');
+        $bucket_name = $ci->config->item('qiniu_bucket');
+
+        $auth = new Qiniu\Auth($access_key, $secret_key);
+
+        $policy = array(
+            'callbackUrl' => $ci->config->item('base_url').'/Callback/'.$dbname.'/'.$field.'/'.$id,
+            'callbackBody' => 'fname=$(fname)&fkey=$(fkey)&fsize=$(fsize)&hash=$(etag)'
+        );
+
+        $uploadToken = $auth->uploadToken($bucket_name, null, 3600, $policy);
+
+        $uploadMgr = new Qiniu\Storage\UploadManager();
+
+        list($ret, $err) = $uploadMgr->putFile($uploadToken, null, $fname);
+
+        if ($err !== null) {
+            return 0;
+        } else {
+            return $ret;
+        }
+    }
+}

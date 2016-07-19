@@ -17,8 +17,6 @@ class Upload extends  CI_Controller
     public function upload_file($file) {
         $fname = ROOTPATH.'tmp/'.$file;
 
-        print_r($fname);
-
         $access_key = $this->config->item('qiniu_access');
         $secret_key = $this->config->item('qiniu_secret');
         $bucket_name = $this->config->item('qiniu_bucket');
@@ -37,9 +35,21 @@ class Upload extends  CI_Controller
         list($ret, $err) = $uploadMgr->putFile($uploadToken, null, $fname);
 
         if ($err !== null) {
-            print_r($err);
+            return 0;
         } else {
-            print_r($ret);
+            return $ret;
         }
+    }
+
+    public function download_file() {
+        $url = 'http://oaetkzt9k.bkt.clouddn.com/Fnq6z1szzxgopzJW3GeeZiL7goSM';
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+
+        $output = curl_exec($ch);
+        
+        file_put_contents(ROOTPATH.'tmp/tmp_'.time().'.png', $output);
     }
 }

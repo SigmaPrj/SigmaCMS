@@ -106,6 +106,22 @@ CREATE TABLE IF NOT EXISTS `si_school` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+
+-- ###########################################
+--                   图片
+-- ###########################################
+DROP TABLE IF EXISTS `si_image`;
+CREATE TABLE IF NOT EXISTS `si_image`(
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `fname` VARCHAR(60) NOT NULL ,
+  `fkey` VARCHAR(60) NOT NULL ,
+  `hash` VARCHAR(40) NOT NULL ,
+  `fsize` INT UNSIGNED NOT NULL ,
+  PRIMARY KEY `pk_image` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
 -- ###########################################
 --                   用户
 -- ###########################################

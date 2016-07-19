@@ -23,8 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://2.sigmainc.applinzi.com/';
-
+//$config['base_url'] = 'http://2.sigmainc.applinzi.com/';
+$config['base_url'] = 'http://sigma.test.com/';
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -528,3 +528,4 @@ $config['si_md5'] = 'sigma2016_';
 $config['qiniu_access'] = 'wz81hSAWUxrGWPQ99vDsBG_mfmEMo8nV4xo2UiML';
 $config['qiniu_secret'] = 'UCFqd2m8r5wh_EjdRCm61hr7eQB6WYGXNSiuo3w2';
 $config['qiniu_bucket'] = 'sigma';
+$config['qiniu_domain'] = 'http://oaetkzt9k.bkt.clouddn.com/';

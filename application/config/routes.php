@@ -59,7 +59,7 @@ $route['translate_uri_dashes'] = FALSE;
 | -------------------------------------------------------------------------
 */
 $route['default_controller'] = 'Index';
-$route['Callback'] = 'Callback/handler';
+$route['Callback/(:any)/(:any)/(:num)'] = 'Callback/handler/$1/$2/$3';
 
 
 /*
