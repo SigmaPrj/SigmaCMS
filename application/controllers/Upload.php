@@ -35,9 +35,9 @@ class Upload extends  CI_Controller
         list($ret, $err) = $uploadMgr->putFile($uploadToken, null, $fname);
 
         if ($err !== null) {
-            var_dump($err);
+            print_r($err);
         } else {
-            var_dump($ret);
+            print_r($ret);
         }
     }
 }
