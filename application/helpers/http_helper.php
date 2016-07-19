@@ -54,7 +54,7 @@ if (!function_exists('download_file_by_curl')) {
 }
 
 if (!function_exists('upload_file_to_qiniu')) {
-    function upload_file_to_qiniu($url, $dbname, $field, $id) {
+    function upload_file_to_qiniu($output, $dbname, $field, $id) {
 
         $ci = &get_instance();
         $ci->config->load('config');
@@ -70,18 +70,9 @@ if (!function_exists('upload_file_to_qiniu')) {
             'callbackBody' => 'fname=$(fname)&fkey=$(fkey)&fsize=$(fsize)&hash=$(etag)'
         );
 
-        header('Access-Control-Allow-Origin:*');
-
         $uploadToken = $auth->uploadToken($bucket_name, null, 3600, $policy);
 
         $uploadMgr = new Qiniu\Storage\UploadManager();
-
-        // 获取文件
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        $output = curl_exec($ch);
 
         list($ret, $err) = $uploadMgr->put($uploadToken, null, $output);
 
