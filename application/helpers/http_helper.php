@@ -54,7 +54,7 @@ if (!function_exists('download_file_by_curl')) {
 }
 
 if (!function_exists('upload_file_to_qiniu')) {
-    function upload_file_to_qiniu($output, $dbname, $field, $id) {
+    function upload_file_to_qiniu($url, $dbname, $field, $id) {
 
         $ci = &get_instance();
         $ci->config->load('config');
@@ -74,7 +74,16 @@ if (!function_exists('upload_file_to_qiniu')) {
 
         $uploadMgr = new Qiniu\Storage\UploadManager();
 
+        // 获取文件
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        $output = curl_exec($ch);
+
         list($ret, $err) = $uploadMgr->put($uploadToken, null, $output);
+
+        echo 'ret : '.print_r($ret);
 
         if ($err !== null) {
             return 0;
