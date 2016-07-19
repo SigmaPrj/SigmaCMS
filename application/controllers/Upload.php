@@ -14,8 +14,8 @@ class Upload extends  CI_Controller
         $this->config->load('config');
     }
 
-    public function upload_file() {
-        $fname = ROOTPATH.'tmp/'.$this->input->get('fname');
+    public function upload_file($file) {
+        $fname = ROOTPATH.'tmp/'.$file;
 
         print_r($fname);
 
