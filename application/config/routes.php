@@ -59,6 +59,7 @@ $route['translate_uri_dashes'] = FALSE;
 | -------------------------------------------------------------------------
 */
 $route['default_controller'] = 'Index';
+$route['Callback'] = 'Callback/handler';
 
 
 /*
@@ -70,5 +71,14 @@ $route['api/example/users/(:num)'] = 'api/example/users/id/$1'; // Example 4
 $route['api/example/users/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'api/example/users/id/$1/format/$3$4'; //
 
 // API for city
-$route['api/city'] = 'api/city/cities';
+$route['api/city'] = 'api/City/cities';
 $route['api/city/(:num)'] = 'api/city/cities/id/$1';
+
+// API for school
+$route['api/school'] = 'api/School/schools'; // 获取所有学校
+$route['api/school/(:num)'] = 'api/school/schools/id/$1'; // 获取特定学校
+// api/school/schools?code=$code 获取城市下所有学校  ?limit=3 获取前三条数据
+
+// API for userType
+$route['api/usertype'] = 'api/UserType/userTypes';
+$route['api/usertype/(:num)'] = 'api/UserType/userTypes/id/$1';

@@ -15,6 +15,7 @@ class Login extends CI_Controller
     {
         parent::__construct();
         $this->load->helper(array('form', 'url'));
+        $this->load->library('session');
         $this->load->library('form_validation');
 
         $this->load->model('admin_model', 'adminModel');
@@ -60,6 +61,7 @@ class Login extends CI_Controller
 
     /**
      * @param $username string 用户名验证
+     * @return bool
      */
     public function username_check($username) {
         if ($this->adminModel->is_valid_username($username)) {
@@ -71,6 +73,7 @@ class Login extends CI_Controller
 
     /**
      * @param $password string 密码验证
+     * @return bool
      */
     public function password_check($password) {
         if ($this->adminModel->is_valid_password($this->username, $password)) {

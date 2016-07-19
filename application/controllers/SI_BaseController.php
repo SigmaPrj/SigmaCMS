@@ -14,7 +14,7 @@ class SI_BaseController extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-
+        $this->load->library('session');
         // 登录验证
         if (!$this->session->userdata('is_login')) {
             redirect(base_url('login/index.html'));

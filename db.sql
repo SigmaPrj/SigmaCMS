@@ -87,6 +87,7 @@ DROP TABLE IF EXISTS `si_city`;
 CREATE TABLE IF NOT EXISTS `si_city` (
   `code` SMALLINT UNSIGNED NOT NULL , -- 城市代码
   `name` VARCHAR(45) NOT NULL DEFAULT '' , -- 城市名称
+  `key` VARCHAR(3) NOT NULL DEFAULT '' , -- 城市索引值
   PRIMARY KEY `pk_city` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -138,6 +139,8 @@ CREATE TABLE IF NOT EXISTS `si_user` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(60) NOT NULL , -- 用户名
   `password` VARCHAR(32) NOT NULL , -- 密码
+  `nickname` VARCHAR(15) NOT NULL ,
+  `is_approved` TINYINT UNSIGNED NOT NULL DEFAULT 0, -- 账户是否被认证
   -- 1 表示邮箱注册   2 表示电话注册   3 表示自定义类型账号
   `username_type` ENUM('email', 'phone', 'customer'), -- 账号类型
   `email` VARCHAR(60) , -- 用户邮箱
@@ -231,6 +234,7 @@ DROP TABLE IF EXISTS `si_category`;
 CREATE TABLE IF NOT EXISTS `si_category` (
   `id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(20) NOT NULL , -- 课程分类名称
+  `image` TEXT , -- 课程分类图标ad
   `parent_id` SMALLINT UNSIGNED NOT NULL , -- 父级分类
   PRIMARY KEY `pk_category` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -271,7 +275,7 @@ CREATE TABLE IF NOT EXISTS `si_video_comment` (
   `comment` TEXT ,
   `publish_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 评论发布时间
   `praise` INT UNSIGNED NOT NULL DEFAULT 0 , -- 评论被赞数目
-  `sub_id` INT UNSIGNED NOT NULL , -- 被回复的评论id
+  `sub_id` INT UNSIGNED, -- 被回复的评论id
   PRIMARY KEY `pk_videoComment` (`id`) ,
   FOREIGN KEY `fk_videoComment_video` (`video_id`) REFERENCES `si_video` (`id`) ,
   FOREIGN KEY `fk_videoComment_user` (`user_id`) REFERENCES `si_user` (`id`)
@@ -310,7 +314,7 @@ CREATE TABLE IF NOT EXISTS `si_resource_comment` (
   `comment` TEXT ,
   `publish_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 评论发布时间
   `praise` INT UNSIGNED NOT NULL DEFAULT 0 , -- 评论被赞数目
-  `sub_id` INT UNSIGNED NOT NULL , -- 被回复的评论id
+  `sub_id` INT UNSIGNED, -- 被回复的评论id
   PRIMARY KEY `pk_resourceComment` (`id`) ,
   FOREIGN KEY `fk_resourceComment_resource` (`resource_id`) REFERENCES `si_resource` (`id`) ,
   FOREIGN KEY `fk_resourceComment_user` (`user_id`) REFERENCES `si_user` (`id`)
@@ -322,13 +326,42 @@ CREATE TABLE IF NOT EXISTS `si_resource_comment` (
 --                  活动功能
 -- ###########################################
 
+-- 企业账号,代理点账号以及其他非用户账号
+DROP TABLE IF EXISTS `si_ouser`;
+CREATE TABLE IF NOT EXISTS `si_ouser` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `username` VARCHAR(60) NOT NULL , -- 用户名
+  `password` VARCHAR(32) NOT NULL , -- 密码
+  `nickname` VARCHAR(15) NOT NULL ,
+  -- 1 表示邮箱注册   2 表示电话注册   3 表示自定义类型账号
+  `username_type` ENUM('email', 'phone', 'customer'), -- 账号类型
+  `email` VARCHAR(60) , -- 用户邮箱
+  `phone` VARCHAR(15) , -- 用户电话
+  `image` TEXT , -- 用户头像
+  `is_approved` TINYINT UNSIGNED NOT NULL DEFAULT 0, -- 是否被认证
+  `city_code` SMALLINT UNSIGNED , -- 所属城市
+  `user_type` TINYINT UNSIGNED , -- 用户类型
+  `last_login_city` SMALLINT UNSIGNED , -- 上次登录城市
+  `last_login_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 上次登录时间
+  `last_register_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 上次签到时间
+  `is_active` TINYINT UNSIGNED NOT NULL , -- 用户是否已经被激活
+  `active_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 用户账户被激活的时间
+  `apply_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 用户账户 发送邮箱, 短信验证的时间 有效时间为30分钟
+  `apply_code` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 用户账户 收到的邮箱验证码或者短信验证码 md5 加密值
+  PRIMARY KEY `pk_ouser` (`id`),
+  FOREIGN KEY `fk_ouser_live_city` (`city_code`) REFERENCES `si_city` (`code`),
+  FOREIGN KEY `fk_ouser_userType` (`user_type`) REFERENCES `si_user_type` (`code`),
+  FOREIGN KEY `fk_ouser_last_city` (`last_login_city`) REFERENCES `si_city` (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- 活动
 
 DROP TABLE IF EXISTS `si_activity`;
 CREATE TABLE IF NOT EXISTS `si_activity` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
-  `user_id` INT UNSIGNED NOT NULL ,
+  `ouser_id` INT UNSIGNED NOT NULL ,
   `title` VARCHAR(60) NOT NULL , -- 活动标题
+  `description` TEXT, -- 活动详细描述
   `address` VARCHAR(255) NOT NULL , -- 活动地点
   `image` TEXT , -- 活动宣传图
   `publish_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 活动发布时间
@@ -339,12 +372,12 @@ CREATE TABLE IF NOT EXISTS `si_activity` (
   `allow_team` TINYINT UNSIGNED NOT NULL DEFAULT 1 , -- 是否允许主队参加
   `allow_teacher` TINYINT UNSIGNED NOT NULL DEFAULT 0 , -- 是否需要导师
   `team_min_number` TINYINT UNSIGNED NOT NULL DEFAULT 0 , -- 主队允许最少人数
-  `team_max_number` TINYINT UNSIGNED NOT NULL DEFAULT 0 , -- 主队允许最多人数
-  `save` INT UNSIGNED NOT NULL , -- 多少个人收藏
-  `look` INT UNSIGNED NOT NULL , -- 多少个人查阅
-  `join` INT UNSIGNED NOT NULL , -- 多少个人参加
+  `team_max_number` TINYINT UNSIGNED NOT NULL DEFAULT 0 , -- 主队``允许最多人数
+  `save` INT UNSIGNED NOT NULL DEFAULT 0, -- 多少个人收藏
+  `look` INT UNSIGNED NOT NULL DEFAULT 0, -- 多少个人查阅
+  `join` INT UNSIGNED NOT NULL DEFAULT 0, -- 多少个人参加
   PRIMARY KEY `pk_activity` (`id`) ,
-  FOREIGN KEY `fk_activity_user` (`user_id`) REFERENCES `si_user` (`id`)
+  FOREIGN KEY `fk_activity_user` (`ouser_id`) REFERENCES `si_ouser` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -357,7 +390,7 @@ CREATE TABLE IF NOT EXISTS `si_activity_comment` (
   `comment` TEXT , -- 评论内容
   `publish_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 评论发布时间
   `praise` INT UNSIGNED NOT NULL DEFAULT 0 , -- 评论被赞数目
-  `sub_id` INT UNSIGNED NOT NULL , -- 被回复的评论id
+  `sub_id` INT UNSIGNED, -- 被回复的评论id
   PRIMARY KEY `pk_activityComment` (`id`) ,
   FOREIGN KEY `fk_activityComment_activity` (`activity_id`) REFERENCES `si_activity` (`id`) ,
   FOREIGN KEY `fk_activityComment_user` (`user_id`) REFERENCES `si_user` (`id`)
@@ -367,17 +400,6 @@ CREATE TABLE IF NOT EXISTS `si_activity_comment` (
 -- ###########################################
 --                 社区功能
 -- ###########################################
-
--- ------------------------------------------
--- 话题
--- ------------------------------------------
-DROP TABLE IF EXISTS `si_topic`;
-CREATE TABLE IF NOT EXISTS `si_topic` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(50) NOT NULL , -- 话题内容
-  `dynamic_num` INT UNSIGNED NOT NULL DEFAULT 0 , -- 该话题当前动态数目
-  PRIMARY KEY `pk_topic` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ------------------------------------------
 -- 经验分享
@@ -390,9 +412,9 @@ CREATE TABLE IF NOT EXISTS `si_experience` (
   `content` TEXT , -- 分享文章内容
   `publish_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 活动发布时间
   `last_look_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 最近一次浏览时间
-  `save` INT UNSIGNED NOT NULL , -- 多少个人收藏
-  `look` INT UNSIGNED NOT NULL , -- 多少个人查阅
-  `praise` INT UNSIGNED NOT NULL , -- 多少个人称赞
+  `save` INT UNSIGNED NOT NULL DEFAULT 0, -- 多少个人收藏
+  `look` INT UNSIGNED NOT NULL DEFAULT 0, -- 多少个人查阅
+  `praise` INT UNSIGNED NOT NULL DEFAULT 0, -- 多少个人称赞
   PRIMARY KEY `pk_experience` (`id`) ,
   FOREIGN KEY `fk_experience_user` (`user_id`) REFERENCES `si_user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -408,10 +430,21 @@ CREATE TABLE IF NOT EXISTS `si_experience_comment` (
   `publish_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 活动发布时间
   `last_look_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 最近一次浏览时间
   `praise` INT UNSIGNED NOT NULL DEFAULT 0 , -- 评论被赞数目
-  `sub_id` INT UNSIGNED NOT NULL , -- 被回复的评论id
+  `sub_id` INT UNSIGNED , -- 被回复的评论id
   PRIMARY KEY `pk_experienceComment` (`id`) ,
   FOREIGN KEY `fk_experienceComment_experience` (`experience_id`) REFERENCES `si_experience` (`id`) ,
   FOREIGN KEY `fk_experienceComment_user` (`user_id`) REFERENCES `si_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ------------------------------------------
+-- 话题
+-- ------------------------------------------
+DROP TABLE IF EXISTS `si_topic`;
+CREATE TABLE IF NOT EXISTS `si_topic` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(50) NOT NULL , -- 话题内容
+  `dynamic_num` INT UNSIGNED NOT NULL DEFAULT 0 , -- 该话题当前动态数目
+  PRIMARY KEY `pk_topic` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ------------------------------------------
@@ -426,9 +459,9 @@ CREATE TABLE IF NOT EXISTS `si_dynamic` (
   `content` TEXT , -- 评论内容
   `publish_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 活动发布时间
   `last_look_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 最近一次浏览时间
-  `share` INT UNSIGNED NOT NULL , -- 分享人数
-  `look` INT UNSIGNED NOT NULL , -- 浏览人数
-  `praise` INT UNSIGNED NOT NULL , -- 称赞人数
+  `share` INT UNSIGNED , -- 分享人数
+  `look` INT UNSIGNED , -- 浏览人数
+  `praise` INT UNSIGNED , -- 称赞人数
   PRIMARY KEY `pk_dynamic` (`id`) ,
   FOREIGN KEY `fk_dynamic_user` (`user_id`) REFERENCES `si_user` (`id`) ,
   FOREIGN KEY `fk_dynamic_topic` (`topic_id`) REFERENCES `si_topic` (`id`)
@@ -443,8 +476,8 @@ CREATE TABLE IF NOT EXISTS `si_dynamic_comment`(
   `comment` TEXT , -- 评论内容
   `publish_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 活动发布时间
   `last_look_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 最近一次浏览时间
-  `praise` INT UNSIGNED NOT NULL DEFAULT 0 , -- 评论被赞数目
-  `sub_id` INT UNSIGNED NOT NULL , -- 被回复的评论id
+  `praise` INT UNSIGNED , -- 评论被赞数目
+  `sub_id` INT UNSIGNED , -- 被回复的评论id
   PRIMARY KEY `pk_dynamicComment` (`id`) ,
   FOREIGN KEY `fk_dynamicComment_dynamic` (`dynamic_id`) REFERENCES `si_dynamic` (`id`) ,
   FOREIGN KEY `fk_dynamicComment_user` (`user_id`) REFERENCES `si_user` (`id`)
@@ -460,6 +493,7 @@ DROP TABLE IF EXISTS `si_news_type`;
 CREATE TABLE IF NOT EXISTS `si_news_type` (
   `id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(4) NOT NULL , -- 资讯分类名称
+  `image` TEXT , -- 分类图标
   PRIMARY KEY `pk_newsType` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -480,9 +514,9 @@ CREATE TABLE IF NOT EXISTS `si_news` (
   `allow_teacher` TINYINT UNSIGNED NOT NULL DEFAULT 0 , -- 是否需要导师
   `team_min_number` TINYINT UNSIGNED NOT NULL DEFAULT 0 , -- 主队允许最少人数
   `team_max_number` TINYINT UNSIGNED NOT NULL DEFAULT 0 , -- 主队允许最多人数
-  `save` INT UNSIGNED NOT NULL , -- 多少个人收藏
-  `look` INT UNSIGNED NOT NULL , -- 多少个人查阅
-  `join` INT UNSIGNED NOT NULL , -- 多少个人参加
+  `save` INT UNSIGNED NOT NULL DEFAULT 0, -- 多少个人收藏
+  `look` INT UNSIGNED NOT NULL DEFAULT 0, -- 多少个人查阅
+  `join` INT UNSIGNED NOT NULL DEFAULT 0, -- 多少个人参加
   PRIMARY KEY `pk_news` (`id`) ,
   FOREIGN KEY `fk_news_newsType` (`news_type`) REFERENCES `si_news_type` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -535,10 +569,10 @@ DROP TABLE IF EXISTS `si_friend`;
 CREATE TABLE IF NOT EXISTS `si_friend` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `user_id` INT UNSIGNED NOT NULL ,
-  `frend_user_id` INT UNSIGNED NOT NULL ,
+  `friend_user_id` INT UNSIGNED NOT NULL ,
   PRIMARY KEY `pk_friend` (`id`) ,
   FOREIGN KEY `fk_friend_user` (`user_id`) REFERENCES `si_user` (`id`) ,
-  FOREIGN KEY `fk_friend_fuser` (`frend_user_id`) REFERENCES `si_user` (`id`)
+  FOREIGN KEY `fk_friend_fuser` (`friend_user_id`) REFERENCES `si_user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

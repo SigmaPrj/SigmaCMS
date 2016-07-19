@@ -10,5 +10,7 @@
             "email": "164710166@qq.com"
         }
     ],
-    "require": {}
+    "require": {
+        "qiniu/php-sdk": "^7.0"
+    }
 }

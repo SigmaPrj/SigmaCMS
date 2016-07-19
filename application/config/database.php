@@ -75,6 +75,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
+
 	'hostname' => SAE_MYSQL_HOST_M,
     'port'     => SAE_MYSQL_PORT,
 	'username' => SAE_MYSQL_USER,

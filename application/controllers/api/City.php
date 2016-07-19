@@ -52,7 +52,7 @@ class City extends REST_Controller
         } else {
             $this->response([
                 'status' => FALSE,
-                'message' => 'User not found'
+                'message' => 'City not found'
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
     }
