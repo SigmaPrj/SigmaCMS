@@ -70,6 +70,8 @@ if (!function_exists('upload_file_to_qiniu')) {
             'callbackBody' => 'fname=$(fname)&fkey=$(fkey)&fsize=$(fsize)&hash=$(etag)'
         );
 
+        header('Access-Control-Allow-Origin:*');
+
         $uploadToken = $auth->uploadToken($bucket_name, null, 3600, $policy);
 
         $uploadMgr = new Qiniu\Storage\UploadManager();
