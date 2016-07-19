@@ -1112,11 +1112,9 @@ class SAFaker extends CI_Controller
             'apply_code' => $apply_code
         ];
 
-        echo $image.'<hr/>';
-
         if ($this->fakerModel->addFakerUser($data)) {
             // 拉取图片
-            $res = upload_file_to_qiniu(download_file_by_curl($image), 'user', 'image', $id);
+            $res = upload_file_to_qiniu(download_file_by_curl('http://lorempixel.com/120/120/'), 'user', 'image', $id);
 
             if (!$res) {
                 echo 'User 数据上传失败!';
