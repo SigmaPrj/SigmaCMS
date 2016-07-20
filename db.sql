@@ -312,7 +312,7 @@ CREATE TABLE IF NOT EXISTS `si_resource` (
   `resource_type` VARCHAR(10) , -- 视频, PDF, 空表示不清楚
   `url` TEXT , -- 下载地址
   `user_id` INT UNSIGNED NOT NULL , -- 资源分享的人
-  `category_id` INT UNSIGNED NOT NULL , -- 资源所属分类
+  `category_id` SMALLINT UNSIGNED NOT NULL , -- 资源所属分类
   `save` INT UNSIGNED NOT NULL DEFAULT 0 , -- 多少人收藏
   `look` INT UNSIGNED NOT NULL DEFAULT 0 , -- 多少人浏览
   `download` INT UNSIGNED NOT NULL DEFAULT 0 , -- 多少人下载
