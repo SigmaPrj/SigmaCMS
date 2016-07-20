@@ -300,7 +300,7 @@ class SAFaker extends CI_Controller
         for ($i = 0; $i < 50; $i++) {
             $id = $i+1;
             $title = $this->faker->text(30);
-            $user_id = $this->faker->numberBetween(1, 500);
+            $user_id = $this->faker->numberBetween(1, 50);
             $url = '';
             $duration = 0;
             $pay_type = $this->faker->randomElement([1, 2]);
