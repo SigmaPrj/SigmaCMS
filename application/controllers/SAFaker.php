@@ -881,19 +881,22 @@ class SAFaker extends CI_Controller
 
         // 添加动态信息
         if ($this->fakerModel->addFakerDynamic($dataDynamic)) {
-            echo 'Dynamic 动态添加成功!'.'<br/>';
+            $msg .= 'Dynamic 动态添加成功!'.'<br/>';
         } else {
-            echo 'Dynamic 动态添加失败!'.'<br/>';
+            $msg .= 'Dynamic 动态添加失败!'.'<br/>';
         }
 
         // 上传图片
         for ($l = 0; $l < count($imageData); $l ++){
-            $res = upload_file_to_qiniu(download_file_by_curl($imageData[$l]['url']), 'dynamic_image', 'url', $imageData[$l]['dynamic_id']);
-            if ($res) {
-                $msg .= $index.' : '.($l+1).' ------ 上传成功!'.'<br/>';
-            } else {
-                $msg .= $index.' : '.($l+1).' ------ 上传失败!'.'<br/>';
-            }
+            print_r($imageData[$i]['url']);
+            echo ' ---- ';
+            print_r($imageData[$i]['dynamic_jd'].'<br/>');
+//            $res = upload_file_to_qiniu(download_file_by_curl($imageData[$l]['url']), 'dynamic_image', 'url', $imageData[$l]['dynamic_id']);
+//            if ($res) {
+//                $msg .= $index.' : '.($l+1).' ------ 上传成功!'.'<br/>';
+//            } else {
+//                $msg .= $index.' : '.($l+1).' ------ 上传失败!'.'<br/>';
+//            }
         }
 
 
