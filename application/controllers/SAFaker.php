@@ -890,7 +890,7 @@ class SAFaker extends CI_Controller
         for ($l = 0; $l < count($imageData); $l ++){
             print_r($imageData[$i]['url']);
             echo ' ---- ';
-            print_r($imageData[$i]['dynamic_jd'].'<br/>');
+            print_r($imageData[$i]['dynamic_id'].'<br/>');
 //            $res = upload_file_to_qiniu(download_file_by_curl($imageData[$l]['url']), 'dynamic_image', 'url', $imageData[$l]['dynamic_id']);
 //            if ($res) {
 //                $msg .= $index.' : '.($l+1).' ------ 上传成功!'.'<br/>';
