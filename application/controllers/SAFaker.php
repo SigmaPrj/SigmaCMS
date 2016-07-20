@@ -1043,6 +1043,7 @@ class SAFaker extends CI_Controller
      */
     public function faker_oneUser() {
 
+        $msg = '';
         // 测试 一次上传10条数据的效果
         for ($i=0; $i<10; $i++) {
             $username_type = $this->faker->randomElement(['email', 'phone', 'customer']);
@@ -1118,13 +1119,15 @@ class SAFaker extends CI_Controller
                 $res = upload_file_to_qiniu(download_file_by_curl('http://lorempixel.com/120/120/?37556'), 'user', 'image', $i+1);
 
                 if (!$res) {
-                    echo ($i+1).' User 数据上传成功!'.'<br/>';
+                    $msg .= ($i+1).' User 数据上传成功!'.'<br/>';
                 } else {
-                    echo 'User 数据上传失败!';
+                    $msg .= 'User 数据上传失败!'.'<br/>';
                 }
             } else {
-                echo 'User 数据添加失败!';
+                $msg .= 'User 数据添加失败!'.'<br/>';
             }
         }
+
+        echo $msg;
     }
 }
