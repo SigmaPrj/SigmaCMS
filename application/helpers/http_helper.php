@@ -76,6 +76,10 @@ if (!function_exists('upload_file_to_qiniu')) {
 
         list($ret, $err) = $uploadMgr->put($uploadToken, null, $output);
 
-        return $ret;
+        if ($err) {
+            return FALSE;
+        } else {
+            return $ret;
+        }
     }
 }
