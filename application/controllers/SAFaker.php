@@ -1046,6 +1046,7 @@ class SAFaker extends CI_Controller
         $msg = '';
         // 测试 一次上传10条数据的效果
         for ($i=0; $i<10; $i++) {
+            $data = [];
             $username_type = $this->faker->randomElement(['email', 'phone', 'customer']);
             switch ($username_type) {
                 case 'email': {
@@ -1116,7 +1117,7 @@ class SAFaker extends CI_Controller
 
             if ($this->fakerModel->addFakerUser($data)) {
                 // 拉取图片
-                $res = upload_file_to_qiniu(download_file_by_curl('http://lorempixel.com/120/120/?37556'), 'user', 'image', $i+1);
+                $res = upload_file_to_qiniu(download_file_by_curl($image), 'user', 'image', $i+1);
 
                 if (!$res) {
                     $msg .= ($i+1).' User 数据上传成功!'.'<br/>';
