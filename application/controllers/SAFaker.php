@@ -636,7 +636,7 @@ class SAFaker extends CI_Controller
         for ($i = 0; $i < 50; $i++) {
             $data = [];
             $id = $i + 1;
-            $ouser_id = $this->faker->numberBetween(1, 30);
+            $ouser_id = $this->faker->numberBetween(1, 20);
             $title = $this->faker->text(30);
             $description = implode('\n', $this->faker->paragraphs(6));
             $address = $this->faker->address;
