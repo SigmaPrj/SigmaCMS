@@ -238,9 +238,11 @@ class SAFaker extends CI_Controller
 
             if ($this->fakerModel->addFakerUser($data)) {
                 // 拉取图片
-                $res = upload_file_to_qiniu(download_file_by_curl($image), 'user', 'image', $i+1);
+                $res1 = upload_file_to_qiniu(download_file_by_curl($image), 'user', 'image', $i+1);
+                $res2 = upload_file_to_qiniu(download_file_by_curl($bgImage), 'user', 'bgImage', $i+1);
+                $res3 = upload_file_to_qiniu(download_file_by_curl($signatureImage), 'user', 'signatureImage', $i+1);
 
-                if (!$res) {
+                if ((!$res1) && (!$res2) && (!$res3)) {
                     $msg .= ($i+1).' User 数据上传成功!'.'<br/>';
                 } else {
                     $msg .= 'User 数据上传失败!'.'<br/>';
