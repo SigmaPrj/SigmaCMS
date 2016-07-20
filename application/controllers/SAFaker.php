@@ -829,10 +829,10 @@ class SAFaker extends CI_Controller
     public function faker_dynamic()
     {
         $msg = '';
-        $index = 1;
+        $index = 16;
         $imageData = [];
         $dataDynamic = [];
-        for ($i = 0; $i < 10; $i++) { // 共10个话题
+        for ($i = 6; $i < 10; $i++) { // 共10个话题
             $dynamic_num = $this->faker->numberBetween(0, 4);
             // 构造动态
             for ($j = 0; $j < $dynamic_num; $j++) {
@@ -870,7 +870,6 @@ class SAFaker extends CI_Controller
 
                 $index++;
             }
-
         }
 
         // 添加动态信息
