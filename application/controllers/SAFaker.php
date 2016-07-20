@@ -873,18 +873,18 @@ class SAFaker extends CI_Controller
 
         }
 
-        print_r($dataDynamic);
+        /*print_r($dataDynamic);
 
         echo '<hr/>';
 
-        print_r($imageData);
+        print_r($imageData);*/
 
-        /*// 添加动态信息
+        // 添加动态信息
         if ($this->fakerModel->addFakerDynamic($dataDynamic)) {
-            $msg .= 'Dynamic 动态添加成功!'.'<br/>';
+            echo 'Dynamic 动态添加成功!'.'<br/>';
         } else {
-            $msg .=  'Dynamic 动态添加失败!'.'<br/>';
-        }*/
+            echo 'Dynamic 动态添加失败!'.'<br/>';
+        }
 
         /*// 上传图片
         for ($l = 0; $l < count($imageData); $l ++){
@@ -896,6 +896,8 @@ class SAFaker extends CI_Controller
             }
         }*/
 
+
+        echo $msg;
     }
 
     /**
