@@ -800,33 +800,42 @@ class SAFaker extends CI_Controller
         }
     }
 
+
     /**
      * faker topic 数据
      */
-    public function faker_topicAndDynamic()
+    public function faker_topic() {
+        $data = [];
+        $topics = ['面试', '留学', '趣事', '面经', '经验', '考试', '比赛', '大学', '英雄联盟', 'BAT'];
+        for ($i = 0; $i < 10; $i++) {
+            $data[] = [
+                'id' => $i + 1,
+                'name' => $topics[$i],
+                'dynamic_num' => 0
+            ];
+        }
+
+        // 添加话题
+        if ($this->fakerModel->addFakerTopic($data)) {
+            echo 'Topic 数据添加成功!'.'<br/>';
+        } else {
+            echo 'Topic 数据添加失败!'.'<br/>';
+        }
+    }
+
+    /**
+     * faker topic 数据
+     */
+    public function faker_dynamic()
     {
         $msg = '';
         $index = 1;
-        $topics = ['面试', '留学', '趣事', '面经', '经验', '考试', '比赛', '大学', '英雄联盟', 'BAT'];
+        $imageData = [];
         for ($i = 0; $i < 10; $i++) {
-            $dataTopic = [];
-            $dynamic_num = $this->faker->numberBetween(1, 10);
-            $dataTopic[] = [
-                'id' => $i + 1,
-                'name' => $topics[$i],
-                'dynamic_num' => $dynamic_num
-            ];
-
-            // 添加话题
-            if ($this->fakerModel->addFakerTopic($dataTopic)) {
-                $msg .= 'Topic 数据添加成功!'.'<br/>';
-            } else {
-                $msg .= 'Topic 数据添加失败!'.'<br/>';
-            }
-
+            $dynamic_num = $this->faker->numberBetween(0, 4);
             // 构造动态
+            $dataDynamic = [];
             for ($j = 0; $j < $dynamic_num; $j++) {
-                $dataDynamic = [];
                 $id = $index;
                 $user_id = $this->faker->numberBetween(1, 30);
                 $has_topic = 1;
@@ -850,28 +859,37 @@ class SAFaker extends CI_Controller
                     'praise' => $praise
                 ];
 
-                // 添加动态信息
-                if ($this->fakerModel->addFakerDynamic($dataDynamic)) {
-                    $msg .= 'Dynamic 动态添加成功!'.'<br/>';
-                } else {
-                    $msg .=  'Dynamic 动态添加失败!'.'<br/>';
-                }
-
-                // 构造动态的图片
-                $image_num = $this->faker->numberBetween(1, 6);
+                // 构造图片
+                $image_num = $this->faker->numberBetween(0, 6);
                 for ($k = 0; $k < $image_num; $k++) {
-                    $remoteUrl = $this->faker->imageUrl(640, 480);
-                    $res = upload_file_to_qiniu(download_file_by_curl($remoteUrl), 'dynamic_image', 'url', $index);
-                    if ($res) {
-                        $msg .= $index.' : '.($k+1).' ------ 上传成功!'.'<br/>';
-                    } else {
-                        $msg .= $index.' : '.($k+1).' ------ 上传失败!'.'<br/>';
-                    }
+                    $imageData[] = [
+                        'dynamic_id' => $id,
+                        'url' => $this->faker->imageUrl(640, 480)
+                    ];
                 }
 
                 $index++;
             }
+            // 添加动态信息
+            if ($this->fakerModel->addFakerDynamic($dataDynamic)) {
+                $msg .= 'Dynamic 动态添加成功!'.'<br/>';
+            } else {
+                $msg .=  'Dynamic 动态添加失败!'.'<br/>';
+            }
         }
+
+        print_r($imageData);
+
+        /*// 上传图片
+        for ($l = 0; $l < count($imageData); $l ++){
+            $res = upload_file_to_qiniu(download_file_by_curl($imageData[$l]['url']), 'dynamic_image', 'url', $imageData[$l]['dynamic_id']);
+            if ($res) {
+                $msg .= $index.' : '.($l+1).' ------ 上传成功!'.'<br/>';
+            } else {
+                $msg .= $index.' : '.($l+1).' ------ 上传失败!'.'<br/>';
+            }
+        }*/
+
     }
 
     /**
