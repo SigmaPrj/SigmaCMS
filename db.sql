@@ -162,7 +162,9 @@ CREATE TABLE IF NOT EXISTS `si_user` (
   `email` VARCHAR(60) , -- 用户邮箱
   `phone` VARCHAR(15) , -- 用户电话
   `image` TEXT , -- 用户头像
+  `bgImage` TEXT , -- 用户背景图片
   `signature` VARCHAR(60) , -- 用户签名
+  `signatureImage` TEXT , -- 用户签名背景图片
   -- 1次签到, 1积分 被赞 积分+1 分享积分+10 问答积分为别人买的数目
   `point` INT UNSIGNED NOT NULL DEFAULT 0, -- 用户签到积分
   `coin` INT UNSIGNED NOT NULL DEFAULT 0, -- 金币个数  1块钱100金币
