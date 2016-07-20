@@ -51,7 +51,7 @@ class Callback extends CI_Controller
         } else if ($dbname === 'dynamic_image') {
             $this->load->model('DynamicImage_model', 'diModel');
             $this->diModel->addImageCallback([
-                'dynamic_id', $id,
+                'dynamic_id' => $id,
                 $field => $this->config->item('qiniu_domain').$hash
             ]);
         }
