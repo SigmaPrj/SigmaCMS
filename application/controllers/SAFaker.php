@@ -349,7 +349,7 @@ class SAFaker extends CI_Controller
             $data[] = [
                 'id' => $index,
                 'name' => (string)$category->name,
-                'image' => $this->faker->imageUrl(120, 120),
+                'image' => '',
                 'parent_id' => 0
             ];
             $index++;
@@ -361,7 +361,7 @@ class SAFaker extends CI_Controller
                 $data[] = [
                     'id' => $index,
                     'name' => (string)$item,
-                    'image' => $this->faker->imageUrl(120, 120),
+                    'image' => '',
                     'parent_id' => $p
                 ];
                 $index++;
