@@ -485,6 +485,16 @@ CREATE TABLE IF NOT EXISTS `si_dynamic` (
   FOREIGN KEY `fk_dynamic_topic` (`topic_id`) REFERENCES `si_topic` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- 动态的图片
+DROP TABLE IF EXISTS `si_dynamic_image`;
+CREATE TABLE IF NOT EXISTS `si_dynamic_image` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `url` TEXT,
+  `dynamic_id` INT UNSIGNED NOT NULL ,
+  PRIMARY KEY `pk_dynamicImage` (`id`) ,
+  FOREIGN KEY `fk_dynamicImage_dynamic` (`dynamic_id`) REFERENCES `si_dynamic` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- 动态评论
 DROP TABLE IF EXISTS `si_dynamic_comment`;
 CREATE TABLE IF NOT EXISTS `si_dynamic_comment`(

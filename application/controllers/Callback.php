@@ -48,6 +48,12 @@ class Callback extends CI_Controller
             $this->newsModel->upd([
                 $field => $this->config->item('qiniu_domain').$hash
             ], $id);
+        } else if ($dbname === 'dynamic_image') {
+            $this->load->model('DynamicImage_model', 'diModel');
+            $this->diModel->addImageCallback([
+                'dynamic_id', $id,
+                $field => $this->config->item('qiniu_domain').$hash
+            ]);
         }
 
         echo json_encode([
