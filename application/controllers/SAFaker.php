@@ -873,12 +873,6 @@ class SAFaker extends CI_Controller
 
         }
 
-        /*print_r($dataDynamic);
-
-        echo '<hr/>';
-
-        print_r($imageData);*/
-
         // 添加动态信息
         if ($this->fakerModel->addFakerDynamic($dataDynamic)) {
             $msg .= 'Dynamic 动态添加成功!'.'<br/>';
