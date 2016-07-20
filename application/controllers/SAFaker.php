@@ -380,12 +380,13 @@ class SAFaker extends CI_Controller
      * faker video 数据
      */
     public function faker_video() {
-        $data = [];
+        $msg = '';
         for ($i = 0; $i < 50; $i++) {
+            $data = [];
             $id = $i+1;
             $title = $this->faker->text(30);
             $description = implode('\n', $this->faker->paragraphs(6));
-            $image = $this->faker->imageUrl(600, 300);
+            $image = $this->faker->imageUrl(750, 350);
             $url = '';
             $category = $this->faker->numberBetween(6, 38);
             $learn = $this->faker->numberBetween(1, 10000);
@@ -405,13 +406,20 @@ class SAFaker extends CI_Controller
                 'publish_date' => $publish_date,
                 'last_look_date' => $last_look_date
             ];
+
+            if ($this->fakerModel->addFakerVideo($data)) {
+                $res = upload_file_to_qiniu(download_file_by_curl($image), 'video', 'image', $id);
+                if (!$res) {
+                    $msg .= 'Video 添加成功!'.'<br/>';
+                } else {
+                    $msg .= 'Video 添加失败!'.'<br/>';
+                }
+            } else {
+                $msg .= 'Video 添加失败!'.'<br/>';
+            }
         }
 
-        if ($this->fakerModel->addFakerVideo($data)) {
-            echo 'Video 添加成功!';
-        } else {
-            echo 'Video 添加失败!';
-        }
+        echo $msg;
     }
 
     /**
@@ -419,10 +427,10 @@ class SAFaker extends CI_Controller
      */
     public function faker_videoComment() {
         $data = [];
-        for ($i =0; $i < 500; $i++) {
+        for ($i =0; $i < 200; $i++) {
             $id = $i+1;
             $video_id = $this->faker->numberBetween(1, 50);
-            $user_id = $this->faker->numberBetween(1, 500);
+            $user_id = $this->faker->numberBetween(1, 50);
             $comment = $this->faker->sentence(10);
             $publish_date = $this->faker->unixTime('now');
             $praise = $this->faker->numberBetween(0, 20);
@@ -497,10 +505,10 @@ class SAFaker extends CI_Controller
      */
     public function faker_resourceComment() {
         $data = [];
-        for ($i =0; $i < 500; $i++) {
+        for ($i =0; $i < 200; $i++) {
             $id = $i+1;
             $resource_id = $this->faker->numberBetween(1, 50);
-            $user_id = $this->faker->numberBetween(1, 500);
+            $user_id = $this->faker->numberBetween(1, 50);
             $comment = $this->faker->sentence(10);
             $publish_date = $this->faker->unixTime('now');
             $praise = $this->faker->numberBetween(0, 20);
@@ -532,8 +540,9 @@ class SAFaker extends CI_Controller
      * faker ouser 数据   -- 企业账户等
      */
     public function faker_ouser() {
-        $data = [];
+        $msg = '';
         for ($i = 0; $i < 50; $i++) {
+            $data = [];
             $id = $i+1;
             $username_type = $this->faker->randomElement(['email', 'phone', 'customer']);
             switch ($username_type) {
@@ -589,21 +598,29 @@ class SAFaker extends CI_Controller
                 'apply_date' => $apply_date,
                 'apply_code' => $apply_code
             ];
+
+            if ($this->fakerModel->addFakerOuser($data)) {
+                $res = upload_file_to_qiniu(download_file_by_curl($image), 'ouser', 'id', $id);
+                if (!$res) {
+                    $msg .= 'Ouser 添加成功!'.'<br/>';
+                } else {
+                    $msg .= 'Ouser 添加失败!'.'<br/>';
+                }
+            } else {
+                $msg .= 'Ouser 添加失败!'.'<br/>';
+            }
         }
 
-        if ($this->fakerModel->addFakerOuser($data)) {
-            echo 'Ouser 添加成功!';
-        } else {
-            echo 'Ouser 添加失败!';
-        }
+        echo $msg;
     }
 
     /**
      * faker activity 数据
      */
     public function faker_activity() {
-        $data = [];
+        $msg = '';
         for ($i = 0; $i < 50; $i++) {
+            $data = [];
             $id = $i+1;
             $ouser_id = $this->faker->numberBetween(1, 50);
             $title = $this->faker->text(30);
@@ -643,13 +660,19 @@ class SAFaker extends CI_Controller
                 'look' => $look,
                 'join' => $join
             ];
+            if ($this->fakerModel->addFakerActivity($data)) {
+                $res = upload_file_to_qiniu(download_file_by_curl($image), 'activity','image', $id);
+                if (!$res) {
+                    $msg .= 'Activity 添加成功!'.'<br/>';
+                } else {
+                    $msg .= 'Activity 添加失败!'.'<br/>';
+                }
+            } else {
+                $msg .= 'Activity 添加失败!'.'<br/>';
+            }
         }
 
-        if ($this->fakerModel->addFakerActivity($data)) {
-            echo 'Activity 添加成功!';
-        } else {
-            echo 'Activity 添加失败!';
-        }
+        echo $msg;
     }
 
     /**
@@ -657,10 +680,10 @@ class SAFaker extends CI_Controller
      */
     public function faker_activityComment() {
         $data = [];
-        for ($i =0; $i < 500; $i++) {
+        for ($i =0; $i < 200; $i++) {
             $id = $i+1;
             $activity_id = $this->faker->numberBetween(1, 50);
-            $user_id = $this->faker->numberBetween(1, 500);
+            $user_id = $this->faker->numberBetween(1, 50);
             $comment = $this->faker->sentence(10);
             $publish_date = $this->faker->unixTime('now');
             $praise = $this->faker->numberBetween(0, 20);
@@ -695,7 +718,7 @@ class SAFaker extends CI_Controller
         $data = [];
         for ($i = 0; $i < 50; $i++) {
             $id = $i+1;
-            $user_id = $this->faker->numberBetween(1, 500);
+            $user_id = $this->faker->numberBetween(1, 50);
             $title = $this->faker->text(30);
             $content = implode('\n', $this->faker->paragraphs(6));
             $last_look_date = $this->faker->unixTime('now');
@@ -729,10 +752,10 @@ class SAFaker extends CI_Controller
      */
     public function faker_experienceComment() {
         $data = [];
-        for ($i =0; $i < 500; $i++) {
+        for ($i =0; $i < 200; $i++) {
             $id = $i+1;
             $experience_id = $this->faker->numberBetween(1, 50);
-            $user_id = $this->faker->numberBetween(1, 500);
+            $user_id = $this->faker->numberBetween(1, 50);
             $comment = $this->faker->sentence(10);
             $publish_date = $this->faker->unixTime('now');
             $praise = $this->faker->numberBetween(0, 20);
@@ -824,10 +847,10 @@ class SAFaker extends CI_Controller
      */
     public function faker_dynamicComment() {
         $data = [];
-        for ($i =0; $i < 100; $i++) {
+        for ($i =0; $i < 300; $i++) {
             $id = $i+1;
             $dynamic_id = $this->faker->numberBetween(1, 20);
-            $user_id = $this->faker->numberBetween(1, 500);
+            $user_id = $this->faker->numberBetween(1, 50);
             $comment = $this->faker->sentence(10);
             $publish_date = $this->faker->unixTime('now');
             $praise = $this->faker->numberBetween(0, 20);
@@ -863,52 +886,52 @@ class SAFaker extends CI_Controller
             [
                 'id' => 1,
                 'name' => '数学建模',
-                'image' => $this->faker->imageUrl(120, 120)
+                'image' => ''
             ],
             [
                 'id' => 2,
                 'name' => '奥数竞赛',
-                'image' => $this->faker->imageUrl(120, 120)
+                'image' => ''
             ],
             [
                 'id' => 3,
                 'name' => '微软竞赛',
-                'image' => $this->faker->imageUrl(120, 120)
+                'image' => ''
             ],
             [
                 'id' => 4,
                 'name' => '小型比赛',
-                'image' => $this->faker->imageUrl(120, 120)
+                'image' => ''
             ],
             [
                 'id' => 5,
                 'name' => 'BAT',
-                'image' => $this->faker->imageUrl(120, 120)
+                'image' => ''
             ],
             [
                 'id' => 6,
                 'name' => '搜狐网',
-                'image' => $this->faker->imageUrl(120, 120)
+                'image' => ''
             ],
             [
                 'id' => 7,
                 'name' => '新浪网',
-                'image' => $this->faker->imageUrl(120, 120)
+                'image' => ''
             ],
             [
                 'id' => 8,
                 'name' => '网易网',
-                'image' => $this->faker->imageUrl(120, 120)
+                'image' => ''
             ],
             [
                 'id' => 9,
                 'name' => '校园网',
-                'image' => $this->faker->imageUrl(120, 120)
+                'image' => ''
             ],
             [
                 'id' => 10,
                 'name' => '国家级',
-                'image' => $this->faker->imageUrl(120, 120)
+                'image' => ''
             ]
         ];
 
@@ -923,13 +946,13 @@ class SAFaker extends CI_Controller
      * faker news 数据
      */
     public function faker_news() {
-        $data = [];
-
+        $msg = '';
         for ($i = 0; $i<50; $i++) {
+            $data = [];
             $id = $i+1;
             $title = $this->faker->text(30);
             $description = implode('\n', $this->faker->paragraphs(6));
-            $image = $this->faker->imageUrl(600, 300);
+            $image = $this->faker->imageUrl(750, 350);
             $news_type = $this->faker->numberBetween(1, 10);
             $last_look_date = $this->faker->unixTime('now');
             $publish_date = $this->faker->unixTime($last_look_date);
@@ -963,13 +986,20 @@ class SAFaker extends CI_Controller
                 'look' => $look,
                 'join' => $join
             ];
-        }
 
-        if ($this->fakerModel->addFakerNews($data)) {
-            echo 'News 数据添加成功!';
-        } else {
-            echo 'News 数据添加失败!';
+            if ($this->fakerModel->addFakerNews($data)) {
+                $res = upload_file_to_qiniu(download_file_by_curl($image), 'news', 'image', $id);
+                if (!$res) {
+                    $msg .= 'News 数据添加成功!'.'<br/>';
+                } else {
+                    $msg .= 'News 数据添加失败!'.'<br/>';
+                }
+
+            } else {
+                $msg .= 'News 数据添加失败!'.'<br/>';
+            }
         }
+        echo $msg;
     }
 
     /**
@@ -977,10 +1007,10 @@ class SAFaker extends CI_Controller
      */
     public function faker_newsComment() {
         $data = [];
-        for ($i =0; $i < 100; $i++) {
+        for ($i =0; $i < 200; $i++) {
             $id = $i+1;
-            $news_id = $this->faker->numberBetween(1, 20);
-            $user_id = $this->faker->numberBetween(1, 500);
+            $news_id = $this->faker->numberBetween(1, 50);
+            $user_id = $this->faker->numberBetween(1, 50);
             $comment = $this->faker->sentence(10);
             $publish_date = $this->faker->unixTime('now');
             $praise = $this->faker->numberBetween(0, 20);
@@ -1013,12 +1043,12 @@ class SAFaker extends CI_Controller
      */
     public function faker_follow() {
         $data = [];
-        for ($i = 0; $i < 500; $i++) {
+        for ($i = 0; $i < 300; $i++) {
             $id = $i+1;
-            $user_id = $this->faker->numberBetween(1, 500);
-            $follow_user_id = $this->faker->numberBetween(1, 500);
+            $user_id = $this->faker->numberBetween(1, 50);
+            $follow_user_id = $this->faker->numberBetween(1, 50);
             if ($user_id === $follow_user_id) {
-                $follow_user_id = $this->faker->numberBetween(1, 500);
+                $follow_user_id = $this->faker->numberBetween(1, 50);
             }
 
             $data[] = [
@@ -1040,12 +1070,12 @@ class SAFaker extends CI_Controller
      */
     public function faker_friend() {
         $data = [];
-        for ($i = 0; $i < 500; $i++) {
+        for ($i = 0; $i < 300; $i++) {
             $id = $i+1;
-            $user_id = $this->faker->numberBetween(1, 500);
-            $friend_user_id = $this->faker->numberBetween(1, 500);
+            $user_id = $this->faker->numberBetween(1, 50);
+            $friend_user_id = $this->faker->numberBetween(1, 50);
             if ($user_id === $friend_user_id) {
-                $friend_user_id = $this->faker->numberBetween(1, 500);
+                $friend_user_id = $this->faker->numberBetween(1, 50);
             }
 
             $data[] = [
@@ -1060,6 +1090,102 @@ class SAFaker extends CI_Controller
         } else {
             echo 'Friend 数据添加失败!';
         }
+    }
+
+    public function faker_oneUser() {
+        $msg = '';
+        // 测试 一次上传10条数据的效果
+        for ($i=0; $i<1; $i++) {
+            $data = [];
+            $username_type = $this->faker->randomElement(['email', 'phone', 'customer']);
+            switch ($username_type) {
+                case 'email': {
+                    $username = $this->faker->safeEmail;
+                    $email = $username;
+                    $phone = '';
+                }
+                    break;
+                case 'phone' : {
+                    $username = $this->faker->phoneNumber;
+                    $phone = $username;
+                    $email = '';
+                }
+                    break;
+                case 'customer' : {
+                    $username = $this->faker->regexify('[a-zA-Z0-9]{6,10}');
+                    $email = '';
+                    $phone = '';
+                }
+                    break;
+            }
+            $password = md5($this->config->item('si_md5').$username);
+            $nickname = $this->faker->text(15);
+            $image = $this->faker->imageUrl(120, 120);
+            $bgImage = $this->faker->imageUrl(750, 350);
+            $signatureImage = $this->faker->imageUrl(750, 350);
+            $signature = $this->faker->text(60);
+            $point = $this->faker->randomNumber(4);
+            $coin = $this->faker->randomNumber(4);
+            $user_level = $this->faker->randomNumber(2);
+            $school_code = $this->faker->numberBetween(1, 2553);
+            while (!$this->schoolModel->getSchoolWithCode($school_code)) {
+                // 判断是否为有效的school_code
+                $school_code = $this->faker->numberBetween(1, 2553);
+            }
+            $city_code = $this->faker->numberBetween(1, 216);
+            $user_type = $this->faker->numberBetween(1, 2);
+            $user_social = $i+1;
+            $last_login_city = $this->faker->numberBetween(1, 216);
+            $last_login_date = $this->faker->unixTime('now');
+            $last_register_date = $this->faker->unixTime($last_login_date);
+            $is_active = 1;
+            $active_date = $this->faker->unixTime($last_register_date);
+            $apply_date = 1800;
+            $apply_code = $this->faker->regexify('[0-9A-Z]{6}');
+            $data[] = [
+                'id' => $i+1,
+                'username' => $username,
+                'password' => $password,
+                'nickname' => $nickname,
+                'username_type' => $username_type,
+                'email' => $email,
+                'phone' => $phone,
+                'bgImage' => $bgImage,
+                'signature' => $signature,
+                'signatureImage' => $signatureImage,
+                'point' => $point,
+                'coin' => $coin,
+                'user_level' => $user_level,
+                'school_code' => $school_code,
+                'city_code' => $city_code,
+                'user_type' => $user_type,
+                'user_social' => $user_social,
+                'last_login_city' => $last_login_city,
+                'last_login_date' => $last_login_date,
+                'last_register_date' => $last_register_date,
+                'is_active' => $is_active,
+                'active_date' => $active_date,
+                'apply_date' => $apply_date,
+                'apply_code' => $apply_code
+            ];
+
+            if ($this->fakerModel->addFakerUser($data)) {
+                // 拉取图片
+                $res1 = upload_file_to_qiniu(download_file_by_curl($image), 'user', 'image', $i+1);
+
+                $msg .= print_r($res1, 'string').'<hr/>';
+
+                if (!$res1) {
+                    $msg .= ($i+1).' User 数据上传成功!'.'<br/>';
+                } else {
+                    $msg .= 'User 数据上传失败!'.'<br/>';
+                }
+            } else {
+                $msg .= 'User 数据添加失败!'.'<br/>';
+            }
+        }
+
+        echo $msg;
     }
 
 }

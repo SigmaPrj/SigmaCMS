@@ -28,6 +28,30 @@ class Callback extends CI_Controller
             $this->advModel->upd([
                 $field => $this->config->item('qiniu_domain').$hash
             ], $id);
+        } else if ($dbname === 'video') {
+            $this->load->model('Video_model', 'videoModel');
+            $this->videoModel->upd([
+                $field => $this->config->item('qiniu_domain').$hash
+            ], $id);
+        } else if ($dbname === 'ouser') {
+            $this->load->model('Ouser_model', 'ouserModel');
+            $this->ouserModel->upd([
+                $field => $this->config->item('qiniu_domain').$hash
+            ], $id);
+        } else if ($dbname === 'activity') {
+            $this->load->model('Activity_model', 'acModel');
+            $this->acModel->upd([
+                $field => $this->config->item('qiniu_domain').$hash
+            ], $id);
+        } else if ($dbname === 'news') {
+            $this->load->model('News_model', 'newsModel');
+            $this->newsModel->upd([
+                $field => $this->config->item('qiniu_domain').$hash
+            ], $id);
         }
+
+        echo json_encode([
+            'hash' => $hash
+        ]);
     }
 }
