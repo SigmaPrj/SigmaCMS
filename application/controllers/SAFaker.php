@@ -831,10 +831,10 @@ class SAFaker extends CI_Controller
         $msg = '';
         $index = 1;
         $imageData = [];
-        for ($i = 0; $i < 10; $i++) {
+        $dataDynamic = [];
+        for ($i = 0; $i < 10; $i++) { // 共10个话题
             $dynamic_num = $this->faker->numberBetween(0, 4);
             // 构造动态
-            $dataDynamic = [];
             for ($j = 0; $j < $dynamic_num; $j++) {
                 $id = $index;
                 $user_id = $this->faker->numberBetween(1, 30);
@@ -870,15 +870,21 @@ class SAFaker extends CI_Controller
 
                 $index++;
             }
-            // 添加动态信息
-            if ($this->fakerModel->addFakerDynamic($dataDynamic)) {
-                $msg .= 'Dynamic 动态添加成功!'.'<br/>';
-            } else {
-                $msg .=  'Dynamic 动态添加失败!'.'<br/>';
-            }
+
         }
 
+        print_r($dataDynamic);
+
+        echo '<hr/>';
+
         print_r($imageData);
+
+        /*// 添加动态信息
+        if ($this->fakerModel->addFakerDynamic($dataDynamic)) {
+            $msg .= 'Dynamic 动态添加成功!'.'<br/>';
+        } else {
+            $msg .=  'Dynamic 动态添加失败!'.'<br/>';
+        }*/
 
         /*// 上传图片
         for ($l = 0; $l < count($imageData); $l ++){
