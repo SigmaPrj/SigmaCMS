@@ -259,10 +259,11 @@ class SAFaker extends CI_Controller
      * faker advertisement 数据
      */
     public function faker_advertisement() {
-        $data = [];
+        $msg = '';
         for ($i =0; $i < 50; $i++) {
+            $data = [];
             $id = $i+1;
-            $url = $this->faker->imageUrl(600, 300);
+            $url = $this->faker->imageUrl(750, 350);
             $level = $this->faker->numberBetween(1, 10);
             $time = mktime(12, 0, 0, 10, 20, 2020);
             $e_date = $this->faker->unixTime($time);
@@ -275,13 +276,20 @@ class SAFaker extends CI_Controller
                 's_date' => $s_date,
                 'e_date' => $e_date
             ];
+
+            if ($this->fakerModel->addFakerAdvertisement($data)) {
+                $res = upload_file_to_qiniu(download_file_by_curl($url), 'advertisement', 'url', $id);
+                if (!$res) {
+                    $msg .= 'Advertisement 数据添加成功!'.'<br/>';
+                } else {
+                    $msg .= 'Advertisement 数据添加失败!'.'<br/>';
+                }
+            } else {
+                $msg .= 'Advertisement 数据添加失败!'.'<br/>';
+            }
         }
 
-        if ($this->fakerModel->addFakerAdvertisement($data)) {
-            echo 'Advertisement 数据创建成功!';
-        } else {
-            echo 'Advertisement 数据创建失败!';
-        }
+        echo $msg;
     }
 
     /**

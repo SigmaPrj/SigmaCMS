@@ -23,6 +23,11 @@ class Callback extends CI_Controller
             $this->userModel->upd([
                 $field => $this->config->item('qiniu_domain').$hash
             ], $id);
+        } else if ($dbname === 'advertisement') {
+            $this->load->model('Advertisement_model', 'advModel');
+            $this->advModel->upd([
+                $field => $this->config->item('qiniu_domain').$hash
+            ], $id);
         }
     }
 }
