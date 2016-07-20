@@ -886,7 +886,7 @@ class SAFaker extends CI_Controller
             echo 'Dynamic 动态添加失败!'.'<br/>';
         }
 
-        /*// 上传图片
+        // 上传图片
         for ($l = 0; $l < count($imageData); $l ++){
             $res = upload_file_to_qiniu(download_file_by_curl($imageData[$l]['url']), 'dynamic_image', 'url', $imageData[$l]['dynamic_id']);
             if ($res) {
@@ -894,7 +894,7 @@ class SAFaker extends CI_Controller
             } else {
                 $msg .= $index.' : '.($l+1).' ------ 上传失败!'.'<br/>';
             }
-        }*/
+        }
 
 
         echo $msg;
