@@ -201,7 +201,7 @@ class SAFaker extends CI_Controller
             }
             $city_code = $this->faker->numberBetween(1, 216);
             $user_type = $this->faker->numberBetween(1, 2);
-            $user_social = 1;
+            $user_social = $i+1;
             $last_login_city = $this->faker->numberBetween(1, 216);
             $last_login_date = $this->faker->unixTime('now');
             $last_register_date = $this->faker->unixTime($last_login_date);
