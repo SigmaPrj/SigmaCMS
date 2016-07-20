@@ -613,7 +613,7 @@ class SAFaker extends CI_Controller
             ];
 
             if ($this->fakerModel->addFakerOuser($data)) {
-                $res = upload_file_to_qiniu(download_file_by_curl($image), 'ouser', 'id', $id);
+                $res = upload_file_to_qiniu(download_file_by_curl($image), 'ouser', 'image', $id);
                 if ($res) {
                     $msg .= 'Ouser 添加成功!' . '<br/>';
                 } else {
