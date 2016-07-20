@@ -887,7 +887,8 @@ class SAFaker extends CI_Controller
         }
 
         // 上传图片
-        for ($l = 0; $l < count($imageData); $l ++){
+        $nums = count($imageData);
+        for ($l = 0; $l < $nums; $l++){
             print_r($imageData[$i]['url']);
             echo ' ---- ';
             print_r($imageData[$i]['dynamic_id'].'<br/>');
