@@ -188,8 +188,8 @@ class SAFaker extends CI_Controller
             $password = md5($this->config->item('si_md5').$username);
             $nickname = $this->faker->text(15);
             $image = $this->faker->imageUrl(120, 120);
-            $bgImage = $this->faker->imageUrl(600, 300);
-            $signatureImage = $this->faker->imageUrl(600, 300);
+            $bgImage = $this->faker->imageUrl(750, 350);
+            $signatureImage = $this->faker->imageUrl(750, 350);
             $signature = $this->faker->text(60);
             $point = $this->faker->randomNumber(4);
             $coin = $this->faker->randomNumber(4);
