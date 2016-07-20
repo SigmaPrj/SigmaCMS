@@ -829,7 +829,7 @@ class SAFaker extends CI_Controller
     public function faker_dynamic()
     {
         $msg = '';
-        $index = 16;
+        $index = 17;
         $imageData = [];
         $dataDynamic = [];
         for ($i = 6; $i < 10; $i++) { // 共10个话题
