@@ -806,11 +806,10 @@ class SAFaker extends CI_Controller
     public function faker_topicAndDynamic()
     {
         $msg = '';
-        $dataTopic = [];
-        $dataDynamic = [];
         $index = 1;
         $topics = ['面试', '留学', '趣事', '面经', '经验', '考试', '比赛', '大学', '英雄联盟', 'BAT'];
         for ($i = 0; $i < 10; $i++) {
+            $dataTopic = [];
             $dynamic_num = $this->faker->numberBetween(1, 10);
             $dataTopic[] = [
                 'id' => $i + 1,
@@ -818,8 +817,16 @@ class SAFaker extends CI_Controller
                 'dynamic_num' => $dynamic_num
             ];
 
+            // 添加话题
+            if ($this->fakerModel->addFakerTopic($dataTopic)) {
+                $msg .= 'Topic 数据添加成功!'.'<br/>';
+            } else {
+                $msg .= 'Topic 数据添加失败!'.'<br/>';
+            }
+
             // 构造动态
             for ($j = 0; $j < $dynamic_num; $j++) {
+                $dataDynamic = [];
                 $id = $index;
                 $user_id = $this->faker->numberBetween(1, 30);
                 $has_topic = 1;
@@ -843,6 +850,13 @@ class SAFaker extends CI_Controller
                     'praise' => $praise
                 ];
 
+                // 添加动态信息
+                if ($this->fakerModel->addFakerDynamic($dataDynamic)) {
+                    $msg .= 'Dynamic 动态添加成功!'.'<br/>';
+                } else {
+                    $msg .=  'Dynamic 动态添加失败!'.'<br/>';
+                }
+
                 // 构造动态的图片
                 $image_num = $this->faker->numberBetween(1, 6);
                 for ($k = 0; $k < $image_num; $k++) {
@@ -857,19 +871,6 @@ class SAFaker extends CI_Controller
 
                 $index++;
             }
-        }
-
-        // 添加话题
-        if ($this->fakerModel->addFakerTopic($dataTopic)) {
-            echo 'Topic 数据添加成功!';
-            // 添加动态信息
-            if ($this->fakerModel->addFakerDynamic($dataDynamic)) {
-                echo 'Dynamic 动态添加成功!';
-            } else {
-                echo 'Dynamic 动态添加失败!';
-            }
-        } else {
-            echo 'Topic 数据添加失败!';
         }
     }
 
