@@ -167,6 +167,8 @@ CREATE TABLE IF NOT EXISTS `si_user` (
   `username` VARCHAR(60) NOT NULL , -- 用户名
   `password` VARCHAR(32) NOT NULL , -- 密码
   `nickname` VARCHAR(15) NOT NULL ,
+  `truename` VARCHAR(6) NOT NULL DEFAULT '', -- 真实姓名
+  `bio` TEXT NOT NULL DEFAULT '', -- 个人简历地址
   `is_approved` TINYINT UNSIGNED NOT NULL DEFAULT 0, -- 账户是否被认证
   -- 1 表示邮箱注册   2 表示电话注册   3 表示自定义类型账号
   `username_type` ENUM('email', 'phone', 'customer'), -- 账号类型
@@ -184,6 +186,7 @@ CREATE TABLE IF NOT EXISTS `si_user` (
   `city_code` SMALLINT UNSIGNED , -- 所属城市
   `user_type` TINYINT UNSIGNED , -- 用户类型
   `user_social` INT UNSIGNED , -- 用户社交账号绑定信息
+  `user_privilege` INT UNSIGNED NOT NULL ,
   `last_login_city` SMALLINT UNSIGNED , -- 上次登录城市
   `last_login_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 上次登录时间
   `last_register_date` INT(10) UNSIGNED DEFAULT 0 NOT NULL , -- 上次签到时间
@@ -195,7 +198,22 @@ CREATE TABLE IF NOT EXISTS `si_user` (
   FOREIGN KEY `fk_user_school` (`school_code`) REFERENCES `si_school` (`code`) ,
   FOREIGN KEY `fk_user_city` (`city_code`) REFERENCES `si_city` (`code`) ,
   FOREIGN KEY `fk_user_userType` (`user_type`) REFERENCES `si_user_type` (`code`) ,
-  FOREIGN KEY `fk_user_userSocial` (`user_social`) REFERENCES `si_user_social` (`id`)
+  FOREIGN KEY `fk_user_userSocial` (`user_social`) REFERENCES `si_user_social` (`id`) ,
+  FOREIGN KEY `fk_user_userPrivilege` (`user_privilege`) REFERENCES `si_user_privilege` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 用户权限设置
+-- 权限都分为3级, 0 所有人不可见 1 朋友可见 2 任何人都可见
+DROP TABLE IF EXISTS `si_user_privilege`;
+CREATE TABLE IF NOT EXISTS `si_user_privilege` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `friend_visibility` TINYINT UNSIGNED NOT NULL DEFAULT 1, -- 是否可以允许别人查看自己的朋友列表
+  `follow_visibility` TINYINT UNSIGNED NOT NULL DEFAULT 2, -- 是否可以允许本人查看自己follow的用户列表
+  `sex_visibility` TINYINT UNSIGNED NOT NULL DEFAULT 2, -- 是否可以允许别人查看到自己性别
+  `name_visibility` TINYINT UNSIGNED NOT NULL DEFAULT 1, -- 是否允许别人查看自己的真实姓名
+  `phone_visibility` TINYINT UNSIGNED NOT NULL DEFAULT 1, -- 是否允许别人查看到自己的电话号码
+  `email_visibility` TINYINT UNSIGNED NOT NULL DEFAULT 1, -- 是否允许别人查看到自己的邮箱地址
+  PRIMARY KEY `pk_userPrivilege` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ###########################################
@@ -638,3 +656,9 @@ CREATE TABLE IF NOT EXISTS `si_team_member`(
   FOREIGN KEY `fk_teamMember_team` (`team_id`) REFERENCES `si_team` (`id`) ,
   FOREIGN KEY `fk_teamMember_user` (`user_id`) REFERENCES `si_user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- 修改
+alter table `si_user` add column `truename` VARCHAR(6) NOT NULL DEFAULT '' after `nickname`;
+alter table `si_user` add column `bio` TEXT NOT NULL DEFAULT '' after `truename`;
+alter table `si_user` add column `user_privilege` INT UNSIGNED NOT NULL after `user_social`;

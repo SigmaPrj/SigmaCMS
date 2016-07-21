@@ -49,6 +49,22 @@ class SAFaker_model extends CI_Model
     }
 
     /**
+     * @param $data
+     */
+    public function addFakerUserPrivilege($data) {
+        return $this->db->insert_batch('user_privilege', $data);
+    }
+
+
+    public function updateUserUserPrivilege($id) {
+        $this->db->set([
+            'user_privilege' => $id
+        ])->where([
+            'id' => $id
+        ])->update('user');
+    }
+
+    /**
      * @param $data array 向表 si_user 中添加数据
      * @return mixed
      */

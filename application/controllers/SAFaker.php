@@ -161,6 +161,42 @@ class SAFaker extends CI_Controller
     }
 
     /**
+     * faker user privilege 数据
+     */
+    public function faker_userPrivilege() {
+        $data = [];
+        for ($i = 0; $i < 30; $i++) {
+            $id = $i+1;
+            $friend_visibility = $this->faker->numberBetween(0, 2);
+            $follow_visibility = $this->faker->numberBetween(0, 2);
+            $sex_visibility = $this->faker->numberBetween(0, 2);
+            $name_visibility = $this->faker->numberBetween(0, 2);
+            $phone_visibility = $this->faker->numberBetween(0, 2);
+            $email_visibility = $this->faker->numberBetween(0, 2);
+
+            $data[] = [
+                'id' => $id,
+                'friend_visibility' => $friend_visibility,
+                'follow_visibility' => $follow_visibility,
+                'sex_visibility' => $sex_visibility,
+                'name_visibility' => $name_visibility,
+                'phone_visibility' => $phone_visibility,
+                'email_visibility' => $email_visibility
+            ];
+        }
+
+        for ($j = 0; $j < 30; $j++) {
+            $this->fakerModel->updateUserUserPrivilege($j+1);
+        }
+
+        if ($this->fakerModel->addFakerUserPrivilege($data)) {
+            echo 'User Privilege 数据添加成功!';
+        } else {
+            echo 'User Privilege 数据添加失败';
+        }
+    }
+
+    /**
      * faker user 数据
      */
     public function faker_user()
