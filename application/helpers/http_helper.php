@@ -83,3 +83,27 @@ if (!function_exists('upload_file_to_qiniu')) {
         }
     }
 }
+
+if (!function_exists('getAllHeaders')) {
+    function getAllHeaders()
+    {
+        $headers = [];
+        foreach ($_SERVER as $name => $value)
+        {
+            if (substr($name, 0, 5) == 'HTTP_')
+            {
+                $key = strtolower(str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5))))));
+                $headers[$key] = $value;
+            }
+        }
+        return $headers;
+    }
+}
+
+if (!function_exists('getHeader')) {
+    function getHeader($key) {
+        $headers = getAllHeaders();
+
+        return $headers[$key];
+    }
+}

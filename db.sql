@@ -136,6 +136,17 @@ CREATE TABLE IF NOT EXISTS `si_user_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+-- 登录认证表
+DROP TABLE IF EXISTS `si_token`;
+CREATE TABLE IF NOT EXISTS `si_token` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `token` VARCHAR(40) NOT NULL ,
+  `user_type` TINYINT UNSIGNED NOT NULL ,
+  `dead_time` INT UNSIGNED NOT NULL ,
+  PRIMARY KEY `pk_token` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 -- 用户社交平台关联信息 老师和学生才会有
 DROP TABLE IF EXISTS `si_user_social`;
 CREATE TABLE IF NOT EXISTS `si_user_social` (

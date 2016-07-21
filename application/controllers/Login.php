@@ -82,4 +82,70 @@ class Login extends CI_Controller
             return FALSE;
         }
     }
+
+    public function auth() {
+        if (IS_POST()) {
+            $username = $this->input->post('username');
+            $password = $this->input->post('password');
+
+            if ($username && $password) {
+                // 进行用户验证
+                $this->load->model('User_model', 'userModel');
+                $userData = $this->userModel->getUserByUsername($username);
+                if ($userData) {
+                    if ($password === $userData['password']) {
+                        // 载入配置
+                        $this->config->load('config');
+                        $auth_prefix = $this->config->item('auth_prefix');
+                        // 生成token
+                        $token = md5($auth_prefix.md5($username).md5($password));
+                        // 写入token
+                        $time = time()+$this->config->item('auth_timeout');
+                        $userType = (int)$userData['user_type'];
+                        $tokenData = [
+                            'token' => $token,
+                            'user_type' => $userType,
+                            'dead_time' => $time
+                        ];
+                        $this->load->model('Token_model', 'tokenModel');
+                        if ($this->tokenModel->addToken($tokenData)) {
+                            echo json_encode([
+                                'token' => $token
+                            ]);
+                        } else {
+                            echo json_encode([
+                                'status' => false,
+                                'code' => 3,
+                                'error' => 'Can\'t get token from host, wait for a minute!'
+                            ]);
+                        }
+                    } else {
+                        echo json_encode([
+                            'status' => false,
+                            'code' => 2,
+                            'error' => 'Username or Password is not right!'
+                        ]);
+                    }
+                } else {
+                    echo json_encode([
+                        'status' => false,
+                        'code' => '1',
+                        'error' => 'Can\'t find user!'
+                    ]);
+                }
+            } else {
+                echo json_encode([
+                    'status' => false,
+                    'code'  => 5,
+                    'error' => 'Your content-type should be application/x-www-form-urlencoded!'
+                ]);
+            }
+        } else {
+            echo json_encode([
+                'status' => false,
+                'code' => 4,
+                'error' => 'You should use post method!'
+            ]);
+        }
+    }
 }

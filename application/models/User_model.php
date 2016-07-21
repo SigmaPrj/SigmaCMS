@@ -17,4 +17,14 @@ class User_model extends CI_Model
     public function upd($new, $id) {
         return $this->db->where(['id' => $id])->update('user', $new);
     }
+
+    /**
+     * @param $username string 根据用户名获取用户的数据
+     */
+    public function getUserByUsername($username) {
+        $query = $this->db->where([
+            'username' => $username
+        ])->get('user');
+        return $query->row_array();
+    }
 }
