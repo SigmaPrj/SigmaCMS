@@ -76,18 +76,18 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 
-/*	'hostname' => SAE_MYSQL_HOST_M,
+	'hostname' => SAE_MYSQL_HOST_M,
     'port'     => SAE_MYSQL_PORT,
 	'username' => SAE_MYSQL_USER,
 	'password' => SAE_MYSQL_PASS,
-	'database' => SAE_MYSQL_DB,*/
+	'database' => SAE_MYSQL_DB,
 
 
-	'hostname' => 'localhost',
+/*	'hostname' => 'localhost',
     'port'     => '3306',
     'username' => 'root',
     'password' => 'admin',
-    'database' => 'sigma',
+    'database' => 'sigma',*/
 
 
 	'dbdriver' => 'mysqli',

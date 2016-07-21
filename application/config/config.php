@@ -23,8 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-//$config['base_url'] = 'http://2.sigmainc.applinzi.com/';
-$config['base_url'] = 'http://sigma.test.com/';
+$config['base_url'] = 'http://2.sigmainc.applinzi.com/';
+//$config['base_url'] = 'http://sigma.test.com/';
 /*
 |--------------------------------------------------------------------------
 | Index File
