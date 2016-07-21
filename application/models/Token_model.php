@@ -15,7 +15,16 @@ class Token_model extends CI_Model
     }
 
     public function addToken($data) {
-        return $this->db->insert('token', $data);
+        // 如果已经存在Token,就更新token, 否则就添加token
+        $query = $this->db->where([
+            'user_id' => $data['user_id']
+        ])->get('token');
+        $tokenData = $query->row_array();
+        if ($tokenData) {
+            return $this->db->set($data)->where('id', $tokenData['id'])->update('token');
+        } else {
+            return $this->db->insert('token', $data);
+        }
     }
 
     /**
@@ -43,5 +52,37 @@ class Token_model extends CI_Model
         } else {
             return false;
         }
+    }
+
+
+    /**
+     * 判断 $user_id 是否是该 $token 所有者
+     *
+     * @param $token string
+     * @param $user_id int
+     * @return bool
+     */
+    public function is_owner($token, $user_id) {
+        $query = $this->db->where([
+            'token' => $token,
+            'user_id' => $user_id
+        ])->get('token');
+        $tokenData = $query->row_array();
+        if ($tokenData) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function getUserIdByToken($token) {
+        $query = $this->db->where([
+            'token' => $token
+        ])->get('token');
+
+        $data = $query->row_array();
+
+        return empty($data)?null:$data['user_id'];
     }
 }

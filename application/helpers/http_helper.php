@@ -103,8 +103,9 @@ if (!function_exists('getAllHeaders')) {
 if (!function_exists('getHeader')) {
     function getHeader($key) {
         $headers = getAllHeaders();
-        if (array_key_exists($key, $headers)) {
-            return $headers[$key];
+        $lowerKey = strtolower($key);
+        if (array_key_exists($lowerKey, $headers)) {
+            return $headers[$lowerKey];
         }
         return false;
     }

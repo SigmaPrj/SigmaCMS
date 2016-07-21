@@ -17,4 +17,32 @@ class DynamicImage_model extends CI_Model
     public function addImageCallback($data) {
         return $this->db->insert('dynamic_image', $data);
     }
+
+    /**
+     * @param $ids array 所有动态的数组
+     */
+    public function getDynamicImages($ids) {
+        $this->db->select('url, dynamic_id');
+
+        if (empty($ids)) {
+          return [];
+        }
+
+        if (is_array($ids)) {
+            $this->db->where_in('dynamic_id', $ids);
+        } else {
+            $this->db->where('dynamic', $ids);
+        }
+
+        $query = $this->db->get('dynamic_image');
+        $tmpImages = $query->result_array();
+        $images = [];
+
+        for ($i =0; $i < count($tmpImages); $i++) {
+            $tmpImage = $tmpImages[$i];
+            $images[$tmpImage['dynamic_id']][] = $tmpImage['url'];
+        }
+
+        return $images;
+    }
 }

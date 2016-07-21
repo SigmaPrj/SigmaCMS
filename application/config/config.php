@@ -23,8 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://2.sigmainc.applinzi.com/';
-//$config['base_url'] = 'http://sigma.test.com/';
+//$config['base_url'] = 'http://2.sigmainc.applinzi.com/';
+$config['base_url'] = 'http://sigma.test.com/';
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -522,6 +522,8 @@ $config['si_md5'] = 'sigma2016_'; // 密码加密前缀
 $config['auth_prefix'] = 'sigma2016_'; // token加密前缀
 $config['auth_timeout'] = 604800; // 有效期为7天
 $config['auth_token_name'] = 'SIGMA-ACCESS-TOKEN';
+// 动态
+$config['num_per_request'] = 5;
 
 /*
 |--------------------------------------------------------------------------

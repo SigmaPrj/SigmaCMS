@@ -87,6 +87,7 @@ $route['api/usertype/(:num)'] = 'api/UserType/userTypes/id/$1';
  * 动态,社区API设计
  */
 $route['api/dynamic'] = 'api/Dynamic/dynamics';
+$route['api/dynamic/(:num)/(:any)'] = 'api/Dynamic/dynamics/id/$1/type/$2';
 
 /**
  * 用户

@@ -20,16 +20,19 @@ class Dynamic extends API_Middleware
     /**
      * 业务 : 1 根据 用户id 获取用户所有动态 /user/user_id/dynamic
      *       2 根据 话题id 获取话题下所有动态 /topic/topic_id/dynamic
-     *       3 根据 用户id 获取该用户所有好友的动态 /dynamic?user_id=user_id
-     */
-    public function dynamics_get() {
-
-    }
-
-    /**
+     *
      * 业务 : 1 根据 动态的id 获取该动态下的评论 /dynamic/dynamic_id/comment
      */
-    public function comments_get() {
+    public function dynamics_get() {
+      $dynamic_id = $this->get('id');
+      $type = $this->get('type');
 
+      if (!isset($dynamic_id)) {
+        $this->response([
+            'status' => false,
+            'code' => 1,
+            'error' => REST_Controller::HTTP
+        ], );
+      }
     }
 }

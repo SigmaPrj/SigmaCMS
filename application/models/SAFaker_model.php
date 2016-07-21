@@ -191,6 +191,14 @@ class SAFaker_model extends CI_Model
     }
 
     /**
+     * @param $data array 向表 si_dynamic_image 中添加数据
+     * @return mixed
+     */
+    public function addFakerDynamicImages($data) {
+        return $this->db->insert_batch('dynamic_image', $data);
+    }
+
+    /**
      * @param $data array 向表 si_news_type 中添加数据
      * @return mixed
      */

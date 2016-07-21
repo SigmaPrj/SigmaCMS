@@ -96,15 +96,16 @@ class Login extends CI_Controller
                     if ($password === $userData['password']) {
                         // 载入配置
                         $this->config->load('config');
-                        $auth_prefix = $this->config->item('auth_prefix');
+                        $faker = \Faker\Factory::create();
+                        $auth_prefix = $faker->regexify('[0-9a-zA-Z]{4,6}');
                         // 生成token
                         $token = md5($auth_prefix.md5($username).md5($password));
                         // 写入token
                         $time = time()+$this->config->item('auth_timeout');
-                        $userType = (int)$userData['user_type'];
+                        $user_id = (int)$userData['id'];
                         $tokenData = [
                             'token' => $token,
-                            'user_type' => $userType,
+                            'user_id' => $user_id,
                             'dead_time' => $time
                         ];
                         $this->load->model('Token_model', 'tokenModel');

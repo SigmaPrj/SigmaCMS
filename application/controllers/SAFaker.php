@@ -931,6 +931,72 @@ class SAFaker extends CI_Controller
     }
 
     /**
+     *
+     */
+    public function local_faker_dynamic() {
+        $index = 36;
+        $dataDynamic = [];
+        for ($i = 0; $i < 10; $i++) { // 共10个话题
+            $dynamic_num = $this->faker->numberBetween(0, 4);
+            // 构造动态
+            for ($j = 0; $j < $dynamic_num; $j++) {
+                $id = $index;
+                $user_id = $this->faker->numberBetween(1, 10);
+                $has_topic = 1;
+                $topic_id = $i + 1;
+                $content = $this->faker->sentence(10);
+                $last_look_date = $this->faker->unixTime('now');
+                $publish_date = $this->faker->unixTime($last_look_date);
+                $share = $this->faker->numberBetween(1, 10);
+                $look = $this->faker->numberBetween(1, 100);
+                $praise = $this->faker->numberBetween(1, 10);
+                $dataDynamic[] = [
+                    'id' => $id,
+                    'user_id' => $user_id,
+                    'has_topic' => $has_topic,
+                    'topic_id' => $topic_id,
+                    'content' => $content,
+                    'publish_date' => $publish_date,
+                    'last_look_date' => $last_look_date,
+                    'share' => $share,
+                    'look' => $look,
+                    'praise' => $praise
+                ];
+
+                $index++;
+            }
+        }
+
+        // 添加动态信息
+        if ($this->fakerModel->addFakerDynamic($dataDynamic)) {
+            echo 'Dynamic 动态添加成功!'.'<br/>';
+        } else {
+            echo 'Dynamic 动态添加失败!'.'<br/>';
+        }
+    }
+
+    public function local_faker_dynamicImage() {
+        $data = [];
+        for ($i=0; $i<10; $i++) {
+            $imageNum = $this->faker->numberBetween(0, 6);
+            for ($j=0;$j<$imageNum;$j++) {
+                $id = $i+1;
+                $url = $this->faker->imageUrl(400, 600);
+                $data[] = [
+                    'url' => $url,
+                    'dynamic_id' => $id
+                ];
+            }
+        }
+
+        if ($this->fakerModel->addFakerDynamicImages($data)) {
+            echo 'Dynamic Images 添加成功!';
+        } else {
+            echo 'Dynamic Images 添加失败!';
+        }
+    }
+
+    /**
      * faker dynamic comment 数据
      */
     public function faker_dynamicComment()
