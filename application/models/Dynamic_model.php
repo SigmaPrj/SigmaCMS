@@ -16,6 +16,9 @@ class Dynamic_model extends CI_Model
 
     /**
      * 判断有没有page
+     *
+     * @param $ids array user_id 数组
+     * @return mixed
      */
     public function getFriendsDynamics($ids) {
         $page = $this->input->get('p');
@@ -60,6 +63,7 @@ class Dynamic_model extends CI_Model
         $images = $this->diModel->getDynamicImages(array_map(function ($value) {
             return $value['id'];
         }, $tmpData));
+        // 获取每条动态的用户信息
         $this->load->model('User_model', 'userModel');
         $users = $this->userModel->getUserDataBrief(array_map(function ($value) {
             return $value['user_id'];
@@ -80,6 +84,38 @@ class Dynamic_model extends CI_Model
         }
 
         return $tmpData;
+    }
+
+    /**
+     * 根据id获取特定的动态信息
+     *
+     * @param $id int
+     * @return mixed
+     */
+    public function getDynamicById($id) {
+        $query = $this->db->where('id', $id)->get('dynamic');
+        $data = $query->row_array();
+
+        // 获取每条动态的图片
+        $this->load->model('DynamicImage_model', 'diModel');
+        $images = $this->diModel->getDynamicImages([$id]);
+        // 获取每条动态的用户信息
+        $this->load->model('User_model', 'userModel');
+        $user = $this->userModel->getUserDataBrief([$data['user_id']]);
+
+        if (array_key_exists($data['id'], $images)) {
+            $data['images'] = $images[$data['id']];
+        } else {
+            $data['images'] = [];
+        }
+
+        if (array_key_exists($data['user_id'], $user)) {
+            $data['user'] = $user[$data['user_id']];
+        } else {
+            $data['user'] = [];
+        }
+
+        return $data;
     }
 
 }

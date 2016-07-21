@@ -13,5 +13,16 @@ require APPPATH . '/libraries/REST_Controller.php';
  */
 class Topic extends REST_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
+    /**
+     * 业务 : 不传入id 返回所有的topic
+     */
+    public function topics() {
+        $id = $this->get('id');
+        $type = $this->get('type');
+    }
 }

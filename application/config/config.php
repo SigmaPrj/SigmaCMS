@@ -524,6 +524,12 @@ $config['auth_timeout'] = 604800; // 有效期为7天
 $config['auth_token_name'] = 'SIGMA-ACCESS-TOKEN';
 // 动态
 $config['num_per_request'] = 5;
+// 热门评论点赞数目多少,才算人们,默认10
+$config['hot_comment_praise_start_num'] = 10;
+// 热门评论默认请求条数
+$config['hot_comment_default_num'] = 4;
+// 每次请求热门评论条数
+$config['comment_per_request'] = 5;
 
 /*
 |--------------------------------------------------------------------------
