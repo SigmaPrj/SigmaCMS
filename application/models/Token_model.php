@@ -30,7 +30,7 @@ class Token_model extends CI_Model
         $now = time();
 
         // 万分之一的机会清除一次过期token
-        if (random_int(1, 10000) === 100) {
+        if (mt_rand(1, 10000) === 100) {
             $this->db->where('dead_time <', $now)->delete('token');
         }
 

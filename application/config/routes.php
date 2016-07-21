@@ -82,3 +82,8 @@ $route['api/school/(:num)'] = 'api/school/schools/id/$1'; // 获取特定学校
 // API for userType
 $route['api/usertype'] = 'api/UserType/userTypes';
 $route['api/usertype/(:num)'] = 'api/UserType/userTypes/id/$1';
+
+/**
+ * 动态,社区API设计
+ */
+$route['api/dynamic'] = 'api/Dynamic/dynamics';
