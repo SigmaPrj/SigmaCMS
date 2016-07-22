@@ -118,15 +118,22 @@ $route['api/video/(:num)/(:any)'] = 'api/Video/videos/id/$1/type/$2';
 /**
  * 问答
  */
-$route['api/question'] = 'api/question/Questions';
-$route['api/question/(:num)'] = 'api/question/Questions/id/$1';
+$route['api/question'] = 'api/Question/questions';
+$route['api/question/(:num)'] = 'api/Question/questions/id/$1';
 
 /**
  * 资源
  */
-$route['api/resource'] = 'api/resource/Resource';
-$route['api/resource/(:num)'] = 'api/resource/Resource/id/$1';
-$route['api/resource/(:num)/(:any)'] = 'api/resource/Resource/id/$1/type/$2';
+$route['api/resource'] = 'api/Resource/resource';
+$route['api/resource/(:num)'] = 'api/Resource/resource/id/$1';
+$route['api/resource/(:num)/(:any)'] = 'api/Resource/resource/id/$1/type/$2';
+
+/**
+ * 活动
+ */
+$route['api/activity'] = 'api/Activity/activities';
+$route['api/activity/(:num)'] = 'api/Activity/activities/id/$1';
+$route['api/activity/(:num)/(:any)'] = 'api/Activity/activities/id/$1/type/$2';
 
 /**
  * 用户

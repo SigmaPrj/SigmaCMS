@@ -534,6 +534,9 @@ $config['topic_default_num'] = 5;
 // 资源
 $config['resource_pre_request'] = 5;
 $config['resource_default_num'] = 5;
+// 活动
+$config['activity_pre_request'] = 5;
+$config['activity_default_num'] = 5;
 // 经验分享
 $config['experience_per_request'] = 5;
 $config['experience_default_num'] = 5;
