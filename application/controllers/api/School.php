@@ -30,7 +30,8 @@ class School extends REST_Controller
                 } else {
                     $this->response([
                         'status' => FALSE,
-                        'message' => 'No schools were found'
+                        'code' => REST_Controller::HTTP_NOT_FOUND,
+                        'error' => 'No schools were found'
                     ], REST_Controller::HTTP_NOT_FOUND);
                 }
             } else {
@@ -43,7 +44,8 @@ class School extends REST_Controller
                 } else {
                     $this->response([
                         'status' => FALSE,
-                        'message' => 'No schools were found . Bad city code'
+                        'code' => REST_Controller::HTTP_BAD_REQUEST,
+                        'error' => 'No schools were found . Bad city code'
                     ], REST_Controller::HTTP_BAD_REQUEST);
                 }
             }
@@ -57,7 +59,8 @@ class School extends REST_Controller
         } else {
             $this->response([
                 'status' => FALSE,
-                'message' => 'No school were found . Bad school code'
+                'code' => REST_Controller::HTTP_BAD_REQUEST,
+                'error' => 'No school were found . Bad school code'
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
     }

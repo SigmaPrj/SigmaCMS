@@ -31,7 +31,7 @@ class Dynamic extends API_Middleware
         if (!isset($dynamic_id)) {
             $this->response([
                 'status' => false,
-                'code' => 1,
+                'code' => REST_Controller::HTTP_BAD_REQUEST,
                 'error' => 'Invalid API'
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
@@ -45,7 +45,7 @@ class Dynamic extends API_Middleware
             if (empty($data)) {
               $this->response([
                   'status' => false,
-                  'code' => 2,
+                  'code' => REST_Controller::HTTP_NOT_FOUND,
                   'error' => 'Can\'t find any dynamic!'
               ], REST_Controller::HTTP_NOT_FOUND);
             } else {
@@ -68,7 +68,7 @@ class Dynamic extends API_Middleware
                 if (empty($comments)) {
                     $this->response([
                         'status' => false,
-                        'code' => 3,
+                        'code' => REST_Controller::HTTP_NOT_FOUND,
                         'error' => 'Can\'t find any comment!'
                     ], REST_Controller::HTTP_NOT_FOUND);
                 } else {
@@ -80,7 +80,7 @@ class Dynamic extends API_Middleware
             {
                 $this->response([
                     'status' => false,
-                    'code' => 1,
+                    'code' => REST_Controller::HTTP_BAD_REQUEST,
                     'error' => 'Invalid API'
                 ], REST_Controller::HTTP_BAD_REQUEST);
             }

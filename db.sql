@@ -661,3 +661,8 @@ CREATE TABLE IF NOT EXISTS `si_team_member`(
 alter table `si_user` add column `truename` VARCHAR(6) NOT NULL DEFAULT '' after `nickname`;
 alter table `si_user` add column `bio` TEXT NOT NULL DEFAULT '' after `truename`;
 alter table `si_user` add column `user_privilege` INT UNSIGNED NOT NULL after `user_social`;
+
+-- 7 - 22
+ALTER TABLE `si_topic` ADD COLUMN `image` TEXT AFTER `name`;
+ALTER TABLE `si_topic` ADD COLUMN `create_date` TEXT AFTER `image`;
+ALTER TABLE `si_topic` ADD COLUMN `active_date` TEXT AFTER `create_date`;

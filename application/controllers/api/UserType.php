@@ -26,7 +26,8 @@ class UserType extends REST_Controller
             } else {
                 $this->response([
                     'status' => FALSE,
-                    'message' => 'No user types were found'
+                    'code' => REST_Controller::HTTP_NOT_FOUND,
+                    'error' => 'No user types were found'
                 ], REST_Controller::HTTP_NOT_FOUND);
             }
         }
@@ -35,7 +36,11 @@ class UserType extends REST_Controller
         $code = (int)$id;
 
         if ($id <= 0) {
-            $this->response(null, REST_Controller::HTTP_BAD_REQUEST);
+            $this->response([
+                'status' => false,
+                'code' => REST_Controller::HTTP_BAD_REQUEST,
+                'error' => 'Invalid parameter'
+            ], REST_Controller::HTTP_BAD_REQUEST);
         }
 
         $city = $this->userTypeModel->getUserTypeByCode($code);
@@ -44,7 +49,8 @@ class UserType extends REST_Controller
         } else {
             $this->response([
                 'status' => FALSE,
-                'message' => 'User type not found'
+                'code' => REST_Controller::HTTP_BAD_REQUEST,
+                'error' => 'User type not found'
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
     }

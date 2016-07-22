@@ -34,7 +34,8 @@ class City extends REST_Controller
             } else {
                 $this->response([
                     'status' => FALSE,
-                    'message' => 'No cities were found'
+                    'code' => REST_Controller::HTTP_NOT_FOUND,
+                    'error' => 'No cities were found'
                 ], REST_Controller::HTTP_NOT_FOUND);
             }
         }
@@ -43,7 +44,11 @@ class City extends REST_Controller
         $code = (int)$id;
 
         if ($id <= 0) {
-            $this->response(null, REST_Controller::HTTP_BAD_REQUEST);
+            $this->response([
+                'status' => false,
+                'code '=> REST_Controller::HTTP_BAD_REQUEST,
+                'error' => 'Invalid parameter'
+            ], REST_Controller::HTTP_BAD_REQUEST);
         }
 
         $city = $this->cityModel->getCityByCode($code);
@@ -52,7 +57,8 @@ class City extends REST_Controller
         } else {
             $this->response([
                 'status' => FALSE,
-                'message' => 'City not found'
+                'code' => REST_Controller::HTTP_BAD_REQUEST,
+                'error' => 'City not found'
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
     }

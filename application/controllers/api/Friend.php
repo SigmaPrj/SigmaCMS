@@ -35,7 +35,7 @@ class Friend extends API_Middleware
             // 没有传入id , 直接请求 返回错误
             $this->response([
                 'status' => false,
-                'code' => 1,
+                'code' => REST_Controller::HTTP_BAD_REQUEST,
                 'error' => 'Invalid API'
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
@@ -45,7 +45,7 @@ class Friend extends API_Middleware
         if (!$this->tokenModel->is_valid($token)) {
             $this->response([
                 'status' => false,
-                'code' => 2, // token无效
+                'code' => REST_Controller::HTTP_BAD_REQUEST, // token无效
                 'error' => 'This is not a valid token!'
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
@@ -54,7 +54,7 @@ class Friend extends API_Middleware
         if (!$this->_has_privilege($token, $user_id)) {
             $this->response([
                 'status' => false,
-                'code' => 3,
+                'code' => REST_Controller::HTTP_FORBIDDEN,
                 'error' => 'You have no privilege!'
             ], REST_Controller::HTTP_FORBIDDEN);
         }
@@ -79,7 +79,7 @@ class Friend extends API_Middleware
                 if (empty($datas)) {
                     $this->response([
                         'status' => false ,
-                        'code' => 4,
+                        'code' => REST_Controller::HTTP_NOT_FOUND,
                         'error' => 'Not found any friends'
                     ], REST_Controller::HTTP_NOT_FOUND);
                 } else {
@@ -96,7 +96,7 @@ class Friend extends API_Middleware
                 if (empty($datas)) {
                     $this->response([
                         'status' => false,
-                        'code' => 4,
+                        'code' => REST_Controller::HTTP_NOT_FOUND,
                         'error' => 'Can\'t find any dynamic!'
                     ], REST_Controller::HTTP_NOT_FOUND);
                 }
