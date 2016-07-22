@@ -658,9 +658,9 @@ CREATE TABLE IF NOT EXISTS `si_team_member`(
 
 
 -- 修改
-alter table `si_user` add column `truename` VARCHAR(6) NOT NULL DEFAULT '' after `nickname`;
-alter table `si_user` add column `bio` TEXT NOT NULL DEFAULT '' after `truename`;
-alter table `si_user` add column `user_privilege` INT UNSIGNED NOT NULL after `user_social`;
+Alter TABLE `si_user` ADD COLUMN `truename` VARCHAR(6) NOT NULL DEFAULT '' after `nickname`;
+Alter TABLE `si_user` ADD COLUMN `bio` TEXT NOT NULL DEFAULT '' after `truename`;
+Alter TABLE `si_user` ADD COLUMN `user_privilege` INT UNSIGNED NOT NULL after `user_social`;
 
 -- 7 - 22
 ALTER TABLE `si_topic` ADD COLUMN `image` TEXT AFTER `name`;
@@ -668,3 +668,5 @@ ALTER TABLE `si_topic` ADD COLUMN `create_date` TEXT AFTER `image`;
 ALTER TABLE `si_topic` ADD COLUMN `active_date` TEXT AFTER `create_date`;
 
 ALTER TABLE `si_video` ADD COLUMN `ouser_id` INT UNSIGNED NOT NULL AFTER `id`;
+ALTER TABLE `si_question` ADD COLUMN `topic_id` INT UNSIGNED NOT NULL DEFAULT 0 AFTER `user_id`;
+ALTER TABLE `si_topic` DROP COLUMN `dynamic_num`;

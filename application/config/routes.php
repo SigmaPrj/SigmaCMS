@@ -116,6 +116,12 @@ $route['api/video/(:num)'] = 'api/Video/videos/id/$1';
 $route['api/video/(:num)/(:any)'] = 'api/Video/videos/id/$1/type/$2';
 
 /**
+ * 问答
+ */
+$route['api/question'] = 'api/question/Questions';
+$route['api/question/(:num)'] = 'api/question/Questions/id/$1';
+
+/**
  * 用户
  */
 $route['api/user'] = 'api/User/users'; // limit

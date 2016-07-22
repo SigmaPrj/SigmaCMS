@@ -60,32 +60,38 @@ class Topic extends API_Middleware
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
 
-        switch ($type) {
-            case 'dynamic':
-            {
-                // 获取特定话题下的所有动态
-                $this->load->model('Topic_model', 'topicModel');
-                $dynamics = $this->topicModel->getAllDynamicsByTopic($id);
-                if (empty($dynamics)) {
-                    $this->response([
-                        'status' => false,
-                        'code' => REST_Controller::HTTP_NOT_FOUND,
-                        'error' => 'Can\'t find any more dynamics!'
-                    ], REST_Controller::HTTP_NOT_FOUND);
-                } else {
-                    $this->response($dynamics, REST_Controller::HTTP_OK);
-                }
-            }
-                break;
-            default:
-            {
+        if ($type === 'dynamic') {
+            // 获取特定话题下的所有动态
+            $this->load->model('Topic_model', 'topicModel');
+            $dynamics = $this->topicModel->getAllDynamicsByTopic($id);
+            if (empty($dynamics)) {
                 $this->response([
                     'status' => false,
-                    'code' => REST_Controller::HTTP_BAD_REQUEST,
-                    'error' => 'Invalid API!'
-                ], REST_Controller::HTTP_BAD_REQUEST);
+                    'code' => REST_Controller::HTTP_NOT_FOUND,
+                    'error' => 'Can\'t find any more dynamics!'
+                ], REST_Controller::HTTP_NOT_FOUND);
+            } else {
+                $this->response($dynamics, REST_Controller::HTTP_OK);
             }
-                break;
+        } else if ($type === 'question') {
+            //  获取特定话题下的问题
+            $this->load->model('Question_model', 'qModel');
+            $questions = $this->qModel->getQuestionsByTopicId($id);
+            if (empty($questions)) {
+                $this->response([
+                    'status' => false,
+                    'code' => REST_Controller::HTTP_NOT_FOUND,
+                    'error' => 'Can\'t find ant more questions!'
+                ], REST_Controller::HTTP_NOT_FOUND);
+            } else {
+                $this->response($questions, REST_Controller::HTTP_OK);
+            }
+        } else {
+            $this->response([
+                'status' => false,
+                'code' => REST_Controller::HTTP_BAD_REQUEST,
+                'error' => 'Invalid API!'
+            ], REST_Controller::HTTP_BAD_REQUEST);
         }
     }
 }
