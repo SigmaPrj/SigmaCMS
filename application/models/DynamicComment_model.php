@@ -44,12 +44,17 @@ class DynamicComment_model extends CI_Model
 
         if (isset($page) && $page >= 1) {
             $start_index = ($page-1)*$comment_per_request;
-            $comments = $this->db->get('dynamic_comment', $comment_per_request, $start_index);
+            $query = $this->db->get('dynamic_comment', $comment_per_request, $start_index);
         } else {
-            $comments = $this->db->get('dynamic_comment', $hot_comment_default_num);
+            $query = $this->db->get('dynamic_comment', $hot_comment_default_num);
         }
 
-        return $comments->result_array();
+        $comments = $query->result_array();
+
+        // 将评论数据和comment进行整合
+        $this->_addUserInfoToComments($comments);
+
+        return $comments;
     }
 
     /**
@@ -79,11 +84,48 @@ class DynamicComment_model extends CI_Model
 
         if (isset($page) && $page >= 1) {
             $start_index = ($page-1)*$comment_per_request;
-            $comments = $this->db->get('dynamic_comment', $comment_per_request, $start_index);
+            $query = $this->db->get('dynamic_comment', $comment_per_request, $start_index);
         } else {
-            $comments = $this->db->get('dynamic_comment', $comment_per_request);
+            $query = $this->db->get('dynamic_comment', $comment_per_request);
         }
 
-        return $comments->result_array();
+        $comments = $query->result_array();
+
+        // 将评论数据和comment进行整合
+        $this->_addUserInfoToComments($comments);
+
+        return $comments;
+    }
+
+    /**
+     * @param $comments array 将评论数据与用户信息进行组合
+     */
+    private function _addUserInfoToComments(&$comments) {
+        // 获取user_id 的信息
+        $this->load->model('User_model', 'userModel');
+        $users = $this->userModel->getUserDataBrief(array_map(function ($value) {
+            return $value['user_id'];
+        }, $comments));
+
+        // 获取sub_id 的信息
+        $sub_users = $this->userModel->getUserDataBrief(array_map(function ($value) {
+            if ($value['sub_id'] !== 0) {
+                return $value['sub_id'];
+            }
+        }, $comments));
+
+        foreach ($comments as &$value) {
+            if (array_key_exists($value['user_id'], $users)) {
+                $value['user'] = $users[$value['user_id']];
+            } else {
+                $value['user'] = null;
+            }
+
+            if (array_key_exists($value['sub_id'], $sub_users)) {
+                $value['sub_user'] = $sub_users[$value['sub_id']];
+            } else {
+                $value['sub_user'] = null;
+            }
+        }
     }
 }

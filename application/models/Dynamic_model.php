@@ -73,13 +73,13 @@ class Dynamic_model extends CI_Model
           if (array_key_exists($value['id'], $images)) {
               $value['images'] = $images[$value['id']];
           } else {
-              $value['images'] = [];
+              $value['images'] = null;
           }
 
           if (array_key_exists($value['user_id'], $users)) {
               $value['user'] = $users[$value['user_id']];
           } else {
-              $value['user'] = [];
+              $value['user'] = null;
           }
         }
 
@@ -106,13 +106,13 @@ class Dynamic_model extends CI_Model
         if (array_key_exists($data['id'], $images)) {
             $data['images'] = $images[$data['id']];
         } else {
-            $data['images'] = [];
+            $data['images'] = null;
         }
 
         if (array_key_exists($data['user_id'], $user)) {
             $data['user'] = $user[$data['user_id']];
         } else {
-            $data['user'] = [];
+            $data['user'] = null;
         }
 
         return $data;

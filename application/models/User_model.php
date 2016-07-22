@@ -83,7 +83,7 @@ class User_model extends CI_Model
      * @return mixed
      */
     public function getUserDataBasic($ids) {
-
+        // TODO : 得到用户的基本信息内容
     }
 
     /**
@@ -91,6 +91,6 @@ class User_model extends CI_Model
      * @return mixed
      */
     public function getUserDataAll($ids) {
-
+        // TODO : 得到用户的所有信息内容
     }
 }
