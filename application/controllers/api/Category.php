@@ -60,21 +60,27 @@ class Category extends API_Middleware
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
 
-        switch ($type) {
-            case 'video':
-            {
+        if ($type === 'video') {
+            // 获取特定分类下的所有视频
+            $this->load->model('Video_model', 'videoModel');
+            $videos = $this->videoModel->getVideosByCategoryId($id);
 
-            }
-                break;
-            default:
-            {
+            if (empty($videos)) {
                 $this->response([
                     'status' => false,
-                    'code' => REST_Controller::HTTP_BAD_REQUEST,
-                    'error' => 'Invalid API'
-                ], REST_Controller::HTTP_BAD_REQUEST);
+                    'code' => REST_Controller::HTTP_NOT_FOUND,
+                    'error' => 'Can\'t find any videos!'
+                ], REST_Controller::HTTP_NOT_FOUND);
+            } else {
+                $this->response($videos, REST_Controller::HTTP_OK);
             }
-                break;
+
+        } else {
+            $this->response([
+                'status' => false,
+                'code' => REST_Controller::HTTP_BAD_REQUEST,
+                'error' => 'Invalid API'
+            ], REST_Controller::HTTP_BAD_REQUEST);
         }
     }
 }
