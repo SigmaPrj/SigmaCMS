@@ -59,11 +59,7 @@ class Dynamic extends API_Middleware
             {
                 // 获取当前动态的所有评论
                 $this->load->model('DynamicComment_model', 'dcModel');
-                if ($state === 'hot') {
-                    $comments = $this->dcModel->getHotCommentsById($dynamic_id);
-                } else {
-                    $comments = $this->dcModel->getBasicCommentsById($dynamic_id);
-                }
+                $comments = $this->dcModel->getCommentsByDynamicId($dynamic_id);
 
                 if (empty($comments)) {
                     $this->response([

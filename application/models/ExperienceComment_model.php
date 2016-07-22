@@ -14,13 +14,7 @@ class ExperienceComment_model extends CI_Model
         $this->load->database();
     }
 
-    /**
-     * 获取特定 经验分享 中的所有评论内容
-     *
-     * @param $ex_id int
-     * @return mixed
-     */
-    public function getAllCommentsByExperienceID($ex_id) {
+    public function _do_select($ex_id) {
         $page = $this->input->get('p');
         $time = $this->input->get('t');
         $state = $this->input->get('state');
@@ -58,27 +52,18 @@ class ExperienceComment_model extends CI_Model
 
         if (isset($page) && ($page >= 1)) {
             $start_index = ($page-1)*$comment_per_request;
-            $query = $this->db->get('experience_comment', $comment_per_request, $start_index);
+            $this->db->limit($comment_per_request, $start_index);
         } else {
-            if (isset($state)) {
-                switch ($state) {
-                    case 'hot':
-                    {
-                        $query = $this->db->get('experience_comment', $hot_comment_default_num, 0);
-                    }
-                        break;
-                    case 'basic':
-                    default:
-                    {
-                        $query = $this->db->get('experience_comment', $comment_per_request, 0);
-                    }
-                        break;
-                }
+            if (isset($state) && ($state === 'hot')) {
+                $this->db->limit($hot_comment_default_num, 0);
             } else {
-                $query = $this->db->get('experience_comment', $comment_per_request, 0);
+                $this->db->limit($comment_per_request, 0);
             }
         }
+    }
 
+    public function _get_comments() {
+        $query = $this->db->get('experience_comment');
         $comments = $query->result_array();
 
         // 载入用户信息
@@ -96,5 +81,17 @@ class ExperienceComment_model extends CI_Model
         }
 
         return $comments;
+    }
+
+    /**
+     * 获取特定 经验分享 中的所有评论内容
+     *
+     * @param $ex_id int
+     * @return mixed
+     */
+    public function getAllCommentsByExperienceID($ex_id) {
+        $this->_do_select($ex_id);
+
+        return $this->_get_comments();
     }
 }

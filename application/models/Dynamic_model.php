@@ -14,15 +14,13 @@ class Dynamic_model extends CI_Model
         $this->load->database();
     }
 
-    /**
-     * 判断有没有page
-     *
-     * @param $ids array user_id 数组
-     * @return mixed
-     */
-    public function getFriendsDynamics($ids) {
+    public function _do_select($ids) {
         $page = $this->input->get('p');
         $time = $this->input->get('t');
+
+        // 载入配置
+        $this->config->load('config');
+        $num_per_request = $this->config->item('num_per_request');
 
         // 查询
         $this->db->select('dynamic.id as id, user_id, has_topic, topic_id, topic.name as topic_name, content, publish_date, last_look_date, share, look, praise')
@@ -36,7 +34,7 @@ class Dynamic_model extends CI_Model
         if ($time) {
             // 时间
             $this->db->where([
-              'publish_date <' => $time
+                'publish_date <' => $time
             ]);
         }
 
@@ -45,14 +43,15 @@ class Dynamic_model extends CI_Model
 
         if ($page) {
             // 分页
-            $this->config->load('config');
-            $num_per_request = $this->config->item('num_per_request');
             $start_index = ($page-1)*$num_per_request;
-            $query = $this->db->get(null, $num_per_request, $start_index);
+            $this->db->limit($num_per_request, $start_index);
         } else {
-            $query = $this->db->get();
+            $this->db->limit($num_per_request, 0);
         }
+    }
 
+    public function _get_dynamics() {
+        $query = $this->db->get('dynamic');
         $tmpData = $query->result_array();
         if (empty($tmpData)) {
             return [];
@@ -70,20 +69,32 @@ class Dynamic_model extends CI_Model
         }, $tmpData));
 
         foreach ($tmpData as $key => &$value) {
-          if (array_key_exists($value['id'], $images)) {
-              $value['images'] = $images[$value['id']];
-          } else {
-              $value['images'] = null;
-          }
+            if (array_key_exists($value['id'], $images)) {
+                $value['images'] = $images[$value['id']];
+            } else {
+                $value['images'] = null;
+            }
 
-          if (array_key_exists($value['user_id'], $users)) {
-              $value['user'] = $users[$value['user_id']];
-          } else {
-              $value['user'] = null;
-          }
+            if (array_key_exists($value['user_id'], $users)) {
+                $value['user'] = $users[$value['user_id']];
+            } else {
+                $value['user'] = null;
+            }
         }
 
         return $tmpData;
+    }
+
+    /**
+     * 判断有没有page
+     *
+     * @param $ids array user_id 数组
+     * @return mixed
+     */
+    public function getFriendsDynamics($ids) {
+        $this->_do_select($ids);
+
+        return $this->_get_dynamics();
     }
 
     /**

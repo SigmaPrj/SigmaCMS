@@ -14,13 +14,7 @@ class VideoComment_model extends CI_Model
         $this->load->database();
     }
 
-    /**
-     * 根据 $video_id 获取特定的视频下评论
-     *
-     * @param $video_id int
-     * @return mixed
-     */
-    public function getAllCommentsByVideoId($video_id) {
+    public function _do_select() {
         $page = $this->input->get('p');
         $time = $this->input->get('t');
         $state = $this->input->get('state');
@@ -30,8 +24,6 @@ class VideoComment_model extends CI_Model
         $comment_per_request = $this->config->item('comment_per_request');
         $hot_comment_default_num = $this->config->item('hot_comment_default_num');
         $hot_comment_praise_start_num = $this->config->item('hot_comment_praise_start_num');
-
-        $this->db->where('video_id', $video_id);
 
         if (isset($time)) {
             $this->db->where('publish_date <', $time);
@@ -50,15 +42,19 @@ class VideoComment_model extends CI_Model
 
         if (isset($page) && ($page >= 1)) {
             $start_index = ($page-1)*$comment_per_request;
-            $query = $this->db->get('video_comment', $comment_per_request, $start_index);
+            $this->db->limit($comment_per_request, $start_index);
         } else {
             if (isset($state) && ($state === 'hot')) {
-                $query = $this->db->get('video_comment', $hot_comment_default_num);
+                $this->db->limit($hot_comment_default_num);
             } else {
-                $query = $this->db->get('video_comment', $comment_per_request, 0);
+                $this->db->limit($comment_per_request, 0);
             }
         }
+    }
 
+    public function _get_comments() {
+
+        $query = $this->db->get('video_comment');
         $comments = $query->result_array();
 
         if (empty($comments)) {
@@ -80,5 +76,20 @@ class VideoComment_model extends CI_Model
         }
 
         return $comments;
+    }
+
+    /**
+     * 根据 $video_id 获取特定的视频下评论
+     *
+     * @param $video_id int
+     * @return mixed
+     */
+    public function getAllCommentsByVideoId($video_id) {
+
+        $this->_do_select();
+
+        $this->db->where('video_id', $video_id);
+
+        return $this->_get_comments();
     }
 }

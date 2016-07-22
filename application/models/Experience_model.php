@@ -14,12 +14,7 @@ class Experience_model extends CI_Model
         $this->load->database();
     }
 
-    /**
-     * 获取所有经验分享, 支持p t state
-     *
-     * @return mixed
-     */
-    public function getAllExperiences() {
+    public function _do_select() {
         // 获得一些设定参数 page time hot
         $page = $this->input->get('p');
         $time = $this->input->get('t');
@@ -54,10 +49,14 @@ class Experience_model extends CI_Model
 
         if (isset($page) && ($page >= 1)) {
             $start_index = ($page-1)*$experience_per_request;
-            $query = $this->db->get('experience', $experience_per_request, $start_index);
+            $this->db->limit($experience_per_request, $start_index);
         } else {
-            $query = $this->db->get('experience', $experience_default_num, 0);
+            $this->db->limit($experience_default_num, 0);
         }
+    }
+
+    public function _get_experiences() {
+        $query = $this->db->get('experience');
 
         $experiences = $query->result_array();
 
@@ -76,6 +75,17 @@ class Experience_model extends CI_Model
         }
 
         return $experiences;
+    }
+
+    /**
+     * 获取所有经验分享, 支持p t state
+     *
+     * @return mixed
+     */
+    public function getAllExperiences() {
+        $this->_do_select();
+
+        return $this->_get_experiences();
     }
 
     /**
