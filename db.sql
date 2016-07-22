@@ -666,3 +666,5 @@ alter table `si_user` add column `user_privilege` INT UNSIGNED NOT NULL after `u
 ALTER TABLE `si_topic` ADD COLUMN `image` TEXT AFTER `name`;
 ALTER TABLE `si_topic` ADD COLUMN `create_date` TEXT AFTER `image`;
 ALTER TABLE `si_topic` ADD COLUMN `active_date` TEXT AFTER `create_date`;
+
+ALTER TABLE `si_video` ADD COLUMN `ouser_id` INT UNSIGNED NOT NULL AFTER `id`;

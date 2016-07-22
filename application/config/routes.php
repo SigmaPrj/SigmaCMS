@@ -102,6 +102,20 @@ $route['api/dynamic/(:num)'] = 'api/Dynamic/dynamics/id/$1';
 $route['api/dynamic/(:num)/(:any)'] = 'api/Dynamic/dynamics/id/$1/type/$2';
 
 /**
+ * 分类
+ */
+$route['api/category'] = 'api/Category/categories';
+$route['api/category/(:num)'] = 'api/Category/categories/id/$1';
+$route['api/category/(:num)/(:any)'] = 'api/Category/categories/id/$1/type/$2';
+
+/**
+ * 视频
+ */
+$route['api/video'] = 'api/Video/videos';
+$route['api/video/(:num)'] = 'api/Video/videos/id/$1';
+$route['api/video/(:num)/(:any)'] = 'api/Video/videos/id/$1/type/$2';
+
+/**
  * 用户
  */
 $route['api/user'] = 'api/User/users'; // limit

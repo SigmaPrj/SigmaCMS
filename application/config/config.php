@@ -522,6 +522,9 @@ $config['si_md5'] = 'sigma2016_'; // 密码加密前缀
 $config['auth_prefix'] = 'sigma2016_'; // token加密前缀
 $config['auth_timeout'] = 604800; // 有效期为7天
 $config['auth_token_name'] = 'SIGMA-ACCESS-TOKEN';
+// 视频
+$config['video_per_request'] = 5;
+$config['video_default_num'] = 5;
 // 话题
 $config['topic_per_request'] = 5;
 $config['topic_default_num'] = 5;
