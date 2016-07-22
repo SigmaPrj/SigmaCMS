@@ -62,8 +62,8 @@ class Topic extends API_Middleware
 
         if ($type === 'dynamic') {
             // 获取特定话题下的所有动态
-            $this->load->model('Topic_model', 'topicModel');
-            $dynamics = $this->topicModel->getAllDynamicsByTopic($id);
+            $this->load->model('Dynamic_model', 'dyModel');
+            $dynamics = $this->dyModel->getAllDynamicsByTopic($id);
             if (empty($dynamics)) {
                 $this->response([
                     'status' => false,

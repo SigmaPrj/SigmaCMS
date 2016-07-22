@@ -14,7 +14,7 @@ class Dynamic_model extends CI_Model
         $this->load->database();
     }
 
-    public function _do_select($ids) {
+    public function _do_select() {
         $page = $this->input->get('p');
         $time = $this->input->get('t');
 
@@ -26,11 +26,7 @@ class Dynamic_model extends CI_Model
         $this->db->select('dynamic.id as id, user_id, has_topic, topic_id, topic.name as topic_name, content, publish_date, last_look_date, share, look, praise')
             ->from('dynamic')
             ->join('topic', 'dynamic.topic_id = topic.id');
-        if (is_array($ids)) {
-            $this->db->where_in('user_id', $ids);
-        } else {
-            $this->db->where('user_id', $ids);
-        }
+
         if ($time) {
             // 时间
             $this->db->where([
@@ -51,7 +47,7 @@ class Dynamic_model extends CI_Model
     }
 
     public function _get_dynamics() {
-        $query = $this->db->get('dynamic');
+        $query = $this->db->get(null);
         $tmpData = $query->result_array();
         if (empty($tmpData)) {
             return [];
@@ -92,7 +88,25 @@ class Dynamic_model extends CI_Model
      * @return mixed
      */
     public function getFriendsDynamics($ids) {
-        $this->_do_select($ids);
+        $this->_do_select();
+
+        if (is_array($ids)) {
+            $this->db->where_in('user_id', $ids);
+        } else {
+            $this->db->where('user_id', $ids);
+        }
+
+        return $this->_get_dynamics();
+    }
+
+    /**
+     * @param $topic_id
+     * @return mixed
+     */
+    public function getAllDynamicsByTopic($topic_id) {
+        $this->_do_select();
+
+        $this->db->where('topic_id', $topic_id);
 
         return $this->_get_dynamics();
     }
