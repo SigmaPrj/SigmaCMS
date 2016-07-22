@@ -90,6 +90,10 @@ $route['api/topic'] = 'api/Topic/topics'; // 获取所有话题
 $route['api/topic/(:num)'] = 'api/Topic/topics/id/$1';
 $route['api/topic/(:num)/(:any)'] = 'api/Topic/topics/id/$1/type/$2'; // 获取特定话题下所有特定内容
 
+$route['api/experience'] = 'api/Experience/experiences'; // 获取所有经验分享
+$route['api/experience/(:num)'] = 'api/Experience/experiences/id/$1';
+$route['api/experience/(:num)/(:any)'] = 'api/Experience/experiences/id/$1/type/$2';
+
 /**
  * 动态,社区API设计
  */

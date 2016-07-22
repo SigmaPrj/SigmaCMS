@@ -38,9 +38,9 @@ class UserType extends REST_Controller
         if ($id <= 0) {
             $this->response([
                 'status' => false,
-                'code' => REST_Controller::HTTP_BAD_REQUEST,
+                'code' => REST_Controller::HTTP_NOT_ACCEPTABLE,
                 'error' => 'Invalid parameter'
-            ], REST_Controller::HTTP_BAD_REQUEST);
+            ], REST_Controller::HTTP_NOT_ACCEPTABLE);
         }
 
         $city = $this->userTypeModel->getUserTypeByCode($code);

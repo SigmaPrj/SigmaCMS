@@ -522,9 +522,12 @@ $config['si_md5'] = 'sigma2016_'; // 密码加密前缀
 $config['auth_prefix'] = 'sigma2016_'; // token加密前缀
 $config['auth_timeout'] = 604800; // 有效期为7天
 $config['auth_token_name'] = 'SIGMA-ACCESS-TOKEN';
-// t话题
+// 话题
 $config['topic_per_request'] = 5;
 $config['topic_default_num'] = 5;
+// 经验分享
+$config['experience_per_request'] = 5;
+$config['experience_default_num'] = 5;
 // 动态
 $config['num_per_request'] = 5;
 // 热门评论点赞数目多少,才算人们,默认10

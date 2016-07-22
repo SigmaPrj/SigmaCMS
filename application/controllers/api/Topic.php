@@ -46,9 +46,9 @@ class Topic extends API_Middleware
         if ($id <= 0) {
             $this->response([
                 'status' => false,
-                'code' => REST_Controller::HTTP_BAD_REQUEST,
+                'code' => REST_Controller::HTTP_NOT_ACCEPTABLE,
                 'error' => 'Invalid parameter!'
-            ], REST_Controller::HTTP_BAD_REQUEST);
+            ], REST_Controller::HTTP_NOT_ACCEPTABLE);
         }
 
         if (!isset($type)) {
