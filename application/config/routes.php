@@ -122,6 +122,13 @@ $route['api/question'] = 'api/question/Questions';
 $route['api/question/(:num)'] = 'api/question/Questions/id/$1';
 
 /**
+ * 资源
+ */
+$route['api/resource'] = 'api/resource/Resource';
+$route['api/resource/(:num)'] = 'api/resource/Resource/id/$1';
+$route['api/resource/(:num)/(:any)'] = 'api/resource/Resource/id/$1/type/$2';
+
+/**
  * 用户
  */
 $route['api/user'] = 'api/User/users'; // limit

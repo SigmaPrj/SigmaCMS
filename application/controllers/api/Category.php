@@ -75,6 +75,19 @@ class Category extends API_Middleware
                 $this->response($videos, REST_Controller::HTTP_OK);
             }
 
+        } else if ($type === 'resource') {
+            // 根据分类获取资源
+            $this->load->model('Resource_model', 'reModel');
+            $resources = $this->reModel->getResourcesByCategoryId($id);
+            if (empty($resources)) {
+                $this->response([
+                    'status' => false,
+                    'code' => REST_Controller::HTTP_NOT_FOUND,
+                    'error' => 'Can\'t find any resources!'
+                ], REST_Controller::HTTP_NOT_FOUND);
+            } else {
+                $this->response($resources, REST_Controller::HTTP_OK);
+            }
         } else {
             $this->response([
                 'status' => false,
