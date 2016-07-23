@@ -32,17 +32,7 @@ class Index extends SI_BaseController
     }
 
     public function test() {
-        print_r('mysql_user : '.SAE_MYSQL_USER);
-        echo '<br/>';
-        print_r('mysql_pass : '.SAE_MYSQL_PASS);
-        echo '<br/>';
-        print_r('mysql_host_m : '.SAE_MYSQL_HOST_M);
-        echo '<br/>';
-        print_r('mysql_host_s : '.SAE_MYSQL_HOST_S);
-        echo '<br/>';
-        print_r('mysql_port : '.SAE_MYSQL_PORT);
-        echo '<br/>';
-        print_r('mysql_db : '.SAE_MYSQL_DB);
-        echo '<br/>';
+        $this->config->load('config');
+        echo md5($this->config->item('si_md5').'sigmatest');
     }
 }
