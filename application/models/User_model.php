@@ -52,7 +52,7 @@ class User_model extends CI_Model
      * @return mixed
      */
     public function getUserDataBrief($ids) {
-        $this->db->select('user.id as id, nickname, is_approved, image, signature, user_level, school.name as school_name, user_type')
+        $this->db->select('user.id as id, nickname, is_approved, image, user_level, school.name as school_name, user_type')
             ->from('user')
             ->join('school', 'user.school_code = school.code');
 
@@ -83,7 +83,30 @@ class User_model extends CI_Model
      * @return mixed
      */
     public function getUserDataBasic($ids) {
-        // TODO : 得到用户的基本信息内容
+        $this->db->select('user.id as user_id, nickname, is_approved, image, bgImage, signature, user_level, school.name as school_name, user_type')
+            ->from('user')
+            ->join('school', 'user.school_code = school.code');
+
+        if (empty($ids)) {
+            return [];
+        }
+
+        if (is_array($ids)) {
+            $query = $this->db->where_in('user.id', $ids)->get();
+        } else {
+            $query = $this->db->where([
+                'user.id' => $ids
+            ])->get();
+        }
+
+        $tmpData = $query->result_array();
+        $data = [];
+
+        foreach ($tmpData as $key => $value) {
+            $data[$value['id']] = $value;
+        }
+
+        return $data;
     }
 
     /**
