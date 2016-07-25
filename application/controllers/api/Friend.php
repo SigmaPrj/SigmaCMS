@@ -91,6 +91,8 @@ class Friend extends API_Middleware
             {
                 $this->load->model('Dynamic_model', 'dynamicModel');
 
+                $friends[] = $user_id;
+
                 $datas = $this->dynamicModel->getFriendsDynamics($friends);
 
                 if (empty($datas)) {
