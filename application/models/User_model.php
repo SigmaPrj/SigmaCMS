@@ -83,7 +83,7 @@ class User_model extends CI_Model
      * @return mixed
      */
     public function getUserDataBasic($ids) {
-        $this->db->select('user.id as user_id, nickname, is_approved, image, bgImage, signature, user_level, school.name as school_name, user_type')
+        $this->db->select('user.id as id, nickname, is_approved, image, bgImage, signature, user_level, school.name as school_name, user_type')
             ->from('user')
             ->join('school', 'user.school_code = school.code');
 
