@@ -141,7 +141,7 @@ $route['api/activity/(:num)/(:any)'] = 'api/Activity/activities/id/$1/type/$2';
 $route['api/user'] = 'api/User/users'; // limit
 $route['api/user/(:num)'] = 'api/User/users/id/$1'; // type 选择 数据返回 类型 brief basic all
 $route['api/user/(:num)/(:any)'] = 'api/User/users/id/$1/type/$2'; // 获取用户i的某方面相关数据
-$route['api/user/(:num)/(:any)/(:num)'] = 'api/User/users/id/$1/type/$2/type_id/$3'; // 获取,修改等用户 某方面的具体某个数据内容
+
 
 /**
  * 朋友
