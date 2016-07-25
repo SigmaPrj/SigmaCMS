@@ -39,7 +39,7 @@ class User extends API_Middleware
                     'error' => 'Can\'t find the user!'
                 ], REST_Controller::HTTP_NOT_FOUND);
             } else {
-                $this->response($user, REST_Controller::HTTP_OK);
+                $this->response($user[$id], REST_Controller::HTTP_OK);
             }
         }
 
@@ -53,7 +53,7 @@ class User extends API_Middleware
                     'error' => 'Can\'t find the user!'
                 ], REST_Controller::HTTP_NOT_FOUND);
             } else {
-                $this->response($user, REST_Controller::HTTP_OK);
+                $this->response($user[$id], REST_Controller::HTTP_OK);
             }
         } else if ($type === 'basic') {
             $user = $this->userModel->getUserDataBasic($id);
@@ -64,7 +64,7 @@ class User extends API_Middleware
                     'error' => 'Can\'t find the user!'
                 ], REST_Controller::HTTP_NOT_FOUND);
             } else {
-                $this->response($user, REST_Controller::HTTP_OK);
+                $this->response($user[$id], REST_Controller::HTTP_OK);
             }
         } else if ($type === 'all') {
             // TODO: 用户生分验证
@@ -76,7 +76,7 @@ class User extends API_Middleware
                     'error' => 'Can\'t find the user!'
                 ], REST_Controller::HTTP_NOT_FOUND);
             } else {
-                $this->response($user, REST_Controller::HTTP_OK);
+                $this->response($user[$id], REST_Controller::HTTP_OK);
             }
         } else {
             $this->response([
