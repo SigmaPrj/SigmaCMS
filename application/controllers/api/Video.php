@@ -39,7 +39,11 @@ class Video extends API_Middleware
                     'error' => 'Can\'t find any videos!'
                 ], REST_Controller::HTTP_NOT_FOUND);
             } else {
-                $this->response($videos, REST_Controller::HTTP_OK);
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => $videos
+                ], REST_Controller::HTTP_OK);
             }
         }
 
@@ -55,7 +59,11 @@ class Video extends API_Middleware
                     'error' => 'Can\'t find the video!'
                 ], REST_Controller::HTTP_NOT_FOUND);
             } else {
-                $this->response($video, REST_Controller::HTTP_OK);
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => $video
+                ], REST_Controller::HTTP_OK);
             }
         }
 
@@ -71,7 +79,11 @@ class Video extends API_Middleware
                     'error' => 'Can\'t find any comments!'
                 ], REST_Controller::HTTP_NOT_FOUND);
             } else {
-                $this->response($comments, REST_Controller::HTTP_OK);
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => $comments
+                ], REST_Controller::HTTP_OK);
             }
         } else {
             $this->response([

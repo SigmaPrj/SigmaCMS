@@ -26,7 +26,11 @@ class School extends REST_Controller
                 $limit = (int)$limit;
                 $schools = $limit?$this->schoolModel->getAllSchools($limit):$this->schoolModel->getAllSchools(null);
                 if ($schools) {
-                    $this->response($schools, REST_Controller::HTTP_OK);
+                    $this->response([
+                        'status' => true,
+                        'code' => REST_Controller::HTTP_OK,
+                        'data' => $schools
+                    ], REST_Controller::HTTP_OK);
                 } else {
                     $this->response([
                         'status' => FALSE,
@@ -40,7 +44,11 @@ class School extends REST_Controller
                 $limit = (int)$limit;
                 $schools = $limit?$this->schoolModel->getSchoolsWithCityCode($code, $limit):$this->schoolModel->getSchoolsWithCityCode($code, null);
                 if ($schools) {
-                    $this->response($schools, REST_Controller::HTTP_OK);
+                    $this->response([
+                        'status' => true,
+                        'code' => REST_Controller::HTTP_OK,
+                        'data' => $schools
+                    ], REST_Controller::HTTP_OK);
                 } else {
                     $this->response([
                         'status' => FALSE,
@@ -55,7 +63,11 @@ class School extends REST_Controller
         $id = (int)$id;
         $school = $this->schoolModel->getSchoolWithCode($id);
         if ($school) {
-            $this->response($school, REST_Controller::HTTP_OK);
+            $this->response([
+                'status' => true,
+                'code' => REST_Controller::HTTP_OK,
+                'data' => $school
+            ], REST_Controller::HTTP_OK);
         } else {
             $this->response([
                 'status' => FALSE,

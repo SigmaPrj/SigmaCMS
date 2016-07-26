@@ -39,7 +39,11 @@ class Topic extends API_Middleware
                     'error' => 'Can\'t find any topic!'
                 ], REST_Controller::HTTP_NOT_FOUND);
             } else {
-                $this->response($topics, REST_Controller::HTTP_OK);
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => $topics
+                ], REST_Controller::HTTP_OK);
             }
         }
 
@@ -71,7 +75,11 @@ class Topic extends API_Middleware
                     'error' => 'Can\'t find any more dynamics!'
                 ], REST_Controller::HTTP_NOT_FOUND);
             } else {
-                $this->response($dynamics, REST_Controller::HTTP_OK);
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => $dynamics
+                ], REST_Controller::HTTP_OK);
             }
         } else if ($type === 'question') {
             //  获取特定话题下的问题
@@ -84,7 +92,11 @@ class Topic extends API_Middleware
                     'error' => 'Can\'t find ant more questions!'
                 ], REST_Controller::HTTP_NOT_FOUND);
             } else {
-                $this->response($questions, REST_Controller::HTTP_OK);
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => $questions
+                ], REST_Controller::HTTP_OK);
             }
         } else {
             $this->response([

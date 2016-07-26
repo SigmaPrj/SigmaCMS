@@ -33,7 +33,11 @@ class Question extends API_Middleware
                     'error' => 'Can\'t find any questions!'
                 ], REST_Controller::HTTP_NOT_FOUND);
             } else {
-                $this->response($questions, REST_Controller::HTTP_OK);
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => $questions
+                ], REST_Controller::HTTP_OK);
             }
         }
 
@@ -48,7 +52,11 @@ class Question extends API_Middleware
                 'error' => 'Can\'t find the question!'
             ], REST_Controller::HTTP_NOT_FOUND);
         } else {
-            $this->response($question, REST_Controller::HTTP_OK);
+            $this->response([
+                'status' => true,
+                'code' => REST_Controller::HTTP_OK,
+                'data' => $question
+            ], REST_Controller::HTTP_OK);
         }
     }
 }

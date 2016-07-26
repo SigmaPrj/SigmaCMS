@@ -34,7 +34,11 @@ class Experience extends API_Middleware
                     'error' => 'Can\'t find any more experience!'
                 ], REST_Controller::HTTP_NOT_FOUND);
             } else {
-                $this->response($experiences, REST_Controller::HTTP_OK);
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => $experiences
+                ], REST_Controller::HTTP_OK);
             }
         }
 
@@ -57,7 +61,11 @@ class Experience extends API_Middleware
                     'error' => 'Can\'t find this experience!'
                 ], REST_Controller::HTTP_NOT_FOUND);
             } else {
-                $this->response($experience, REST_Controller::HTTP_OK);
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => $experience
+                ], REST_Controller::HTTP_OK);
             }
         }
 
@@ -75,7 +83,11 @@ class Experience extends API_Middleware
                         'error' => 'Can\'t find any comments!'
                     ], REST_Controller::HTTP_NOT_FOUND);
                 } else {
-                    $this->response($comments, REST_Controller::HTTP_OK);
+                    $this->response([
+                        'status' => true,
+                        'code' => REST_Controller::HTTP_OK,
+                        'data' => $comments
+                    ], REST_Controller::HTTP_OK);
                 }
             }
                 break;

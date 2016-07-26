@@ -39,7 +39,11 @@ class Category extends API_Middleware
                     'error' => 'Can\'t find any categories!'
                 ], REST_Controller::HTTP_NOT_FOUND);
             } else {
-                $this->response($categories, REST_Controller::HTTP_OK);
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => $categories
+                ], REST_Controller::HTTP_OK);
             }
         }
 
@@ -72,7 +76,11 @@ class Category extends API_Middleware
                     'error' => 'Can\'t find any videos!'
                 ], REST_Controller::HTTP_NOT_FOUND);
             } else {
-                $this->response($videos, REST_Controller::HTTP_OK);
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => $videos
+                ], REST_Controller::HTTP_OK);
             }
 
         } else if ($type === 'resource') {
@@ -86,7 +94,11 @@ class Category extends API_Middleware
                     'error' => 'Can\'t find any resources!'
                 ], REST_Controller::HTTP_NOT_FOUND);
             } else {
-                $this->response($resources, REST_Controller::HTTP_OK);
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => $resources
+                ], REST_Controller::HTTP_OK);
             }
         } else {
             $this->response([

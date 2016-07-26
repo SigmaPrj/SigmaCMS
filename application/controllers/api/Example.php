@@ -49,7 +49,11 @@ class Example extends REST_Controller {
             if ($users)
             {
                 // Set the response and exit
-                $this->response($users, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => $users
+                ], REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
             }
             else
             {
@@ -90,7 +94,11 @@ class Example extends REST_Controller {
 
         if (!empty($user))
         {
-            $this->set_response($user, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+            $this->set_response([
+                'status' => true,
+                'code' => REST_Controller::HTTP_OK,
+                'data' => $user
+            ], REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
         }
         else
         {

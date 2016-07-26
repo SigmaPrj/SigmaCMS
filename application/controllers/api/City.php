@@ -30,7 +30,11 @@ class City extends REST_Controller
             // 获取所有数据
             $data = $this->cityModel->getAllCities();
             if ($data) {
-                $this->response($data, REST_Controller::HTTP_OK);
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => $data
+                ], REST_Controller::HTTP_OK);
             } else {
                 $this->response([
                     'status' => FALSE,
@@ -53,7 +57,11 @@ class City extends REST_Controller
 
         $city = $this->cityModel->getCityByCode($code);
         if ($city) {
-            $this->response($city, REST_Controller::HTTP_OK);
+            $this->response([
+                'status' => true,
+                'code' => REST_Controller::HTTP_OK,
+                'data' => $city
+            ], REST_Controller::HTTP_OK);
         } else {
             $this->response([
                 'status' => FALSE,

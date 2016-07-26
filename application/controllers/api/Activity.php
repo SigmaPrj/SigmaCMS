@@ -38,7 +38,11 @@ class Activity extends API_Middleware
                     'error' => 'Can\'t find any activities!'
                 ], REST_Controller::HTTP_NOT_FOUND);
             } else {
-                $this->response($activities, REST_Controller::HTTP_OK);
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => $activities
+                ], REST_Controller::HTTP_OK);
             }
         }
 
@@ -54,7 +58,11 @@ class Activity extends API_Middleware
                     'error' => 'Can\'t find the activity!'
                 ], REST_Controller::HTTP_NOT_FOUND);
             } else {
-                $this->response($activity, REST_Controller::HTTP_OK);
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => $activity
+                ], REST_Controller::HTTP_OK);
             }
         }
 
@@ -70,7 +78,11 @@ class Activity extends API_Middleware
                     'error' => 'Can\'t find any comment!'
                 ], REST_Controller::HTTP_NOT_FOUND);
             } else {
-                $this->response($comments, REST_Controller::HTTP_OK);
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => $comments
+                ], REST_Controller::HTTP_OK);
             }
         } else {
             $this->response([

@@ -40,7 +40,11 @@ class Resource extends API_Middleware
                     'error' => 'Can\'t find any resources!'
                 ], REST_Controller::HTTP_NOT_FOUND);
             } else {
-                $this->response($resources, REST_Controller::HTTP_OK);
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => $resources
+                ], REST_Controller::HTTP_OK);
             }
         }
 
@@ -56,7 +60,11 @@ class Resource extends API_Middleware
                     'error' => 'Can\'t find the resource!'
                 ], REST_Controller::HTTP_NOT_FOUND);
             } else {
-                $this->response($resource, REST_Controller::HTTP_OK);
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => $resource
+                ], REST_Controller::HTTP_OK);
             }
         }
 
@@ -71,7 +79,11 @@ class Resource extends API_Middleware
                     'error' => 'Can\'t find any comments!'
                 ], REST_Controller::HTTP_NOT_FOUND);
             } else {
-                $this->response($comments, REST_Controller::HTTP_OK);
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => $comments
+                ], REST_Controller::HTTP_OK);
             }
         } else {
             $this->response([

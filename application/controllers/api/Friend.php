@@ -83,7 +83,11 @@ class Friend extends API_Middleware
                         'error' => 'Not found any friends'
                     ], REST_Controller::HTTP_NOT_FOUND);
                 } else {
-                    $this->response($datas, REST_Controller::HTTP_OK);
+                    $this->response([
+                        'status' => true,
+                        'code' => REST_Controller::HTTP_OK,
+                        'data' => $datas
+                    ], REST_Controller::HTTP_OK);
                 }
             }
                 break;
@@ -102,7 +106,11 @@ class Friend extends API_Middleware
                         'error' => 'Can\'t find any dynamic!'
                     ], REST_Controller::HTTP_NOT_FOUND);
                 }
-                $this->response($datas, REST_Controller::HTTP_OK);
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => $datas
+                ], REST_Controller::HTTP_OK);
             }
                 break;
         }
