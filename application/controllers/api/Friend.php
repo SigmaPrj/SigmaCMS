@@ -71,48 +71,47 @@ class Friend extends API_Middleware
         }
 
         // 有type属性
-        switch ($type) {
-            case 'user':
-            {
-                $this->load->model('User_Model', 'userModel');
-                $datas = $this->userModel->getUserDataBrief($friends);
-                if (empty($datas)) {
-                    $this->response([
-                        'status' => false ,
-                        'code' => REST_Controller::HTTP_NOT_FOUND,
-                        'error' => 'Not found any friends'
-                    ], REST_Controller::HTTP_NOT_FOUND);
-                } else {
-                    $this->response([
-                        'status' => true,
-                        'code' => REST_Controller::HTTP_OK,
-                        'data' => $datas
-                    ], REST_Controller::HTTP_OK);
-                }
-            }
-                break;
-            case 'dynamic':
-            {
-                $this->load->model('Dynamic_model', 'dynamicModel');
-
-                $friends[] = $user_id;
-
-                $datas = $this->dynamicModel->getFriendsDynamics($friends);
-
-                if (empty($datas)) {
-                    $this->response([
-                        'status' => false,
-                        'code' => REST_Controller::HTTP_NOT_FOUND,
-                        'error' => 'Can\'t find any dynamic!'
-                    ], REST_Controller::HTTP_NOT_FOUND);
-                }
+        if ($type === 'user') {
+            $this->load->model('User_Model', 'userModel');
+            $datas = $this->userModel->getUserDataBrief($friends);
+            if (empty($datas)) {
+                $this->response([
+                    'status' => false ,
+                    'code' => REST_Controller::HTTP_NOT_FOUND,
+                    'error' => 'Not found any friends'
+                ], REST_Controller::HTTP_NOT_FOUND);
+            } else {
                 $this->response([
                     'status' => true,
                     'code' => REST_Controller::HTTP_OK,
                     'data' => $datas
                 ], REST_Controller::HTTP_OK);
             }
-                break;
+        } else if ($type === 'dynamic') {
+            $this->load->model('Dynamic_model', 'dynamicModel');
+
+            $friends[] = $user_id;
+
+            $datas = $this->dynamicModel->getFriendsDynamics($friends);
+
+            if (empty($datas)) {
+                $this->response([
+                    'status' => false,
+                    'code' => REST_Controller::HTTP_NOT_FOUND,
+                    'error' => 'Can\'t find any dynamic!'
+                ], REST_Controller::HTTP_NOT_FOUND);
+            }
+            $this->response([
+                'status' => true,
+                'code' => REST_Controller::HTTP_OK,
+                'data' => $datas
+            ], REST_Controller::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => false ,
+                'code' => REST_Controller::HTTP_BAD_REQUEST,
+                'error' => 'Invalid API'
+            ], REST_Controller::HTTP_BAD_REQUEST);
         }
     }
 

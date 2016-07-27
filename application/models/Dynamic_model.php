@@ -15,8 +15,9 @@ class Dynamic_model extends CI_Model
     }
 
     public function _do_select() {
-        $page = $this->input->get('p');
+        $count = $this->input->get('c');
         $time = $this->input->get('t');
+        $now = $this->input->get('now');
 
         // 载入配置
         $this->config->load('config');
@@ -26,21 +27,29 @@ class Dynamic_model extends CI_Model
         $this->db->select('dynamic.id as id, user_id, has_topic, topic_id, topic.name as topic_name, content, publish_date, last_look_date, share, look, praise')
             ->from('dynamic')
             ->join('topic', 'dynamic.topic_id = topic.id');
+        if (isset($time)) {
+            if (isset($now)) {
+                $this->db->where([
+                    'publish_date >' => $time
+                ]);
+                $this->db->where([
+                    'publish_date <' => $now
+                ]);
+                $this->db->order_by('publish_date', 'asc');
+            } else {
+                // 时间
+                $this->db->where([
+                    'publish_date <' => $time
+                ]);
 
-        if ($time) {
-            // 时间
-            $this->db->where([
-                'publish_date <' => $time
-            ]);
+                // 按时间从早到晚排序呢
+                $this->db->order_by('publish_date', 'DESC');
+            }
         }
 
-        // 按时间从早到晚排序呢
-        $this->db->order_by('publish_date', 'DESC');
-
-        if ($page) {
+        if (isset($count)) {
             // 分页
-            $start_index = ($page-1)*$num_per_request;
-            $this->db->limit($num_per_request, $start_index);
+            $this->db->limit($num_per_request, $count);
         } else {
             $this->db->limit($num_per_request, 0);
         }
