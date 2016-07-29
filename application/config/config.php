@@ -547,7 +547,7 @@ $config['hot_comment_praise_start_num'] = 10;
 // 热门评论默认请求条数
 $config['hot_comment_default_num'] = 4;
 // 每次请求热门评论条数
-$config['comment_per_request'] = 5;
+$config['comment_per_request'] = 10;
 
 /*
 |--------------------------------------------------------------------------

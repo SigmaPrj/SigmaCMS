@@ -95,11 +95,23 @@ class Friend extends API_Middleware
             $datas = $this->dynamicModel->getFriendsDynamics($friends);
 
             if (empty($datas)) {
-                $this->response([
-                    'status' => false,
-                    'code' => REST_Controller::HTTP_NOT_FOUND,
-                    'error' => 'Can\'t find any dynamic!'
-                ], REST_Controller::HTTP_NOT_FOUND);
+                $tNow = $this->get('now');
+                $tC = $this->get('c');
+                if (isset($tNow) || isset($tC)) {
+                    $this->response([
+                        'status' => false,
+                        'code' => REST_Controller::HTTP_NOT_FOUND,
+                        'isfirst' => true,
+                        'error' => 'Can\'t find any dynamic!'
+                    ], REST_Controller::HTTP_NOT_FOUND);
+                } else {
+                    $this->response([
+                        'status' => false,
+                        'code' => REST_Controller::HTTP_NOT_FOUND,
+                        'isfirst' => false,
+                        'error' => 'Can\'t find any dynamic!'
+                    ], REST_Controller::HTTP_NOT_FOUND);
+                }
             }
             $this->response([
                 'status' => true,
