@@ -101,14 +101,14 @@ class Friend extends API_Middleware
                     $this->response([
                         'status' => false,
                         'code' => REST_Controller::HTTP_NOT_FOUND,
-                        'isfirst' => true,
+                        'isfirst' => false,
                         'error' => 'Can\'t find any dynamic!'
                     ], REST_Controller::HTTP_NOT_FOUND);
                 } else {
                     $this->response([
                         'status' => false,
                         'code' => REST_Controller::HTTP_NOT_FOUND,
-                        'isfirst' => false,
+                        'isfirst' => true,
                         'error' => 'Can\'t find any dynamic!'
                     ], REST_Controller::HTTP_NOT_FOUND);
                 }
