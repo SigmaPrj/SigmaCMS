@@ -16,7 +16,7 @@ class NewsType_model extends CI_Model
 
     public function getAllNewsTypes() {
         $query = $this->db->get('news_type');
-        $newsTypes = $query->row_array();
+        $newsTypes = $query->result_array();
         if (empty($newsTypes)) {
             return [];
         }
