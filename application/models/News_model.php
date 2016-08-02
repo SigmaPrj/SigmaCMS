@@ -72,4 +72,10 @@ class News_model extends CI_Model
 
         return $news;
     }
+
+    public function getAllNewsByNewsTypeId($nt_id) {
+        $this->_do_select();
+        $this->db->where('news_type', $nt_id);
+        return $this->_get_news();
+    }
 }

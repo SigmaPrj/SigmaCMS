@@ -17,6 +17,7 @@ class NewsType extends API_Middleware
 
     public function newsTypes_get() {
         $id = $this->get('id');
+        $type = $this->get('type');
 
         if (!isset($id)) {
             // 获得全部活动
@@ -37,22 +38,50 @@ class NewsType extends API_Middleware
             }
         }
 
-        // 获得特定id
-        $this->load->model('NewsType_model', 'ntModel');
-        $newsType = $this->ntModel->getNewsTypeById($id);
+        if (!isset($type)) {
+            // 获得特定id
+            $this->load->model('NewsType_model', 'ntModel');
+            $newsType = $this->ntModel->getNewsTypeById($id);
 
-        if (empty($newsType)) {
-            $this->response([
-                'status' => false,
-                'code' => REST_Controller::HTTP_NOT_FOUND,
-                'error' => 'Can\'t find the activity!'
-            ], REST_Controller::HTTP_NOT_FOUND);
+            if (empty($newsType)) {
+                $this->response([
+                    'status' => false,
+                    'code' => REST_Controller::HTTP_NOT_FOUND,
+                    'error' => 'Can\'t find the activity!'
+                ], REST_Controller::HTTP_NOT_FOUND);
+            } else {
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => $newsType
+                ], REST_Controller::HTTP_OK);
+            }
+        }
+
+        if ($type === 'news') {
+            // 获取特定id下所有评论
+            $this->load->model('News_model', 'newsModel');
+            $news = $this->newsModel->getAllNewsByNewsTypeId($id);
+
+            if (empty($comments)) {
+                $this->response([
+                    'status' => false,
+                    'code' => REST_Controller::HTTP_NOT_FOUND,
+                    'error' => 'Can\'t find any news!'
+                ], REST_Controller::HTTP_NOT_FOUND);
+            } else {
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => $news
+                ], REST_Controller::HTTP_OK);
+            }
         } else {
             $this->response([
-                'status' => true,
-                'code' => REST_Controller::HTTP_OK,
-                'data' => $newsType
-            ], REST_Controller::HTTP_OK);
+                'status' => false,
+                'code' => REST_Controller::HTTP_BAD_REQUEST,
+                'error' => 'Invalid API'
+            ], REST_Controller::HTTP_BAD_REQUEST);
         }
 
     }
