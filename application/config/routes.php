@@ -109,7 +109,8 @@ $route['api/news/(:num)'] = 'api/News/news/id/$1';
 $route['api/news/(:num)/(:any)'] = 'api/News/news/id/$1/type/$2';
 
 $route['api/newstype'] = 'api/NewsType/newsTypes';
-$route['api/newstype/(:num)'] = 'api/NewsType/newsTypes';
+$route['api/newstype/(:num)'] = 'api/NewsType/newsTypes/id/$1';
+$route['api/newstype/(:num)/(:any)'] = 'api/NewsType/newsTypes/id/$1/type/$2';
 
 /**
  * 分类
