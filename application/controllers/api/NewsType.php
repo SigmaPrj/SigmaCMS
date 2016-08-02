@@ -63,7 +63,7 @@ class NewsType extends API_Middleware
             $this->load->model('News_model', 'newsModel');
             $news = $this->newsModel->getAllNewsByNewsTypeId($id);
 
-            if (empty($comments)) {
+            if (empty($news)) {
                 $this->response([
                     'status' => false,
                     'code' => REST_Controller::HTTP_NOT_FOUND,
