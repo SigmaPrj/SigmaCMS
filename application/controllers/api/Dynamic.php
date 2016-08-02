@@ -91,4 +91,32 @@ class Dynamic extends API_Middleware
                 break;
         }
     }
+
+    /**
+     * 业务 : 1 没有id, 上传动态
+     * 业务 : 2 有id ,有type 为comment ,上传评论
+     */
+    public function dynamics_post() {
+        $id = $this->get('id');
+        $type = $this->get('type');
+
+        if (!isset($id)) {
+            // TODO : 发布动态
+        }
+
+        if (!isset($type)) {
+            // TODO : 修改动态
+        }
+
+        if ($type === 'comment') {
+            // TODO : 发布评论
+
+        } else {
+            $this->response([
+                'status' => false,
+                'code' => REST_Controller::HTTP_BAD_REQUEST,
+                'error' => 'Invalid API'
+            ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+    }
 }

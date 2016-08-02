@@ -531,6 +531,9 @@ $config['video_default_num'] = 5;
 // 话题
 $config['topic_per_request'] = 5;
 $config['topic_default_num'] = 5;
+// 资讯
+$config['news_pre_request'] = 5;
+$config['news_default_num'] = 5;
 // 资源
 $config['resource_pre_request'] = 5;
 $config['resource_default_num'] = 5;

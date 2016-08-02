@@ -102,6 +102,16 @@ $route['api/dynamic/(:num)'] = 'api/Dynamic/dynamics/id/$1';
 $route['api/dynamic/(:num)/(:any)'] = 'api/Dynamic/dynamics/id/$1/type/$2';
 
 /**
+ * 资讯
+ */
+$route['api/news'] = 'api/News/news';
+$route['api/news/(:num)'] = 'api/News/news/id/$1';
+$route['api/news/(:num)/(:any)'] = 'api/News/news/id/$1/type/$2';
+
+$route['api/newstype'] = 'api/NewsType/newsTypes';
+$route['api/newstype/(:num)'] = 'api/NewsType/newsTypes';
+
+/**
  * 分类
  */
 $route['api/category'] = 'api/Category/categories';
