@@ -6,6 +6,8 @@
  * Date: 16/8/2
  * Time: 下午4:51
  */
+
+require_once __DIR__.'/API_Middleware.php';
 class NewsType extends API_Middleware
 {
     public function __construct()
