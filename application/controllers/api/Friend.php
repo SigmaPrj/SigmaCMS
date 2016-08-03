@@ -44,13 +44,11 @@ class Friend extends API_Middleware
 
         // 判断token是否有效
         $this->load->model('Token_model', 'tokenModel');
-        if (!$this->tokenModel->is_valid($token)) {
+        if (!$this->tokenModel->is_valid($Token)) {
             $this->response([
                 'status' => false,
                 'code' => REST_Controller::HTTP_BAD_REQUEST, // token无效
-                'error' => 'This is not a valid token!',
-                'headers' => $headers,
-                'token' => $Token
+                'error' => 'This is not a valid token!'
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
 
