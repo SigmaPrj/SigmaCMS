@@ -35,7 +35,7 @@ class Friend extends API_Middleware
             $skey = strtolower($key);
             $headers[$skey] = $value;
         }
-        $Token = $headers['sigma-access-token'];
+        $token = $headers['sigma-access-token'];
 
         if (!$user_id) {
             // 没有传入id , 直接请求 返回错误
@@ -48,13 +48,13 @@ class Friend extends API_Middleware
 
         // 判断token是否有效
         $this->load->model('Token_model', 'tokenModel');
-        if (!$this->tokenModel->is_valid($Token)) {
+        if (!$this->tokenModel->is_valid($token)) {
             $this->response([
                 'status' => false,
                 'code' => REST_Controller::HTTP_BAD_REQUEST, // token无效
                 'error' => 'This is not a valid token!',
                 'headers' => $headers,
-                'token' => $Token
+                'token' => $token
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
 
