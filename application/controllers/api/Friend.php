@@ -31,6 +31,7 @@ class Friend extends API_Middleware
         $this->config->load('config');
         $token = getHeader($this->config->item('auth_token_name'));
         $headers = getAllHeaders();
+        $Token = $headers['Sigma-Access-Token'];
 
         if (!$user_id) {
             // 没有传入id , 直接请求 返回错误
@@ -48,7 +49,8 @@ class Friend extends API_Middleware
                 'status' => false,
                 'code' => REST_Controller::HTTP_BAD_REQUEST, // token无效
                 'error' => 'This is not a valid token!',
-                'headers' => $headers
+                'headers' => $headers,
+                'token' => $Token
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
 
