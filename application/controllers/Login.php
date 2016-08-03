@@ -111,7 +111,12 @@ class Login extends CI_Controller
                         $this->load->model('Token_model', 'tokenModel');
                         if ($this->tokenModel->addToken($tokenData)) {
                             echo json_encode([
-                                'token' => $token
+                                'status' => true,
+                                'code' => 200,
+                                'data' => [
+                                    'token' => $token,
+                                    'user' => userData
+                                ]
                             ]);
                         } else {
                             echo json_encode([
