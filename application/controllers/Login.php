@@ -115,7 +115,7 @@ class Login extends CI_Controller
                                 'code' => 200,
                                 'data' => [
                                     'token' => $token,
-                                    'user' => userData
+                                    'user' => $userData
                                 ]
                             ]);
                         } else {
