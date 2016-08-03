@@ -29,8 +29,12 @@ class Friend extends API_Middleware
         $user_id = $this->get('user_id');
         $type = $this->get('type');
         $this->config->load('config');
-        $token = getHeader($this->config->item('auth_token_name'));
-        $headers = getAllHeaders();
+        $tempHeaders = getAllHeaders();
+        $headers = [];
+        foreach ($tempHeaders as $key => $value) {
+            $skey = strtolower($key);
+            $headers[$skey] = $value;
+        }
         $Token = $headers['sigma-access-token'];
 
         if (!$user_id) {
