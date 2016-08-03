@@ -31,7 +31,7 @@ class Friend extends API_Middleware
         $this->config->load('config');
         $token = getHeader($this->config->item('auth_token_name'));
         $headers = getAllHeaders();
-        $Token = $headers['sigma-api-key'];
+        $Token = $headers['sigma-access-token'];
 
         if (!$user_id) {
             // 没有传入id , 直接请求 返回错误
