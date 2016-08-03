@@ -30,6 +30,7 @@ class Friend extends API_Middleware
         $type = $this->get('type');
         $this->config->load('config');
         $token = getHeader($this->config->item('auth_token_name'));
+        $headers = getAllHeaders();
 
         if (!$user_id) {
             // 没有传入id , 直接请求 返回错误
@@ -46,7 +47,8 @@ class Friend extends API_Middleware
             $this->response([
                 'status' => false,
                 'code' => REST_Controller::HTTP_BAD_REQUEST, // token无效
-                'error' => 'This is not a valid token!'
+                'error' => 'This is not a valid token!',
+                'headers' => $headers
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
 
