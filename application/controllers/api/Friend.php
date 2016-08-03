@@ -29,8 +29,9 @@ class Friend extends API_Middleware
         $user_id = $this->get('user_id');
         $type = $this->get('type');
         $this->config->load('config');
-        $token = getHeader($this->config->item('auth_token_name'));
+        $tokenName = $this->config->item('auth_token_name');
         $headers = getAllHeaders();
+        $token = $headers[tokenName];
 
         if (!$user_id) {
             // 没有传入id , 直接请求 返回错误
