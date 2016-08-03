@@ -155,4 +155,27 @@ class Login extends CI_Controller
             ]);
         }
     }
+
+    public function checkAuth() {
+        $token = $this->input->post('token');
+        $userId = $this->input->post('user_id');
+        $this->load->model('Token_model', 'tokenModel');
+        if ($this->tokenModel->is_owner($token, $userId) && $this->tokenModel->is_valid($token)) {
+            echo json_encode([
+                'status' => true,
+                'code' => 200,
+                'data' => [
+                    'is_valid' => true
+                ]
+            ]);
+        } else {
+            echo json_encode([
+                'status' => false,
+                'code' => 200,
+                'data' => [
+                    'is_valid' => false
+                ]
+            ]);
+        }
+    }
 }
