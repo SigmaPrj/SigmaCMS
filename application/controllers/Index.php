@@ -33,6 +33,6 @@ class Index extends SI_BaseController
 
     public function test() {
         $this->config->load('config');
-        echo md5($this->config->item('si_md5').'sigmatest');
+        echo md5($this->config->item('si_md5').'123456');
     }
 }
