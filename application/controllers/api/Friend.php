@@ -46,7 +46,8 @@ class Friend extends API_Middleware
             $this->response([
                 'status' => false,
                 'code' => REST_Controller::HTTP_BAD_REQUEST, // token无效
-                'error' => 'This is not a valid token!'
+                'error' => 'This is not a valid token!',
+                'token' => $token
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
 
