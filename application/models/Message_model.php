@@ -38,10 +38,12 @@ class Message_model extends CI_Model
             $messages[] = $value;
         }
 
-        $messages[] = $toQuery->result_array();
+        usort($messages, function ($v1, $v2) {
+            return ($v1['date'] < $v2['date']);
+        });
 
         // TODO: 队伍信息
 
-        return $toData;
+        return $messages;
     }
 }
