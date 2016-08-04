@@ -160,3 +160,11 @@ $route['api/user/(:num)/(:any)'] = 'api/User/users/id/$1/type/$2'; // 获取用�
 $route['api/friend'] = 'api/Friend/friends'; // 获取所有朋友关系数据, 用不到
 $route['api/friend/(:num)'] = 'api/Friend/friends/user_id/$1'; // 获取某个人的所有好友
 $route['api/friend/(:num)/(:any)'] = 'api/Friend/friends/user_id/$1/type/$2'; // 获取该用户所有好友的某些信息
+
+/**
+ * 消息
+ */
+$route['api/message'] = 'api/Message/messages'; // 获取所有消息, 不可以用
+$route['api/message/(:num)'] = 'api/Message/messages/user_id/$1'; // 获取当前用户的消息, 所有自己发给别人的, 别人发给自己的, 自己关注的队伍中的消息。
+$route['api/message/(:num)/(:any)'] = 'api/Message/messages/user_id/$1'; // 不可用
+$route['api/message/(:num)/(:any)/(:num)'] = 'api/Message/messages/user_id/$1/type/$2/type_id/$3';

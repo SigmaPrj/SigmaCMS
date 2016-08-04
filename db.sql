@@ -682,10 +682,9 @@ CREATE TABLE IF NOT EXISTS `si_message`(
   `message` TEXT,
   `from` INT UNSIGNED NOT NULL ,
   `to` INT UNSIGNED NOT NULL ,
-  `team_id` INT UNSIGNED NOT NULL ,
+  `team_id` INT UNSIGNED NOT NULL DEFAULT 0,
   `date` INT(10) UNSIGNED DEFAULT 0 NOT NULL,
   PRIMARY KEY `pk_message` (`id`),
   FOREIGN KEY `fk_message_user_from` (`from`) REFERENCES `si_user` (`id`),
-  FOREIGN KEY `fk_message_user_to` (`to`) REFERENCES `si_user` (`id`),
-  FOREIGN KEY `fk_message_team` (`team_id`) REFERENCES `si_team` (`id`)
+  FOREIGN KEY `fk_message_user_to` (`to`) REFERENCES `si_user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
