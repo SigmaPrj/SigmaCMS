@@ -49,11 +49,11 @@ class Message_model extends CI_Model
         foreach ($subMessages as &$value) {
             if ($value['from'] !== $u_id) {
                 $value['user'] = $this->userModel->getUserDataBrief($value['from']);
-                break;
+                continue;
             }
             if ($value['to'] !== $u_id) {
                 $value['user'] = $this->userModel->getUserDataBrief($value['to']);
-                break;
+                continue;
             }
         }
 
