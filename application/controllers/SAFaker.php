@@ -1314,13 +1314,13 @@ class SAFaker extends CI_Controller
     public function faker_message() {
         $messages = [];
         for ($i = 0; $i < 1000; $i++ ) {
-            $messages = $this->faker->text(100);
+            $message = $this->faker->text(100);
             $from = $this->faker->numberBetween(10, 30);
             $to = $this->faker->numberBetween(1, 30);
             $team_id = 0;
             $date = $this->faker->unixTime('now');
             $messages[] = [
-                'message' => $messages,
+                'message' => $message,
                 'from' => $from,
                 'to' => $to,
                 'team_id' => $team_id,
