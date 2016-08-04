@@ -43,7 +43,20 @@ class Message_model extends CI_Model
         });
 
         // TODO: 队伍信息
+        $subMessages = array_slice($messages, 0, 20);
 
-        return $messages;
+        $this->load->model('User_model', 'userModel');
+        foreach ($subMessages as &$value) {
+            if ($value['from'] !== $u_id) {
+                $value['user'] = $this->userModel->getUserDataBrief($value['from']);
+                break;
+            }
+            if ($value['to'] !== $u_id) {
+                $value['user'] = $this->userModel->getUserDataBrief($value['to']);
+                break;
+            }
+        }
+
+        return $subMessages;
     }
 }
