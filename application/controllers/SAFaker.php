@@ -1252,4 +1252,67 @@ class SAFaker extends CI_Controller
         }
     }
 
+    /**
+     *  faker team
+     */
+    public function faker_team() {
+        for ($i =0; $i < 50; $i ++) {
+            $id = $i+1;
+            $name = $this->faker->text(10);
+            $member_num = $this->faker->numberBetween(2, 5); // 不包括老师
+            $teacher_num = $this->faker->randomElement([0, 1]); // 有或者没有
+
+            // 添加team 返回id
+            $team_id = $this->fakerModel->addTeam([
+                'id' => $id,
+                'name' => $name,
+                'member_num' => $member_num,
+                'teacher_num' => $teacher_num
+            ]);
+
+            $members = [];
+            for ($k = 0; $k < $member_num; $k++) {
+                // 添加 team member数据
+                $user_id = $this->faker->randomElement([2, 3, 5, 10, 13, 19, 22, 28, 30, 31]);
+                if ($k === 0) {
+                    $is_leader = 1;
+                } else {
+                    $is_leader = 0;
+                }
+                $is_teacher = 0;
+                $members[] = [
+                    'team_id' => $team_id,
+                    'user_id' => $user_id,
+                    'is_leader' => $is_leader,
+                    'is_teacher' => $is_teacher
+                ];
+            }
+
+            // 添加成员
+            $this->fakerModel->addTeamMemebr($members);
+
+            if ($teacher_num) {
+                // 添加老师
+                $user_id = $this->faker->randomElement([1, 4, 9, 11, 12, 14, 16, 17, 21]);
+                $is_leader = 0;
+                $is_teacher = 1;
+                $teacher = [
+                    'team_id' => $team_id,
+                    'user_id' => $user_id,
+                    'is_leader' => $is_leader,
+                    'is_teacher' => $is_teacher
+                ];
+
+                $this->fakerModel->addTeacher($teacher);
+            }
+        }
+    }
+
+    /**
+     * faker team member
+     */
+    public function faker_team_member() {
+        
+    }
+
 }

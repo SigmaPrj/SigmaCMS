@@ -670,3 +670,7 @@ ALTER TABLE `si_topic` ADD COLUMN `active_date` TEXT AFTER `create_date`;
 ALTER TABLE `si_video` ADD COLUMN `ouser_id` INT UNSIGNED NOT NULL AFTER `id`;
 ALTER TABLE `si_question` ADD COLUMN `topic_id` INT UNSIGNED NOT NULL DEFAULT 0 AFTER `user_id`;
 ALTER TABLE `si_topic` DROP COLUMN `dynamic_num`;
+
+
+-- 8 3
+ALTER TABLE `si_team` ADD COLUMN `teacher_num` TINYINT UNSIGNED NOT NULL DEFAULT 0 AFTER `member_num`;

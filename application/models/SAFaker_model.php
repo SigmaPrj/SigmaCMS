@@ -237,4 +237,23 @@ class SAFaker_model extends CI_Model
     public function addFakerFriend($data) {
         return $this->db->insert_batch('friend', $data);
     }
+
+    /**
+     * @param $teamData array 向表 si_team 中添加数据
+     * @return int 返回插入的id
+     */
+    public function addTeam($teamData) {
+        $this->db->insert('team', $teamData);
+        return $this->db->insert_id();
+    }
+
+    public function addTeamMemebr($member) {
+        $this->db->insert_batch('team_member', $member);
+        return $this->db->insert_id();
+    }
+
+    public function addTeacher($teacher) {
+        $this->db->insert('team_member', $teacher);
+        return $this->db->insert_id();
+    }
 }
