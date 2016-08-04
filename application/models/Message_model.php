@@ -42,6 +42,6 @@ class Message_model extends CI_Model
 
         // TODO: 队伍信息
 
-        return $messages;
+        return $toData;
     }
 }
