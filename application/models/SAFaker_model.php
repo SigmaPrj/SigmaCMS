@@ -256,4 +256,9 @@ class SAFaker_model extends CI_Model
         $this->db->insert('team_member', $teacher);
         return $this->db->insert_id();
     }
+
+    public function addMessage($messages) {
+        $this->db->insert_batch('message', $messages);
+        return $this->db->insert_id();
+    }
 }

@@ -1311,8 +1311,25 @@ class SAFaker extends CI_Controller
     /**
      * faker team member
      */
-    public function faker_team_member() {
-        
+    public function faker_message() {
+        $messages = [];
+        for ($i = 0; $i < 1000; $i++ ) {
+            $messages = $this->faker->text(100);
+            $from = $this->faker->numberBetween(10, 30);
+            $to = $this->faker->numberBetween(1, 30);
+            $team_id = 0;
+            $date = $this->faker->unixTime('now');
+            $messages[] = [
+                'message' => $messages,
+                'from' => $from,
+                'to' => $to,
+                'team_id' => $team_id,
+                'date' => $date
+            ];
+        }
+
+        // 添加消息
+        $this->fakerModel->addMessage($messages);
     }
 
 }

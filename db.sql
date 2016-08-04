@@ -674,3 +674,18 @@ ALTER TABLE `si_topic` DROP COLUMN `dynamic_num`;
 
 -- 8 3
 ALTER TABLE `si_team` ADD COLUMN `teacher_num` TINYINT UNSIGNED NOT NULL DEFAULT 0 AFTER `member_num`;
+
+-- 消息
+DROP TABLE IF EXISTS `si_message`;
+CREATE TABLE IF NOT EXISTS `si_message`(
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `message` TEXT,
+  `from` INT UNSIGNED NOT NULL ,
+  `to` INT UNSIGNED NOT NULL ,
+  `team_id` INT UNSIGNED NOT NULL ,
+  `date` INT(10) UNSIGNED DEFAULT 0 NOT NULL,
+  PRIMARY KEY `pk_message` (`id`),
+  FOREIGN KEY `fk_message_user_from` (`from`) REFERENCES `si_user` (`id`),
+  FOREIGN KEY `fk_message_user_to` (`to`) REFERENCES `si_user` (`id`),
+  FOREIGN KEY `fk_message_team` (`team_id`) REFERENCES `si_team` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
