@@ -23,13 +23,21 @@ class Message_model extends CI_Model
         $fromQuery = $this->db->distinct('to')->where([
             'from' => $u_id,
             'team_id' => 0
-        ])->get('message');
-        $messages[] = $fromQuery->result_array();
+        ])->order_by('date', 'DESC')->get('message');
+        $fromData = $fromQuery->result_array();
+        foreach ($fromData as $value) {
+            $messages[] = $value;
+        }
 
         $toQuery = $this->db->distinct('from')->where([
             'to' => $u_id,
             'team_id' => 0
-        ])->get('message');
+        ])->order_by('date', 'DESC')->get('message');
+        $toData = $toQuery->result_array();
+        foreach ($toData as $value) {
+            $messages[] = $value;
+        }
+
         $messages[] = $toQuery->result_array();
 
         // TODO: 队伍信息
