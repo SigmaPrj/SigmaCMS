@@ -25,8 +25,8 @@ class Message_model extends CI_Model
             'team_id' => 0
         ])->order_by('date', 'DESC')->get('message');
         $fromData = $fromQuery->result_array();
-        foreach ($fromData as $value) {
-            $messages[] = $value;
+        foreach ($fromData as $value1) {
+            $messages[] = $value1;
         }
 
         $toQuery = $this->db->distinct('from')->where([
@@ -34,8 +34,8 @@ class Message_model extends CI_Model
             'team_id' => 0
         ])->order_by('date', 'DESC')->get('message');
         $toData = $toQuery->result_array();
-        foreach ($toData as $value) {
-            $messages[] = $value;
+        foreach ($toData as $value2) {
+            $messages[] = $value2;
         }
 
         usort($messages, function ($v1, $v2) {
@@ -60,5 +60,42 @@ class Message_model extends CI_Model
         }
 
         return $subMessages;
+    }
+
+    /**
+     * 获取用户muser和suser通话消息
+     *
+     * @param $muser
+     * @param $suser
+     */
+    public function getMessagesAboutUser($muser, $suser) {
+        $messages = [];
+        $query1 = $this->where([
+            'from' => $muser,
+            'to' => $suser,
+            'team_id' => 0
+        ])->get('message');
+        $mTosMessages = $query1->result_array();
+
+        $query2 = $this->where([
+            'from' => $suser,
+            'to' => $muser,
+            'team_id' => 0
+        ])->get('message');
+        $sTomMessages = $query2->result_array();
+
+        foreach ($mTosMessages as $value) {
+            $messages[] = $value;
+        }
+
+        foreach ($sTomMessages as $value) {
+            $messages[] = $value;
+        }
+
+        usort($messages, function ($v1, $v2) {
+            return $v1['date'] > $v2['date'];
+        });
+
+        return $messages;
     }
 }

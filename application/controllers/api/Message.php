@@ -45,5 +45,41 @@ class Message extends API_Middleware
                 ], REST_Controller::HTTP_OK);
             }
         }
+
+        if (!isset($type_id)) {
+            if ($type !== 'team') {
+                $this->response([
+                    'status' => false,
+                    'code' => REST_Controller::HTTP_BAD_REQUEST,
+                    'error' => 'Invalid API'
+                ], REST_Controller::HTTP_BAD_REQUEST);
+            } else {
+                // 获取所有team消息
+            }
+        }
+
+        if ($type === 'user') {
+            $this->load->model('Message_model', 'messModel');
+            $messages = $this->messModel->getMessagesAboutUser($user_id, $type_id);
+            if (empty($messages)) {
+                $this->response([
+                    'status' => false,
+                    'code' => REST_Controller::HTTP_NOT_FOUND,
+                    'error' => 'Can\'t find any messages!'
+                ], REST_Controller::HTTP_NOT_FOUND);
+            } else {
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => $messages
+                ], REST_Controller::HTTP_OK);
+            }
+        } else {
+            $this->response([
+                'status' => false,
+                'code' => REST_Controller::HTTP_BAD_REQUEST,
+                'error' => 'Invalid API'
+            ], REST_Controller::HTTP_BAD_REQUEST);
+        }
     }
 }
