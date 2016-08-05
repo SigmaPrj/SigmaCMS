@@ -70,14 +70,14 @@ class Message_model extends CI_Model
      */
     public function getMessagesAboutUser($muser, $suser) {
         $messages = [];
-        $query1 = $this->where([
+        $query1 = $this->db->where([
             'from' => $muser,
             'to' => $suser,
             'team_id' => 0
         ])->get('message');
         $mTosMessages = $query1->result_array();
 
-        $query2 = $this->where([
+        $query2 = $this->db->where([
             'from' => $suser,
             'to' => $muser,
             'team_id' => 0
