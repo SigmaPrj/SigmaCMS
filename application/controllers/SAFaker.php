@@ -1314,13 +1314,39 @@ class SAFaker extends CI_Controller
     public function faker_message() {
         $messages = [];
         for ($i = 0; $i < 1000; $i++ ) {
-            $message = $this->faker->text(100);
+            $message_type = $this->faker->randomElement([0, 1, 2]);
+            if ($message_type === 0) {
+                // 纯文本
+                $message = $this->faker->text(100);
+            }
+
+            if ($message_type === 1) {
+                // 图片
+                $message = $this->faker->randomElement([
+                    'http://oaetkzt9k.bkt.clouddn.com/FgCcdKBAPX0OepScvPLVyxI73_j6',
+                    'http://oaetkzt9k.bkt.clouddn.com/FgEqGtuzqWJ6niopbRv7mQsNpS4K',
+                    'http://oaetkzt9k.bkt.clouddn.com/FgoibRmg-TFskDryL3G18fX2pYJr',
+                    'http://oaetkzt9k.bkt.clouddn.com/FhMDBGWMGG7yGxGhGbzfYSNnqsi7',
+                    'http://oaetkzt9k.bkt.clouddn.com/C.jpg',
+                    'http://oaetkzt9k.bkt.clouddn.com/C++.jpg'
+                ]);
+            }
+
+            if ($message_type === 2) {
+                // 音频
+                $message = $this->faker->randomElement([
+                    'http://oaetkzt9k.bkt.clouddn.com/sendmsg.caf',
+                    'http://oaetkzt9k.bkt.clouddn.com/msg.caf'
+                ]);
+            }
+
             $from = $this->faker->numberBetween(10, 30);
             $to = $this->faker->numberBetween(1, 30);
             $team_id = 0;
             $date = $this->faker->unixTime('now');
             $messages[] = [
                 'message' => $message,
+                'message_type' => $message_type,
                 'from' => $from,
                 'to' => $to,
                 'team_id' => $team_id,

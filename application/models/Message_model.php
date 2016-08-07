@@ -67,6 +67,7 @@ class Message_model extends CI_Model
      *
      * @param $muser
      * @param $suser
+     * @return array messages
      */
     public function getMessagesAboutUser($muser, $suser) {
         $messages = [];

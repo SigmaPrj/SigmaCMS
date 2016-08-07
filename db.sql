@@ -680,6 +680,8 @@ DROP TABLE IF EXISTS `si_message`;
 CREATE TABLE IF NOT EXISTS `si_message`(
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `message` TEXT,
+  -- 0 表示 文本消息 1 表示图片消息 2表示音频消息
+  `message_type` TINYINT UNSIGNED NOT NULL DEFAULT 0,
   `from` INT UNSIGNED NOT NULL ,
   `to` INT UNSIGNED NOT NULL ,
   `team_id` INT UNSIGNED NOT NULL DEFAULT 0,
