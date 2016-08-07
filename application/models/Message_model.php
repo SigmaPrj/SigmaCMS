@@ -94,7 +94,7 @@ class Message_model extends CI_Model
         }
 
         usort($messages, function ($v1, $v2) {
-            return $v1['date'] > $v2['date'];
+            return ($v1['date'] < $v2['date']);
         });
 
         return $messages;
