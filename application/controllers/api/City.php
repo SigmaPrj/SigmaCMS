@@ -34,11 +34,17 @@ class City extends REST_Controller
                 $value['group'] = $this->_getFirstCharter($value['name']);
             }
 
+            $cities = [];
+            foreach($data as &$v){
+                $cities[$v['group']][] = $v;
+                unset($v['group']);
+            }
+
             if ($data) {
                 $this->response([
                     'status' => true,
                     'code' => REST_Controller::HTTP_OK,
-                    'data' => $data
+                    'data' => $cities
                 ], REST_Controller::HTTP_OK);
             } else {
                 $this->response([
