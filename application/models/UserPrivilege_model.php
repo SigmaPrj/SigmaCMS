@@ -20,4 +20,16 @@ class UserPrivilege_model extends CI_Model
         ])->get('user_privilege');
         return $query->row_array();
     }
+
+    public function createRow() {
+        $this->db->insert('user_privilege', [
+            'friend_visibility' => 1,
+            'follow_visibility' => 2,
+            'sex_visibility' => 2,
+            'name_visibility' => 1,
+            'phone_visibility' => 1,
+            'email_visibility' => 1
+        ]);
+        return $this->db->insert_id();
+    }
 }

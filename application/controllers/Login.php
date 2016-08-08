@@ -178,4 +178,57 @@ class Login extends CI_Controller
             ]);
         }
     }
+
+    public function register() {
+        if (IS_POST()) {
+            $user = [];
+            $user['username_type'] = $this->input->post('username_type');
+            $user['password'] = $this->input->post('password');
+//            $password =
+
+            if ($user['username_type'] === 'email') {
+                $user['username'] = $this->input->post('email');
+                $user['email'] = $this->input->post('email');
+            } else if ($user['username_type'] === 'phone') {
+                $user['username'] = $this->input->post('phone');
+                $user['phone'] = $this->input->post('phone');
+            } else {
+                $user['username'] = $this->input->post('customer');
+                $user['customer'] = $this->input->post('customer');
+            }
+
+            $this->load->model('User_model', 'userModel');
+            if ($this->userModel->checkoutUsername($user['username'])) {
+                $user['nickname'] = '';
+                $this->load->model('UserSocial_model', 'usModel');
+                $user['user_social'] = $this->usModel->createRow();
+                $this->load->model('UserPrivilege_model', 'upModel');
+                $user['user_privilege'] = $this->upModel->createRow();
+                $user['is_active'] = 1;
+                $user['active_date'] = time();
+
+                if ($user_id = $this->userModel->addUser($user)) {
+                    echo json_encode([
+                        'status' => true,
+                        'code' => 200,
+                        'data' => [
+                            'user_id' => $user_id
+                        ]
+                    ]);
+                } else {
+                    echo json_encode([
+                        'status' => false,
+                        'code' => 2,
+                        'error' => '注册失败!'
+                    ]);
+                }
+            } else {
+                echo json_encode([
+                    'status' => false,
+                    'code' => 1,
+                    'error' => '用户名已存在!'
+                ]);
+            }
+        }
+    }
 }

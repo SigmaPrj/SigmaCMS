@@ -116,4 +116,33 @@ class User_model extends CI_Model
     public function getUserDataAll($ids) {
         // TODO : 得到用户的所有信息内容
     }
+
+    /**
+     * 添加用户
+     *
+     * @param $user
+     * @return int
+     */
+    public function addUser($user) {
+        $this->db->insert('user', $user);
+        return $this->db->insert_id();
+    }
+
+    /**
+     *  检查用户是否存在
+     *
+     * @param $username
+     * @return bool
+     */
+    public function checkoutUsername($username) {
+        $query = $this->db->where([
+            'username' => $username
+        ])->get('user');
+        $user = $query->row_array();
+        if (empty($user)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

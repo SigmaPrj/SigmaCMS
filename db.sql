@@ -148,6 +148,20 @@ CREATE TABLE IF NOT EXISTS `si_user_social` (
   PRIMARY KEY `pk_userSocial` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- 用户权限设置
+-- 权限都分为3级, 0 仅自己可见 1 朋友可见 2 任何人都可见
+DROP TABLE IF EXISTS `si_user_privilege`;
+CREATE TABLE IF NOT EXISTS `si_user_privilege` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `friend_visibility` TINYINT UNSIGNED NOT NULL DEFAULT 1, -- 是否可以允许别人查看自己的朋友列表
+  `follow_visibility` TINYINT UNSIGNED NOT NULL DEFAULT 2, -- 是否可以允许本人查看自己follow的用户列表
+  `sex_visibility` TINYINT UNSIGNED NOT NULL DEFAULT 2, -- 是否可以允许别人查看到自己性别
+  `name_visibility` TINYINT UNSIGNED NOT NULL DEFAULT 1, -- 是否允许别人查看自己的真实姓名
+  `phone_visibility` TINYINT UNSIGNED NOT NULL DEFAULT 1, -- 是否允许别人查看到自己的电话号码
+  `email_visibility` TINYINT UNSIGNED NOT NULL DEFAULT 1, -- 是否允许别人查看到自己的邮箱地址
+  PRIMARY KEY `pk_userPrivilege` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- 用户注册相关基本信息
 DROP TABLE IF EXISTS `si_user`;
 CREATE TABLE IF NOT EXISTS `si_user` (
@@ -199,20 +213,6 @@ CREATE TABLE IF NOT EXISTS `si_token` (
   `dead_time` INT UNSIGNED NOT NULL ,
   PRIMARY KEY `pk_token` (`id`) ,
   FOREIGN KEY `fk_token_user` (`user_id`) REFERENCES `si_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- 用户权限设置
--- 权限都分为3级, 0 仅自己可见 1 朋友可见 2 任何人都可见
-DROP TABLE IF EXISTS `si_user_privilege`;
-CREATE TABLE IF NOT EXISTS `si_user_privilege` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `friend_visibility` TINYINT UNSIGNED NOT NULL DEFAULT 1, -- 是否可以允许别人查看自己的朋友列表
-  `follow_visibility` TINYINT UNSIGNED NOT NULL DEFAULT 2, -- 是否可以允许本人查看自己follow的用户列表
-  `sex_visibility` TINYINT UNSIGNED NOT NULL DEFAULT 2, -- 是否可以允许别人查看到自己性别
-  `name_visibility` TINYINT UNSIGNED NOT NULL DEFAULT 1, -- 是否允许别人查看自己的真实姓名
-  `phone_visibility` TINYINT UNSIGNED NOT NULL DEFAULT 1, -- 是否允许别人查看到自己的电话号码
-  `email_visibility` TINYINT UNSIGNED NOT NULL DEFAULT 1, -- 是否允许别人查看到自己的邮箱地址
-  PRIMARY KEY `pk_userPrivilege` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ###########################################
