@@ -156,4 +156,14 @@ class User_model extends CI_Model
         $this->db->where('id', $id);
         return $this->db->update('user');
     }
+
+    /**
+     * 给用户设置更多信息数据
+     * @param $infos
+     * @param $id
+     */
+    public function setInfo($infos, $id) {
+        $this->db->where('id', $id);
+        return $this->db->update('user', $infos);
+    }
 }

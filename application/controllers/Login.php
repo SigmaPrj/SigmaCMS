@@ -252,4 +252,37 @@ class Login extends CI_Controller
             }
         }
     }
+
+    public function setinfo() {
+        if (IS_POST()) {
+            $user_id = $this->input->post('user_id');
+            $nickname = $this->input->post('nickname');
+            $city_code = $this->input->post('city_code');
+            $school_code = $this->input->post('school_code');
+            $this->load->model('User_model', 'userModel');
+            if ($this->userModel->setInfo([
+                'nickname' => $nickname,
+                'city_code' => $city_code,
+                'school_code' => $school_code
+            ], $user_id)) {
+                echo json_encode([
+                    'status' => true,
+                    'code' => 200,
+                    'data' => null
+                ]);
+            } else {
+                echo json_encode([
+                    'status' => false,
+                    'code' => 402,
+                    'error' => 'Can\'t set info to user!'
+                ]);
+            }
+        } else {
+            echo json_encode([
+                'status' => false,
+                'code' => 401,
+                'error' => 'Invalid API!'
+            ]);
+        }
+    }
 }
