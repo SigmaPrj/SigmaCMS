@@ -145,4 +145,16 @@ class User_model extends CI_Model
             return false;
         }
     }
+
+    /**
+     * 设置密码
+     * @param $password
+     * @param $id
+     */
+    public function setPassword($password, $id) {
+        return $this->db->replace('user', [
+            'id' => $id,
+            'password' => $password
+        ]);
+    }
 }

@@ -231,4 +231,25 @@ class Login extends CI_Controller
             }
         }
     }
+
+    public function setpass() {
+        if (IS_POST()) {
+            $password = $this->input->post('password');
+            $user_id = $this->input->post('user_id');
+            $this->load->model('User_model', 'userModel');
+            if ($this->userModel->setPassword($password, $user_id)) {
+                echo json_encode([
+                    'status' => true,
+                    'code' => 200,
+                    'data' => null
+                ]);
+            } else {
+                echo json_encode([
+                    'status' => false,
+                    'code' => 402,
+                    'data' => null
+                ]);
+            }
+        }
+    }
 }

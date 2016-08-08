@@ -1,0 +1,1467 @@
+[
+  {
+    "group" : "1",
+    "schools" : [
+      {
+        "code": 121,
+        "name": "160职业大学",
+        "city_code": 160,
+        "group": 1
+      },
+      {
+        "code": 807,
+        "name": "190职业大学",
+        "city_code": 190,
+        "group": 1
+      }
+    ]
+  },
+  {
+    "group" : "2",
+    "schools" : [
+      {
+        "code": 803,
+        "name": "208高等专科学校",
+        "city_code": 208,
+        "group": 2
+      }
+    ]
+  },
+  {
+    "group" : "A",
+    "schools" : [
+      {
+        "code": 423,
+        "name": "鞍山师范学院",
+        "city_code": 3,
+        "group": "A"
+      },
+      {
+        "code": 986,
+        "name": "安徽大学",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 990,
+        "name": "安徽理工大学",
+        "city_code": 60,
+        "group": "A"
+      },
+      {
+        "code": 991,
+        "name": "安徽工程大学",
+        "city_code": 167,
+        "group": "A"
+      },
+      {
+        "code": 992,
+        "name": "安徽农业大学",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 993,
+        "name": "安徽医科大学",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 996,
+        "name": "安徽中医药大学",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 997,
+        "name": "安徽师范大学",
+        "city_code": 167,
+        "group": "A"
+      },
+      {
+        "code": 999,
+        "name": "安庆师范学院",
+        "city_code": 2,
+        "group": "A"
+      },
+      {
+        "code": 1004,
+        "name": "安徽财经大学",
+        "city_code": 10,
+        "group": "A"
+      },
+      {
+        "code": 1009,
+        "name": "安徽建筑大学",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1010,
+        "name": "安徽科技学院",
+        "city_code": 25,
+        "group": "A"
+      },
+      {
+        "code": 1011,
+        "name": "安徽三联学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1015,
+        "name": "安徽新华学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1016,
+        "name": "安徽文达信息工程学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1017,
+        "name": "安徽外国语学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1018,
+        "name": "安徽财经大学商学院",
+        "city_code": 10,
+        "group": "A"
+      },
+      {
+        "code": 1019,
+        "name": "安徽大学江淮学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1020,
+        "name": "安徽工程大学机电学院",
+        "city_code": 167,
+        "group": "A"
+      },
+      {
+        "code": 1022,
+        "name": "安徽建筑大学城市建设学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1023,
+        "name": "安徽农业大学经济技术学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1024,
+        "name": "安徽师范大学皖江学院",
+        "city_code": 167,
+        "group": "A"
+      },
+      {
+        "code": 1025,
+        "name": "安徽医科大学临床医学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1030,
+        "name": "安徽职业技术学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1034,
+        "name": "安徽商贸职业技术学院",
+        "city_code": 167,
+        "group": "A"
+      },
+      {
+        "code": 1035,
+        "name": "安徽水利水电职业技术学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1039,
+        "name": "安徽警官职业学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1041,
+        "name": "安徽工业经济职业技术学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1043,
+        "name": "安徽工贸职业技术学院",
+        "city_code": 60,
+        "group": "A"
+      },
+      {
+        "code": 1046,
+        "name": "安徽电子信息职业技术学院",
+        "city_code": 10,
+        "group": "A"
+      },
+      {
+        "code": 1048,
+        "name": "安徽交通职业技术学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1049,
+        "name": "安徽体育运动职业技术学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1050,
+        "name": "安徽中医药高等专科学校",
+        "city_code": 167,
+        "group": "A"
+      },
+      {
+        "code": 1051,
+        "name": "安徽医学高等专科学校",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1057,
+        "name": "安徽广播影视职业技术学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1059,
+        "name": "安徽电气工程职业技术学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1061,
+        "name": "安徽城市管理职业学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1062,
+        "name": "安徽机电职业技术学院",
+        "city_code": 167,
+        "group": "A"
+      },
+      {
+        "code": 1063,
+        "name": "安徽工商职业学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1064,
+        "name": "安徽中澳科技职业学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1067,
+        "name": "安徽国防科技职业学院",
+        "city_code": 103,
+        "group": "A"
+      },
+      {
+        "code": 1068,
+        "name": "安庆职业技术学院",
+        "city_code": 2,
+        "group": "A"
+      },
+      {
+        "code": 1069,
+        "name": "安徽艺术职业学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1071,
+        "name": "安徽财贸职业学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1072,
+        "name": "安徽国际商务职业学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1073,
+        "name": "安徽公安职业学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1074,
+        "name": "安徽林业职业技术学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1075,
+        "name": "安徽审计职业学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1076,
+        "name": "安徽新闻出版职业技术学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1077,
+        "name": "安徽邮电职业技术学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1078,
+        "name": "安徽工业职业技术学院",
+        "city_code": 161,
+        "group": "A"
+      },
+      {
+        "code": 1080,
+        "name": "安庆医药高等专科学校",
+        "city_code": 2,
+        "group": "A"
+      },
+      {
+        "code": 1081,
+        "name": "安徽涉外经济职业学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1082,
+        "name": "安徽绿海商务职业学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1088,
+        "name": "安徽现代信息工程职业学院",
+        "city_code": 103,
+        "group": "A"
+      },
+      {
+        "code": 1089,
+        "name": "安徽矿业职业技术学院",
+        "city_code": 57,
+        "group": "A"
+      },
+      {
+        "code": 1094,
+        "name": "安徽汽车职业技术学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1097,
+        "name": "安徽长江职业学院",
+        "city_code": 52,
+        "group": "A"
+      },
+      {
+        "code": 1098,
+        "name": "安徽扬子职业技术学院",
+        "city_code": 167,
+        "group": "A"
+      },
+      {
+        "code": 1099,
+        "name": "安徽黄梅戏艺术职业学院",
+        "city_code": 2,
+        "group": "A"
+      },
+      {
+        "code": 1100,
+        "name": "安徽粮食工程职业学院",
+        "city_code": 52,
+        "group": "A"
+      }
+    ]
+  },
+  {
+    "group" : "B",
+    "schools" : [
+      {
+        "code": 1,
+        "name": "北京大学",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 4,
+        "name": "北京交通大学",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 5,
+        "name": "北京工业大学",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 6,
+        "name": "北京航空航天大学",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 7,
+        "name": "北京理工大学",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 8,
+        "name": "北京科技大学",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 9,
+        "name": "北方工业大学",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 10,
+        "name": "北京化工大学",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 11,
+        "name": "北京工商大学",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 12,
+        "name": "北京服装学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 13,
+        "name": "北京邮电大学",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 14,
+        "name": "北京印刷学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 15,
+        "name": "北京建筑大学",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 16,
+        "name": "北京石油化工学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 17,
+        "name": "北京电子科技学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 19,
+        "name": "北京农学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 20,
+        "name": "北京林业大学",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 21,
+        "name": "北京协和医学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 23,
+        "name": "北京中医药大学",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 24,
+        "name": "北京师范大学",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 27,
+        "name": "北京外国语大学",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 28,
+        "name": "北京第二外国语学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 29,
+        "name": "北京语言大学",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 33,
+        "name": "北京物资学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 38,
+        "name": "北京体育大学",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 44,
+        "name": "北京电影学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 45,
+        "name": "北京舞蹈学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 50,
+        "name": "北京信息科技大学",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 54,
+        "name": "北京联合大学",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 55,
+        "name": "北京城市学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 59,
+        "name": "北京吉利学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 61,
+        "name": "北京工商大学嘉华学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 62,
+        "name": "北京邮电大学世纪学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 63,
+        "name": "北京工业大学耿丹学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 64,
+        "name": "北京警察学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 65,
+        "name": "北京第二外国语学院中瑞酒店管理学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 67,
+        "name": "北京工业职业技术学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 68,
+        "name": "北京信息职业技术学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 69,
+        "name": "北京电子科技职业学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 70,
+        "name": "北京京北职业技术学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 71,
+        "name": "北京交通职业技术学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 72,
+        "name": "北京青年政治学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 73,
+        "name": "北京农业职业学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 74,
+        "name": "北京政法职业学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 75,
+        "name": "北京财贸职业学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 76,
+        "name": "北京北大方正软件职业技术学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 77,
+        "name": "北京经贸职业学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 78,
+        "name": "北京经济技术职业学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 79,
+        "name": "北京戏曲艺术职业学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 80,
+        "name": "北京汇佳职业学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 81,
+        "name": "北京现代职业技术学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 82,
+        "name": "北京科技经营管理学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 83,
+        "name": "北京科技职业学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 84,
+        "name": "北京培黎职业学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 85,
+        "name": "北京经济管理职业学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 86,
+        "name": "北京劳动保障职业学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 87,
+        "name": "北京社会管理职业学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 88,
+        "name": "北京艺术传媒职业学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 89,
+        "name": "北京体育职业学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 90,
+        "name": "北京交通运输职业学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 91,
+        "name": "北京卫生职业学院",
+        "city_code": 9,
+        "group": "B"
+      },
+      {
+        "code": 118,
+        "name": "北京科技大学天津学院",
+        "city_code": 160,
+        "group": "B"
+      },
+      {
+        "code": 159,
+        "name": "保定学院",
+        "city_code": 5,
+        "group": "B"
+      },
+      {
+        "code": 176,
+        "name": "北华航天工业学院",
+        "city_code": 91,
+        "group": "B"
+      },
+      {
+        "code": 201,
+        "name": "北京中医药大学东方学院",
+        "city_code": 91,
+        "group": "B"
+      },
+      {
+        "code": 202,
+        "name": "北京交通大学海滨学院",
+        "city_code": 12,
+        "group": "B"
+      },
+      {
+        "code": 219,
+        "name": "保定职业技术学院",
+        "city_code": 5,
+        "group": "B"
+      },
+      {
+        "code": 234,
+        "name": "保定电力职业技术学院",
+        "city_code": 5,
+        "group": "B"
+      },
+      {
+        "code": 236,
+        "name": "渤海石油职业学院",
+        "city_code": 12,
+        "group": "B"
+      },
+      {
+        "code": 255,
+        "name": "泊头职业学院",
+        "city_code": 12,
+        "group": "B"
+      },
+      {
+        "code": 262,
+        "name": "保定幼儿师范高等专科学校",
+        "city_code": 5,
+        "group": "B"
+      },
+      {
+        "code": 264,
+        "name": "渤海理工职业学院",
+        "city_code": 12,
+        "group": "B"
+      },
+      {
+        "code": 363,
+        "name": "包头职业技术学院",
+        "city_code": 7,
+        "group": "B"
+      },
+      {
+        "code": 366,
+        "name": "包头轻工职业技术学院",
+        "city_code": 7,
+        "group": "B"
+      },
+      {
+        "code": 378,
+        "name": "包头钢铁职业技术学院",
+        "city_code": 7,
+        "group": "B"
+      },
+      {
+        "code": 384,
+        "name": "包头铁道职业技术学院",
+        "city_code": 7,
+        "group": "B"
+      },
+      {
+        "code": 422,
+        "name": "渤海大学",
+        "city_code": 83,
+        "group": "B"
+      },
+      {
+        "code": 488,
+        "name": "渤海船舶职业学院",
+        "city_code": 66,
+        "group": "B"
+      },
+      {
+        "code": 523,
+        "name": "北华大学",
+        "city_code": 75,
+        "group": "B"
+      },
+      {
+        "code": 994,
+        "name": "蚌埠医学院",
+        "city_code": 10,
+        "group": "B"
+      },
+      {
+        "code": 1013,
+        "name": "蚌埠学院",
+        "city_code": 10,
+        "group": "B"
+      },
+      {
+        "code": 1084,
+        "name": "蚌埠经济技术职业学院",
+        "city_code": 10,
+        "group": "B"
+      },
+      {
+        "code": 1306,
+        "name": "北京电影学院现代创意媒体学院",
+        "city_code": 126,
+        "group": "B"
+      },
+      {
+        "code": 1315,
+        "name": "滨州医学院",
+        "city_code": 11,
+        "group": "B"
+      },
+      {
+        "code": 1322,
+        "name": "滨州学院",
+        "city_code": 11,
+        "group": "B"
+      },
+      {
+        "code": 1373,
+        "name": "滨州职业学院",
+        "city_code": 11,
+        "group": "B"
+      },
+      {
+        "code": 1752,
+        "name": "保险职业学院",
+        "city_code": 16,
+        "group": "B"
+      },
+      {
+        "code": 1856,
+        "name": "北京师范大学珠海分校",
+        "city_code": 212,
+        "group": "B"
+      },
+      {
+        "code": 1860,
+        "name": "北京理工大学珠海学院",
+        "city_code": 212,
+        "group": "B"
+      },
+      {
+        "code": 1869,
+        "name": "北京师范大学-香港浸会大学\r联合国际学院",
+        "city_code": 212,
+        "group": "B"
+      },
+      {
+        "code": 1976,
+        "name": "北海艺术设计学院",
+        "city_code": 8,
+        "group": "B"
+      },
+      {
+        "code": 1986,
+        "name": "北京航空航天大学北海学院",
+        "city_code": 8,
+        "group": "B"
+      },
+      {
+        "code": 2002,
+        "name": "北海职业学院",
+        "city_code": 8,
+        "group": "B"
+      },
+      {
+        "code": 2360,
+        "name": "宝鸡文理学院",
+        "city_code": 6,
+        "group": "B"
+      },
+      {
+        "code": 2410,
+        "name": "宝鸡职业技术学院",
+        "city_code": 6,
+        "group": "B"
+      },
+      {
+        "code": 2495,
+        "name": "北方民族大学",
+        "city_code": 193,
+        "group": "B"
+      }
+    ]
+  },
+  {
+    "group" : "C",
+    "schools" : [
+      {
+        "code": 157,
+        "name": "承德医学院",
+        "city_code": 21,
+        "group": "C"
+      },
+      {
+        "code": 167,
+        "name": "沧州师范学院",
+        "city_code": 12,
+        "group": "C"
+      },
+      {
+        "code": 210,
+        "name": "承德石油高等专科学校",
+        "city_code": 21,
+        "group": "C"
+      },
+      {
+        "code": 216,
+        "name": "沧州职业技术学院",
+        "city_code": 12,
+        "group": "C"
+      },
+      {
+        "code": 245,
+        "name": "沧州医学高等专科学校",
+        "city_code": 12,
+        "group": "C"
+      },
+      {
+        "code": 258,
+        "name": "承德护理职业学院",
+        "city_code": 21,
+        "group": "C"
+      },
+      {
+        "code": 515,
+        "name": "长春理工大学",
+        "city_code": 13,
+        "group": "C"
+      },
+      {
+        "code": 517,
+        "name": "长春工业大学",
+        "city_code": 13,
+        "group": "C"
+      },
+      {
+        "code": 521,
+        "name": "长春中医药大学",
+        "city_code": 13,
+        "group": "C"
+      },
+      {
+        "code": 527,
+        "name": "长春师范大学",
+        "city_code": 13,
+        "group": "C"
+      },
+      {
+        "code": 534,
+        "name": "长春工程学院",
+        "city_code": 13,
+        "group": "C"
+      },
+      {
+        "code": 537,
+        "name": "长春大学",
+        "city_code": 13,
+        "group": "C"
+      },
+      {
+        "code": 538,
+        "name": "长春光华学院",
+        "city_code": 13,
+        "group": "C"
+      },
+      {
+        "code": 539,
+        "name": "长春工业大学人文信息学院",
+        "city_code": 13,
+        "group": "C"
+      },
+      {
+        "code": 540,
+        "name": "长春理工大学光电信息学院",
+        "city_code": 13,
+        "group": "C"
+      },
+      {
+        "code": 541,
+        "name": "长春财经学院",
+        "city_code": 13,
+        "group": "C"
+      },
+      {
+        "code": 543,
+        "name": "长春建筑学院",
+        "city_code": 13,
+        "group": "C"
+      },
+      {
+        "code": 544,
+        "name": "长春科技学院",
+        "city_code": 13,
+        "group": "C"
+      },
+      {
+        "code": 547,
+        "name": "长春大学旅游学院",
+        "city_code": 13,
+        "group": "C"
+      },
+      {
+        "code": 552,
+        "name": "长春汽车工业高等专科学校",
+        "city_code": 13,
+        "group": "C"
+      },
+      {
+        "code": 553,
+        "name": "长春金融高等专科学校",
+        "city_code": 13,
+        "group": "C"
+      },
+      {
+        "code": 554,
+        "name": "长春医学高等专科学校",
+        "city_code": 13,
+        "group": "C"
+      },
+      {
+        "code": 556,
+        "name": "长春东方职业学院",
+        "city_code": 13,
+        "group": "C"
+      },
+      {
+        "code": 561,
+        "name": "长春职业技术学院",
+        "city_code": 13,
+        "group": "C"
+      },
+      {
+        "code": 563,
+        "name": "长春信息技术职业学院",
+        "city_code": 13,
+        "group": "C"
+      },
+      {
+        "code": 727,
+        "name": "常州大学",
+        "city_code": 18,
+        "group": "C"
+      },
+      {
+        "code": 750,
+        "name": "常熟理工学院",
+        "city_code": 152,
+        "group": "C"
+      },
+      {
+        "code": 752,
+        "name": "常州工学院",
+        "city_code": 18,
+        "group": "C"
+      },
+      {
+        "code": 789,
+        "name": "常州大学怀德学院",
+        "city_code": 156,
+        "group": "C"
+      },
+      {
+        "code": 813,
+        "name": "常州信息职业技术学院",
+        "city_code": 18,
+        "group": "C"
+      },
+      {
+        "code": 830,
+        "name": "常州纺织服装职业技术学院",
+        "city_code": 18,
+        "group": "C"
+      },
+      {
+        "code": 841,
+        "name": "常州轻工职业技术学院",
+        "city_code": 18,
+        "group": "C"
+      },
+      {
+        "code": 842,
+        "name": "常州工程职业技术学院",
+        "city_code": 18,
+        "group": "C"
+      },
+      {
+        "code": 852,
+        "name": "常州机电职业技术学院",
+        "city_code": 18,
+        "group": "C"
+      },
+      {
+        "code": 1003,
+        "name": "滁州学院",
+        "city_code": 25,
+        "group": "C"
+      },
+      {
+        "code": 1006,
+        "name": "巢湖学院",
+        "city_code": 52,
+        "group": "C"
+      },
+      {
+        "code": 1054,
+        "name": "滁州职业技术学院",
+        "city_code": 25,
+        "group": "C"
+      },
+      {
+        "code": 1093,
+        "name": "滁州城市职业学院",
+        "city_code": 25,
+        "group": "C"
+      },
+      {
+        "code": 1540,
+        "name": "长垣烹饪职业技术学院",
+        "city_code": 182,
+        "group": "C"
+      },
+      {
+        "code": 1632,
+        "name": "长江职业学院",
+        "city_code": 166,
+        "group": "C"
+      },
+      {
+        "code": 1667,
+        "name": "长江工程职业技术学院",
+        "city_code": 166,
+        "group": "C"
+      },
+      {
+        "code": 1690,
+        "name": "长沙理工大学",
+        "city_code": 16,
+        "group": "C"
+      },
+      {
+        "code": 1705,
+        "name": "长沙医学院",
+        "city_code": 16,
+        "group": "C"
+      },
+      {
+        "code": 1706,
+        "name": "长沙学院",
+        "city_code": 16,
+        "group": "C"
+      },
+      {
+        "code": 1731,
+        "name": "长沙理工大学城南学院",
+        "city_code": 16,
+        "group": "C"
+      },
+      {
+        "code": 1732,
+        "name": "长沙师范学院",
+        "city_code": 16,
+        "group": "C"
+      },
+      {
+        "code": 1736,
+        "name": "长沙民政职业技术学院",
+        "city_code": 16,
+        "group": "C"
+      },
+      {
+        "code": 1742,
+        "name": "长沙航空职业技术学院",
+        "city_code": 16,
+        "group": "C"
+      },
+      {
+        "code": 1757,
+        "name": "长沙商贸旅游职业技术学院",
+        "city_code": 16,
+        "group": "C"
+      },
+      {
+        "code": 1761,
+        "name": "郴州职业技术学院",
+        "city_code": 23,
+        "group": "C"
+      },
+      {
+        "code": 1764,
+        "name": "长沙环境保护职业技术学院",
+        "city_code": 16,
+        "group": "C"
+      },
+      {
+        "code": 1767,
+        "name": "长沙职业技术学院",
+        "city_code": 16,
+        "group": "C"
+      },
+      {
+        "code": 1770,
+        "name": "常德职业技术学院",
+        "city_code": 14,
+        "group": "C"
+      },
+      {
+        "code": 1771,
+        "name": "长沙南方职业学院",
+        "city_code": 16,
+        "group": "C"
+      },
+      {
+        "code": 1787,
+        "name": "长沙电力职业技术学院",
+        "city_code": 16,
+        "group": "C"
+      },
+      {
+        "code": 1802,
+        "name": "长沙卫生职业学院",
+        "city_code": 16,
+        "group": "C"
+      },
+      {
+        "code": 1875,
+        "name": "潮汕职业技术学院",
+        "city_code": 74,
+        "group": "C"
+      },
+      {
+        "code": 2047,
+        "name": "长江师范学院",
+        "city_code": 24,
+        "group": "C"
+      },
+      {
+        "code": 2106,
+        "name": "成都理工大学",
+        "city_code": 22,
+        "group": "C"
+      },
+      {
+        "code": 2108,
+        "name": "成都信息工程大学",
+        "city_code": 22,
+        "group": "C"
+      },
+      {
+        "code": 2115,
+        "name": "成都中医药大学",
+        "city_code": 22,
+        "group": "C"
+      },
+      {
+        "code": 2116,
+        "name": "川北医学院",
+        "city_code": 112,
+        "group": "C"
+      },
+      {
+        "code": 2126,
+        "name": "成都体育学院",
+        "city_code": 22,
+        "group": "C"
+      },
+      {
+        "code": 2129,
+        "name": "成都学院",
+        "city_code": 22,
+        "group": "C"
+      },
+      {
+        "code": 2130,
+        "name": "成都工业学院",
+        "city_code": 22,
+        "group": "C"
+      },
+      {
+        "code": 2135,
+        "name": "成都东软学院",
+        "city_code": 22,
+        "group": "C"
+      },
+      {
+        "code": 2139,
+        "name": "成都信息工程大学银杏酒店管理学院",
+        "city_code": 22,
+        "group": "C"
+      },
+      {
+        "code": 2140,
+        "name": "成都文理学院",
+        "city_code": 22,
+        "group": "C"
+      },
+      {
+        "code": 2143,
+        "name": "成都医学院",
+        "city_code": 22,
+        "group": "C"
+      },
+      {
+        "code": 2151,
+        "name": "成都师范学院",
+        "city_code": 22,
+        "group": "C"
+      },
+      {
+        "code": 2153,
+        "name": "成都纺织高等专科学校",
+        "city_code": 22,
+        "group": "C"
+      },
+      {
+        "code": 2155,
+        "name": "成都航空职业技术学院",
+        "city_code": 22,
+        "group": "C"
+      },
+      {
+        "code": 2157,
+        "name": "成都职业技术学院",
+        "city_code": 22,
+        "group": "C"
+      },
+      {
+        "code": 2173,
+        "name": "成都农业科技职业学院",
+        "city_code": 22,
+        "group": "C"
+      },
+      {
+        "code": 2177,
+        "name": "成都艺术职业学院",
+        "city_code": 22,
+        "group": "C"
+      },
+      {
+        "code": 2205,
+        "name": "川南幼儿师范高等专科学校",
+        "city_code": 118,
+        "group": "C"
+      },
+      {
+        "code": 2207,
+        "name": "成都工业职业技术学院",
+        "city_code": 22,
+        "group": "C"
+      },
+      {
+        "code": 2209,
+        "name": "成都工贸职业技术学院",
+        "city_code": 22,
+        "group": "C"
+      },
+      {
+        "code": 2354,
+        "name": "长安大学",
+        "city_code": 173,
+        "group": "C"
+      },
+      {
+        "code": 2394,
+        "name": "长安大学兴华学院",
+        "city_code": 173,
+        "group": "C"
+      }
+    ]
+  }
+]
