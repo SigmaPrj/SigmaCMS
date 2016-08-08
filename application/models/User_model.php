@@ -152,9 +152,8 @@ class User_model extends CI_Model
      * @param $id
      */
     public function setPassword($password, $id) {
-        return $this->db->replace('user', [
-            'id' => $id,
-            'password' => $password
-        ]);
+        $this->db->set('password', $password);
+        $this->db->where('id', $id);
+        return $this->db->update('user');
     }
 }
