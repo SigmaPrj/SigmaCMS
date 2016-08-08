@@ -690,3 +690,7 @@ CREATE TABLE IF NOT EXISTS `si_message`(
   FOREIGN KEY `fk_message_user_from` (`from`) REFERENCES `si_user` (`id`),
   FOREIGN KEY `fk_message_user_to` (`to`) REFERENCES `si_user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- 8,4
+ALTER TABLE `si_dynamic` DROP FOREIGN KEY `fk_dynamic_topic`;
