@@ -152,4 +152,14 @@ class Dynamic_model extends CI_Model
         return $data;
     }
 
+    /**
+     * 向表dynamic中添加数据
+     * @param $dynamic
+     * @return int 成功返回id,失败返回0
+     */
+    public function addDynamic($dynamic) {
+        $this->db->insert('dynamic', $dynamic);
+        return $this->db->insert_id();
+    }
+
 }

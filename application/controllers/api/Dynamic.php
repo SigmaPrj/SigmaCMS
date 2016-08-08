@@ -101,7 +101,37 @@ class Dynamic extends API_Middleware
         $type = $this->get('type');
 
         if (!isset($id)) {
-            // TODO : 发布动态
+            // 发布动态
+            $content = $this->post('content');
+            $user_id = $this->post('user_id');
+            $now = time();
+            $dynamic = [
+                'user_id' => $user_id,
+                'has_topic' => 0,
+                'topic_id' => 0,
+                'content' => $content,
+                'publish_date' => $now,
+                'last_look_date' => $now,
+                'share' => 0,
+                'look' => 0,
+                'praise' => 0
+            ];
+            $this->load->model('Dynamic_model', 'dyModel');
+            if ($insertId = $this->dyModel->addDynamic($dynamic)) {
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => [
+                        'id' => $insertId
+                    ]
+                ], REST_Controller::HTTP_OK);
+            } else {
+                $this->response([
+                    'status' => false,
+                    'code' => REST_Controller::HTTP_BAD_GATEWAY,
+                    'error' => 'Some error occurred!'
+                ], REST_Controller::HTTP_BAD_GATEWAY);
+            }
         }
 
         if (!isset($type)) {
@@ -109,7 +139,41 @@ class Dynamic extends API_Middleware
         }
 
         if ($type === 'comment') {
-            // TODO : 发布评论
+            // 发布评论
+            $user_id = $this->post('user_id');
+            $content = $this->post('comment');
+            $publish_date = time();
+            $last_look_date = time();
+            $praise = 0;
+            $sub_id = $this->post('sub_id') ?$this->post('sub_id'):0;
+            $comment = [
+                'dynamic_id' => $id,
+                'user_id' => $user_id,
+                'comment' => $content,
+                'publish_date' => $publish_date,
+                'last_look_date' => $last_look_date,
+                'praise' => $praise,
+                'sub_id' => $sub_id
+            ];
+            $this->load->model('DynamicComment_model', 'dmModel');
+            if ($insertId = $this->dmModel->addComment($comment)) {
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => [
+                        'id' =>$insertId
+                    ]
+                ], REST_Controller::HTTP_OK);
+            } else {
+                $this->response([
+                    'status' => false,
+                    'code' => REST_Controller::HTTP_BAD_GATEWAY,
+                    'error' => 'Some error occurred!'
+                ], REST_Controller::HTTP_BAD_GATEWAY);
+            }
+        } else if ($type === 'image') {
+            // TODO : 添加图片
+            // 涉及到七牛
 
         } else {
             $this->response([

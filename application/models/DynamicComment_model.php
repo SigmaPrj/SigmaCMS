@@ -101,4 +101,13 @@ class DynamicComment_model extends CI_Model
     private function _addUserInfoToComments(&$comments) {
 
     }
+
+    /**
+     * @param $comment
+     * @return int 插入id
+     */
+    public function addComment($comment) {
+        $this->db->insert('dynamic_comment', $comment);
+        return $this->db->insert_id();
+    }
 }
