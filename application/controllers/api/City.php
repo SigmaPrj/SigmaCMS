@@ -31,13 +31,12 @@ class City extends REST_Controller
             $data = $this->cityModel->getAllCities();
 
             foreach ($data as &$value) {
-                $value['group'] = $this->_getFirstCharter($value['name']);
+                $value['group'] = $this->getfirstchar($value['name']);
             }
 
             $cities = [];
             foreach($data as &$v){
                 $cities[$v['group']][] = $v;
-                unset($v['group']);
             }
 
             if ($data) {
@@ -82,37 +81,34 @@ class City extends REST_Controller
         }
     }
 
-    public function _getFirstCharter($str){
-        if(empty($str)){return '';}
-        $fchar=ord($str{0});
-        if($fchar>=ord('A')&&$fchar<=ord('z')) return strtoupper($str{0});
-        $s1=iconv('UTF-8','gb2312',$str);
-        $s2=iconv('gb2312','UTF-8',$s1);
-        $s=$s2==$str?$s1:$str;
+    public function getfirstchar($s0){
+        $firstchar_ord=ord(strtoupper($s0{0}));
+        if (($firstchar_ord>=65 and $firstchar_ord<=91)or($firstchar_ord>=48 and $firstchar_ord<=57)) return $s0{0};
+        $s=iconv("UTF-8","gb2312", $s0);
         $asc=ord($s{0})*256+ord($s{1})-65536;
-        if($asc>=-20319&&$asc<=-20284) return 'A';
-        if($asc>=-20283&&$asc<=-19776) return 'B';
-        if($asc>=-19775&&$asc<=-19219) return 'C';
-        if($asc>=-19218&&$asc<=-18711) return 'D';
-        if($asc>=-18710&&$asc<=-18527) return 'E';
-        if($asc>=-18526&&$asc<=-18240) return 'F';
-        if($asc>=-18239&&$asc<=-17923) return 'G';
-        if($asc>=-17922&&$asc<=-17418) return 'H';
-        if($asc>=-17417&&$asc<=-16475) return 'J';
-        if($asc>=-16474&&$asc<=-16213) return 'K';
-        if($asc>=-16212&&$asc<=-15641) return 'L';
-        if($asc>=-15640&&$asc<=-15166) return 'M';
-        if($asc>=-15165&&$asc<=-14923) return 'N';
-        if($asc>=-14922&&$asc<=-14915) return 'O';
-        if($asc>=-14914&&$asc<=-14631) return 'P';
-        if($asc>=-14630&&$asc<=-14150) return 'Q';
-        if($asc>=-14149&&$asc<=-14091) return 'R';
-        if($asc>=-14090&&$asc<=-13319) return 'S';
-        if($asc>=-13318&&$asc<=-12839) return 'T';
-        if($asc>=-12838&&$asc<=-12557) return 'W';
-        if($asc>=-12556&&$asc<=-11848) return 'X';
-        if($asc>=-11847&&$asc<=-11056) return 'Y';
-        if($asc>=-11055&&$asc<=-10247) return 'Z';
+        if($asc>=-20319 and $asc<=-20284)return "A";
+        if($asc>=-20283 and $asc<=-19776)return "B";
+        if($asc>=-19775 and $asc<=-19219)return "C";
+        if($asc>=-19218 and $asc<=-18711)return "D";
+        if($asc>=-18710 and $asc<=-18527)return "E";
+        if($asc>=-18526 and $asc<=-18240)return "F";
+        if($asc>=-18239 and $asc<=-17923)return "G";
+        if($asc>=-17922 and $asc<=-17418)return "H";
+        if($asc>=-17417 and $asc<=-16475)return "J";
+        if($asc>=-16474 and $asc<=-16213)return "K";
+        if($asc>=-16212 and $asc<=-15641)return "L";
+        if($asc>=-15640 and $asc<=-15166)return "M";
+        if($asc>=-15165 and $asc<=-14923)return "N";
+        if($asc>=-14922 and $asc<=-14915)return "O";
+        if($asc>=-14914 and $asc<=-14631)return "P";
+        if($asc>=-14630 and $asc<=-14150)return "Q";
+        if($asc>=-14149 and $asc<=-14091)return "R";
+        if($asc>=-14090 and $asc<=-13319)return "S";
+        if($asc>=-13318 and $asc<=-12839)return "T";
+        if($asc>=-12838 and $asc<=-12557)return "W";
+        if($asc>=-12556 and $asc<=-11848)return "X";
+        if($asc>=-11847 and $asc<=-11056)return "Y";
+        if($asc>=-11055 and $asc<=-10247)return "Z";
         return null;
     }
 }
