@@ -33,11 +33,12 @@ class Cbclass extends API_Middleware
         }
 
 
-
+        $_body = file_get_contents('php://input');
+        $body = json_decode($_body, true);
         // 上传用户头像回调
         if ($type === 'user_avatar') {
-            $userId = (int)$this->post('userId');
-            $hash = $this->post('hash');
+            $userId = (int)$body['userId'];
+            $hash = $body['hash'];
             $url = getQNFileUrl($hash);
 
             $this->load->model('User_model', 'userModel');

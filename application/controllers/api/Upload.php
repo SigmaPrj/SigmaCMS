@@ -29,7 +29,7 @@ class Upload extends API_Middleware
 
         if ($type === 'user_avatar') {
             // 上传用户头像
-            $token = generateQNToken('api/callback/user_avatar', ['userId']);
+            $token = generateQNToken('api/callback/user_avatar', '{"hash":"$(etag)", "userId":"$(x:userId)"}');
             $this->response([
                 'status' => true,
                 'code' => REST_Controller::HTTP_OK,
