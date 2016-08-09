@@ -38,5 +38,12 @@ class Upload extends API_Middleware
                 ]
             ], REST_Controller::HTTP_OK);
         }
+
+
+        $this->response([
+            'status' => false,
+            'code' => REST_Controller::HTTP_BAD_REQUEST,
+            'error' => 'Invalid API!'
+        ], REST_Controller::HTTP_BAD_REQUEST);
     }
 }
