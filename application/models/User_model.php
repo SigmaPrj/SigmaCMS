@@ -122,6 +122,7 @@ class User_model extends CI_Model
         $query = $this->db->where([
             'id' => $ids
         ])->get('user');
+
         return $query->row_array();
     }
 

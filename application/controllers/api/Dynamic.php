@@ -172,8 +172,16 @@ class Dynamic extends API_Middleware
                 ], REST_Controller::HTTP_BAD_GATEWAY);
             }
         } else if ($type === 'image') {
-            // TODO : 添加图片
-            // 涉及到七牛
+            // 获取所有图片
+            $images = $this->post('images');
+            $this->response([
+                'status' => true,
+                'code' => REST_Controller::HTTP_OK,
+                'data' => [
+                    'images' => $images,
+                    'id' => $id
+                ]
+            ], REST_Controller::HTTP_OK);
 
         } else {
             $this->response([
