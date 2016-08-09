@@ -61,5 +61,11 @@ class Cbclass extends API_Middleware
                 ], REST_Controller::HTTP_SERVICE_UNAVAILABLE);
             }
         }
+
+        $this->response([
+            'status' => false,
+            'code' => REST_Controller::HTTP_BAD_REQUEST,
+            'error' => 'Invalid API!'
+        ], REST_Controller::HTTP_BAD_REQUEST);
     }
 }
