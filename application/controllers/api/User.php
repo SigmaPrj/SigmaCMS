@@ -111,7 +111,7 @@ class User extends API_Middleware
             // TODO : 上传一个用户信息
         }
 
-        if (!isset($id)) {
+        if (!isset($type)) {
             // TODO : 修改一个用户信息
             $params = $this->post();
             $this->response([
