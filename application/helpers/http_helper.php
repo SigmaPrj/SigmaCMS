@@ -89,7 +89,7 @@ if (!function_exists('generateQNToken')) {
             $tmpArray = array_map(function($val){
                 return $val.'=$(x:'.$val.')';
             }, $params);
-            $callbackBody = 'fname=$(fname)&fkey=$(fkey)&fsize=$(fsize)&hash=$(etag)&'.implode('&', $tmpArray);
+            $callbackBody = 'hash=$(etag)&'.implode('&', $tmpArray);
         }
 
 
