@@ -45,4 +45,20 @@ class DynamicImage_model extends CI_Model
 
         return $images;
     }
+
+    /**
+     * @param $images array
+     * @param $dynamic_id int
+     */
+    public function addImages($images, $dynamic_id) {
+        $data = [];
+        foreach ($images as $val) {
+            $data[] = [
+                'dynamic_id' => $dynamic_id,
+                'url' => $val
+            ];
+        }
+
+        $this->db->insert_batch('dynamic_image', $data);
+    }
 }

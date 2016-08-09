@@ -102,4 +102,26 @@ class User extends API_Middleware
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
     }
+
+    public function users_post() {
+        $id = $this->get('id');
+        $type = $this->get('type');
+
+        if (!isset($id)) {
+            // TODO : 上传一个用户信息
+        }
+
+        if (!isset($id)) {
+            // TODO : 修改一个用户信息
+            $params = $this->post();
+            $this->response([
+                'status' => true,
+                'code' => REST_Controller::HTTP_OK,
+                'data' => [
+                    'params' => $params,
+                    'id' => $id
+                ]
+            ], REST_Controller::HTTP_OK);
+        }
+    }
 }

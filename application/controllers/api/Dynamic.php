@@ -174,15 +174,23 @@ class Dynamic extends API_Middleware
         } else if ($type === 'image') {
             // 获取所有图片
             $images = $this->post('images');
-            $this->response([
-                'status' => true,
-                'code' => REST_Controller::HTTP_OK,
-                'data' => [
-                    'images' => $images,
-                    'id' => $id
-                ]
-            ], REST_Controller::HTTP_OK);
-
+            $this->load->model('DynamicImage_model', 'diModel');
+            if ($this->diModel->addImages($images, $id)) {
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => [
+                        'dynamic_id' => $id,
+                        'images' => $images
+                    ]
+                ], REST_Controller::HTTP_OK);
+            } else {
+                $this->response([
+                    'status' => false,
+                    'code' => REST_Controller::HTTP_SERVICE_UNAVAILABLE,
+                    'error' => 'Wait for a moment!'
+                ], REST_Controller::HTTP_SERVICE_UNAVAILABLE);
+            }
         } else {
             $this->response([
                 'status' => false,
