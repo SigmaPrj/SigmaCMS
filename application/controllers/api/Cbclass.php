@@ -32,11 +32,12 @@ class Cbclass extends API_Middleware
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
 
-        
+
 
         // 上传用户头像回调
         if ($type === 'user_avatar') {
-            $userId = (int)$this->post('user_id');
+//            $userId = (int)$this->post('user_id');
+            $userId = 65;
             $hash = $this->post('hash');
             $url = getQNFileUrl($hash);
 
