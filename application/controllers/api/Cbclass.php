@@ -36,8 +36,7 @@ class Cbclass extends API_Middleware
 
         // 上传用户头像回调
         if ($type === 'user_avatar') {
-//            $userId = (int)$this->post('user_id');
-            $userId = 65;
+            $userId = (int)$this->post('user_id');
             $hash = $this->post('hash');
             $url = getQNFileUrl($hash);
 
