@@ -175,4 +175,14 @@ class User_model extends CI_Model
         $this->db->where('id', $id);
         return $this->db->update('user', $infos);
     }
+
+    /**
+     * @param $params array
+     * @param $id int
+     */
+    public function updateUserInfo($params, $id) {
+        $this->db->set($params);
+        $this->db->where('id', $id);
+        return $this->db->update('user');
+    }
 }

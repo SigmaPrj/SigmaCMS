@@ -114,14 +114,22 @@ class User extends API_Middleware
         if (!isset($type)) {
             // TODO : 修改一个用户信息
             $params = $this->post();
-            $this->response([
-                'status' => true,
-                'code' => REST_Controller::HTTP_OK,
-                'data' => [
-                    'params' => $params,
-                    'id' => $id
-                ]
-            ], REST_Controller::HTTP_OK);
+            $this->load->model('User_model', 'userModel');
+            if ($this->updateUserInfo($params, $id)) {
+                $this->response([
+                    'status' => true,
+                    'code' => REST_Controller::HTTP_OK,
+                    'data' => [
+                        'id' => $id
+                    ]
+                ], REST_Controller::HTTP_OK);
+            } else {
+                $this->response([
+                    'status' => false,
+                    'code' => REST_Controller::HTTP_SERVICE_UNAVAILABLE,
+                    'error' => 'Can not modify the user info!'
+                ], REST_Controller::HTTP_SERVICE_UNAVAILABLE);
+            }
         }
     }
 }

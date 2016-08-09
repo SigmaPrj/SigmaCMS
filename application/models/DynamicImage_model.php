@@ -59,6 +59,6 @@ class DynamicImage_model extends CI_Model
             ];
         }
 
-        $this->db->insert_batch('dynamic_image', $data);
+        return $this->db->insert_batch('dynamic_image', $data);
     }
 }
