@@ -168,3 +168,15 @@ $route['api/message'] = 'api/Message/messages'; // 获取所有消息, 不可以
 $route['api/message/(:num)'] = 'api/Message/messages/user_id/$1'; // 获取当前用户的消息, 所有自己发给别人的, 别人发给自己的, 自己关注的队伍中的消息。
 $route['api/message/(:num)/(:any)'] = 'api/Message/messages/user_id/$1'; // 不可用
 $route['api/message/(:num)/(:any)/(:num)'] = 'api/Message/messages/user_id/$1/type/$2/type_id/$3';
+
+/**
+ * 上传
+ */
+$route['api/upload'] = 'api/Upload/upload';
+$route['api/upload/(:any)'] = 'api/Upload/upload/type/$1';
+
+/**
+ * 回调
+ */
+$route['api/callback'] = 'api/Cbclass/callback';
+$route['api/callback/(:any)'] = 'api/Cbclass/callback/type/$1';

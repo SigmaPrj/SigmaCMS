@@ -53,6 +53,56 @@ if (!function_exists('download_file_by_curl')) {
     }
 }
 
+if (!function_exists('getQNFileUrl')) {
+    function getQNFileUrl($hash) {
+        // 载入配置信息
+        $ci = &get_instance();
+        $ci->config->load('config');
+
+        return $ci->config->item('qiniu_domain').$hash;
+    }
+}
+
+if (!function_exists('generateQNToken')) {
+    /**
+     * @param $cbPath string 回调路径
+     * @param $params array 自定义参数数组
+     * @return string token 上传token
+     */
+    function generateQNToken($cbPath, $params) {
+        // 载入配置信息
+        $ci = &get_instance();
+        $ci->config->load('config');
+
+        $access_key = $ci->config->item('qiniu_access');
+        $secret_key = $ci->config->item('qiniu_secret');
+        $bucket_name = $ci->config->item('qiniu_bucket');
+
+        $auth = new Qiniu\Auth($access_key, $secret_key);
+
+        // 构造callback 地址
+        $callbackUrl = $ci->config->item('base_url').$cbPath;
+        // 构造callbackBody
+        if (empty($params)) {
+            $callbackBody = 'fname=$(fname)&fkey=$(fkey)&fsize=$(fsize)&hash=$(etag)';
+        } else {
+            $tmpArray = array_map(function($val){
+                return $val.'=$(x:'.$val.')';
+            }, $params);
+            $callbackBody = 'fname=$(fname)&fkey=$(fkey)&fsize=$(fsize)&hash=$(etag)&'.implode('&', $tmpArray);
+        }
+
+
+        $policy =  array(
+            'callbackUrl' => $callbackUrl,
+            'callbackBody' => $callbackBody
+        );
+
+        // 生成token
+        return $auth->uploadToken($bucket_name, null, 3600, $policy);
+    }
+}
+
 if (!function_exists('upload_file_to_qiniu')) {
     function upload_file_to_qiniu($output, $dbname, $field, $id) {
 
