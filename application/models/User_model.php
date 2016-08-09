@@ -114,7 +114,15 @@ class User_model extends CI_Model
      * @return mixed
      */
     public function getUserDataAll($ids) {
-        // TODO : 得到用户的所有信息内容
+        // 得到用户的所有信息内容
+        if (empty($ids)) {
+            return [];
+        }
+
+        $query = $this->db->where([
+            'id' => $ids
+        ])->get('user');
+        return $query->row_array();
     }
 
     /**
