@@ -161,7 +161,7 @@ class User extends API_Middleware
             // TODO : 修改一个用户信息
             $params = $this->post();
             $this->load->model('User_model', 'userModel');
-            if ($this->updateUserInfo($params, $id)) {
+            if ($this->userModel->updateUserInfo($params, $id)) {
                 $this->response([
                     'status' => true,
                     'code' => REST_Controller::HTTP_OK,
