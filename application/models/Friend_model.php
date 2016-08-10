@@ -32,6 +32,18 @@ class Friend_model extends CI_Model
         return !empty($data);
     }
 
+    /**
+     * @param $id
+     * @param $friend_id
+     */
+    public function addFriend($id, $friend_id) {
+        $data = [
+            'user_id' => $id,
+            'friend_id' => $friend_id
+        ];
+        return $this->db->insert('friend', $data);
+    }
+
 
     /**
      * 返回当前 用户 所有朋友用户id

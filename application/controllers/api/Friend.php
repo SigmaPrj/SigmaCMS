@@ -159,10 +159,40 @@ class Friend extends API_Middleware
             // 只有id , post请求, 表示请求添加好友
             $username = $this->post('username');
             $this->load->model('User_model', 'userModel');
-            $userData = $this->userModel->getUserDataBrief($id);
-            $userData = $userData[$id];
+            $userData = $this->userModel->getUserDataAll($id);
             if ($userData['username'] === $username) {
+                $this->response([
+                    'status' => false,
+                    'code' => REST_Controller::HTTP_BAD_REQUEST,
+                    'error' => 'Can not add yourself as a friend'
+                ], REST_Controller::HTTP_BAD_REQUEST);
+            }
 
+            $friendUser = $this->userModel->getUserByUsername($username);
+            if (empty($friendUser)) {
+                $this->response([
+                    'status' => false,
+                    'code' => REST_Controller::HTTP_BAD_REQUEST,
+                    'error' => 'Can not find the user!'
+                ], REST_Controller::HTTP_BAD_REQUEST);
+            } else {
+                $this->load->model('Friend_model', 'frModel');
+                if ($this->frModel->addFriend($id, $friendUser['id'])) {
+                    $this->response([
+                        'status' => true,
+                        'code' => REST_Controller::HTTP_OK,
+                        'data' => [
+                            'user' => $userData,
+                            'friend' => $friendUser
+                        ]
+                    ], REST_Controller::HTTP_OK);
+                } else {
+                    $this->response([
+                        'status' => false,
+                        'code' => REST_Controller::HTTP_BAD_GATEWAY,
+                        'error' => 'Add friend failed!'
+                    ], REST_Controller::HTTP_BAD_GATEWAY);
+                }
             }
         }
     }
