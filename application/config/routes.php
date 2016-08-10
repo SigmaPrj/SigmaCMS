@@ -180,3 +180,8 @@ $route['api/upload/(:any)'] = 'api/Upload/upload/type/$1';
  */
 $route['api/callback'] = 'api/Cbclass/callback';
 $route['api/callback/(:any)'] = 'api/Cbclass/callback/type/$1';
+
+/**
+ * 认证
+ */
+$route['api/auth'] = 'api/Auth/auth';
