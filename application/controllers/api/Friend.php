@@ -142,6 +142,31 @@ class Friend extends API_Middleware
         }
     }
 
+    public function friends_post() {
+        $id = $this->get('user_id');
+        $type = $this->get('type');
+
+        if (!isset($id)) {
+            // 没有意义
+            $this->response([
+                'status' => false,
+                'code' => REST_Controller::HTTP_BAD_REQUEST,
+                'error' => 'Invalid API'
+            ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+
+        if (!isset($type)) {
+            // 只有id , post请求, 表示请求添加好友
+            $username = $this->post('username');
+            $this->load->model('User_model', 'userModel');
+            $userData = $this->userModel->getUserDataBrief($id);
+            $userData = $userData[$id];
+            if ($userData['username'] === $username) {
+
+            }
+        }
+    }
+
     private function _has_privilege($token, $user_id) {
         // 获取当前用户user_id的权限
         $token_user_id = $this->tokenModel->getUserIdByToken($token);

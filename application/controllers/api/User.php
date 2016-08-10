@@ -91,7 +91,7 @@ class User extends API_Middleware
                 $this->response([
                     'status' => true,
                     'code' => REST_Controller::HTTP_OK,
-                    'data' => $user[$id]
+                    'data' => $user
                 ], REST_Controller::HTTP_OK);
             }
         } else {

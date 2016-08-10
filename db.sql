@@ -694,3 +694,6 @@ CREATE TABLE IF NOT EXISTS `si_message`(
 
 -- 8,4
 ALTER TABLE `si_dynamic` DROP FOREIGN KEY `fk_dynamic_topic`;
+
+-- 8.10
+ALTER TABLE `si_user` ADD COLUMN `is_register` TINYINT UNSIGNED NOT NULL DEFAULT 0;
