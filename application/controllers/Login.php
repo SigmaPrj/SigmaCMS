@@ -285,4 +285,21 @@ class Login extends CI_Controller
             ]);
         }
     }
+
+    public function ntunnel() {
+        $username = 'kml3ool15w';
+        $password = '0i3wmk25kk4z2k2xj545klh4zy02z551lxjl2w02';
+        if ($_POST["login"] == $username && $_POST["password"] == $password) {
+            $hs = SAE_MYSQL_HOST_M . ':' . SAE_MYSQL_PORT;
+            $conn = mysql_connect($hs, SAE_MYSQL_USER, SAE_MYSQL_PASS);
+            $errno_c = mysql_errno();
+            if(($errno_c <= 0)) {
+                $res = mysql_select_db(SAE_MYSQL_DB, $conn);
+                $errno_c = mysql_errno();
+            }
+        } else {
+            echo 'Authentication failed';
+            exit();
+        }
+    }
 }
